@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TabBarController.h"
+#import "MainViewController.h"
+#import "SearchViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +18,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    //tabbar configuration
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setAlpha:0.96];
+    [[UITabBar appearance] setFrame:CGRectMake(0, 15, 320, 30)];
+    
+    
     return YES;
 }
 
