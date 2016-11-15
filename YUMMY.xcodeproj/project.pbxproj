@@ -18,6 +18,8 @@
 		F4197CA31DB8D43800194D9B /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA01DB8D43800194D9B /* 2.png */; };
 		F4197CA41DB8D43800194D9B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA11DB8D43800194D9B /* 1.png */; };
 		F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */; };
+		F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */; };
+		F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4730B0E1DDB569100BB10D5 /* avatar.jpg */; };
 		F47C69FD1DCBB27500AD951E /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C69FC1DCBB27500AD951E /* UserViewController.m */; };
 		F48445F91DBC8AD2003B09F4 /* mainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F48445F81DBC8AD2003B09F4 /* mainCell.m */; };
 		F494A5C21DB6893E00D173E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5C11DB6893E00D173E0 /* main.m */; };
@@ -76,6 +78,9 @@
 		F4197CA11DB8D43800194D9B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		F4730B081DDB33F900BB10D5 /* notificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationTableViewCell.h; sourceTree = "<group>"; };
+		F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationTableViewCell.m; sourceTree = "<group>"; };
+		F4730B0E1DDB569100BB10D5 /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
 		F47C69FB1DCBB27500AD951E /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		F47C69FC1DCBB27500AD951E /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		F48445F71DBC8AD2003B09F4 /* mainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainCell.h; sourceTree = "<group>"; };
@@ -191,6 +196,7 @@
 				F4197C9F1DB8D43800194D9B /* 3.png */,
 				F4197CA01DB8D43800194D9B /* 2.png */,
 				F4197CA11DB8D43800194D9B /* 1.png */,
+				F4730B0E1DDB569100BB10D5 /* avatar.jpg */,
 			);
 			name = exampleMaterials;
 			sourceTree = "<group>";
@@ -244,6 +250,15 @@
 				F41422951DB6F2670010F9A8 /* MainViewController.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		F4730B0B1DDB340100BB10D5 /* outlet */ = {
+			isa = PBXGroup;
+			children = (
+				F4730B081DDB33F900BB10D5 /* notificationTableViewCell.h */,
+				F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */,
+			);
+			name = outlet;
 			sourceTree = "<group>";
 		};
 		F47C69FE1DCBB28C00AD951E /* UserScreen */ = {
@@ -344,6 +359,7 @@
 			children = (
 				F4B7FF971DC6247A003F6960 /* NotificationViewController.h */,
 				F4B7FF981DC6247A003F6960 /* NotificationViewController.m */,
+				F4730B0B1DDB340100BB10D5 /* outlet */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -486,6 +502,7 @@
 				F4F5EF391DBBBF6100F1A4AC /* love.png in Resources */,
 				F4F5EECE1DBA6FA000F1A4AC /* item2.png in Resources */,
 				F494A5CB1DB6893E00D173E0 /* Main.storyboard in Resources */,
+				F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */,
 				F4F5EEE01DBA900900F1A4AC /* item1.png in Resources */,
 				F4F5EF381DBBBF6100F1A4AC /* loved.png in Resources */,
 				F4197CA41DB8D43800194D9B /* 1.png in Resources */,
@@ -513,6 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */,
 				F494A5C81DB6893E00D173E0 /* ViewController.m in Sources */,
 				F414229A1DB70DA80010F9A8 /* SignUpViewController.m in Sources */,
 				F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */,
