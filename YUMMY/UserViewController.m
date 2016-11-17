@@ -7,8 +7,27 @@
 //
 
 #import "UserViewController.h"
+#import "UserRecipeCollectionViewCell.h"
 
-@interface UserViewController ()
+@interface UserViewController () {
+    NSMutableArray *recipeID;
+    NSMutableArray *recipeImg;
+    NSMutableArray *recipeName;
+    NSMutableArray *recipeCate;
+}
+@property (weak, nonatomic) IBOutlet UIImageView *imgCover;
+@property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
+@property (weak, nonatomic) IBOutlet UILabel *userAccount;
+@property (weak, nonatomic) IBOutlet UILabel *userRecipes;
+@property (weak, nonatomic) IBOutlet UILabel *userFolow;
+@property (weak, nonatomic) IBOutlet UILabel *userBookmark;
+@property (weak, nonatomic) IBOutlet UILabel *userLike;
+@property (weak, nonatomic) IBOutlet UICollectionView *userRecipeTableView;
+
+- (IBAction)settingClick:(id)sender;
+- (IBAction)toFollower:(id)sender;
+- (IBAction)toLike:(id)sender;
+- (IBAction)toBookmark:(id)sender;
 
 @end
 
@@ -17,21 +36,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.userRecipeTableView.delegate = self;
+    self.userRecipeTableView.dataSource = self;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - delegate & datasource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [recipeName count];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UserRecipeCollectionViewCell *cell = [self.userRecipeTableView dequeueReusableCellWithReuseIdentifier:@"UserRecipe" forIndexPath:indexPath];
+    
+    cell.recipeImage.image = [UIImage imageNamed:[recipeImg objectAtIndex:indexPath.item]];
+    cell.RecipeCate.text = [NSString stringWithFormat:@"%@",[recipeCate objectAtIndex:indexPath.item]];
+    cell.lblRecipeName.text = [NSString stringWithFormat:@"%@",[recipeName objectAtIndex:indexPath.item]];
+    
+    return cell;
 }
-*/
 
+#pragma mark - điều chỉnh khoảng cách giữa cell với nhau và với viền
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(-15, 10, 55, 10);  //top left bottom right
+    return sectionInset;
+}
+
+#pragma mark - action
+
+- (IBAction)settingClick:(id)sender {
+    
+}
+
+- (IBAction)toFollower:(id)sender {
+}
+
+- (IBAction)toLike:(id)sender {
+}
+
+- (IBAction)toBookmark:(id)sender {
+}
 @end

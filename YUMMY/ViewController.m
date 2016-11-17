@@ -11,7 +11,9 @@
 #import <CoreImage/CoreImage.h>
 #import "TabBarController.h"
 
-@interface ViewController ()
+@interface ViewController () {
+    NSInteger success;
+}
 @property (weak, nonatomic) IBOutlet UITextField *txtAcc;
 @property (weak, nonatomic) IBOutlet UITextField *txtPwd;
 
@@ -53,41 +55,93 @@
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
         [alertFill addAction:action];
         [self presentViewController:alertFill animated:YES completion:nil];
-    } else {
-        
-        //Xử lý gửi thông tin tài khoản lên server để xác thực
-        /*
+    }
+    else {
         @try {
-            if ([response statusCode] >= 200 && [response statusCode] < 300)
-                {
-                NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-         
-                NSError *error = nil;
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:urlData
-                                                        options:NSJSONReadingMutableContainers
-                                                        error:&error];
-         
-                success = [jsonData[@"success"] integerValue];
-                NSString *username = jsonData[@"username"];
-         
-                if(success == 1)
-                    {
-                    [self performSegueWithIdentifier:@"loginSuccess" sender:[NSString stringWithFormat:@"%s",jsonData[@"username"]];
+            success = 0;
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+            NSURL *url = [NSURL URLWithString:@"http://localhost/yummy/login.php"];
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+            NSString *parameters = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                if (error == nil) {
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                    success = [jsonData[@"code"] integerValue];
+                    if (success == 1) {
+                        NSString *message = (NSString *) jsonData[@"message"];
+                        NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
+                        [self performSegueWithIdentifier:@"loginSuccess" sender:self];
+                        NSLog(@"%@",message);
+                        NSLog(@"UserID la %@",userID);
                     } else {
-                        NSString *error_msg = (NSString *) jsonData[@"error_message"];
-                        [self alertStatus:error_msg :@"Sign in Failed!" :0];
+                        NSString *message = (NSString *) jsonData[@"message"];
+                        NSLog(@"%@",message);
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Đăng nhập thất bại"
+                                                                                       message:message
+                                                                                preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"Thử lại" style:UIAlertActionStyleCancel handler:nil];
+                        [alert addAction:alright];
+                        [self presentViewController:alert animated:YES completion:nil];
                     }
                 }
+            }];
+            [dataTask resume];
+        } @catch(NSException *exception) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
+                                                                           message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+            [alert addAction:alright];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        /*
+        NSInteger success = 2;
+        @try {
+            NSString *post = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
+            NSLog(@"PostData: %@",post);
+            
+            NSURL *url = [NSURL URLWithString:@"http://localhost/yummy/login.php"];
+            
+            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+            
+            //NSString *postLenght = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:url];
+            [request setHTTPMethod:@"POST"];
+            [request setHTTPBody:postData];
+            
+            NSError *error = [[NSError alloc] init];
+            NSHTTPURLResponse *response = nil;
+            NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            if ([response statusCode] >= 200 && [response statusCode] < 300) {
+                NSError *error = nil;
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:urlData
+                                                                         options:NSJSONReadingMutableContainers
+                                                                           error:&error];
+                success = [jsonData[@"code"] integerValue];
+                
+                if (success == 1) {
+                    NSString *message = (NSString *) jsonData[@"message"];
+                    [self performSegueWithIdentifier:@"loginSuccess" sender:self];
+                    NSLog(@"%@",message);
+                } else {
+                    NSString *message = (NSString *) jsonData[@"message"];
+                    NSLog(@"%@",message);
+                }
+            } else {
+                //NSString *message = (NSString *) jsonData[@"message"];
+                NSLog(@"Failed");
             }
-         @catch (NSException *e) {
-            NSLog(@"Exception: %@",e);
-            [self alertStatus:@"Đăng nhập thất bại" :@"Có lỗi xảy ra!" :0];
-         }
-         
-        */
-        //khi thành công thì:
-        [self performSegueWithIdentifier:@"loginSuccess" sender:self];  //thay self bằng [NSString stringWithFormat:@"%s",jsonData[@"username"]];
-        
+        }
+        @catch (NSException *e) {
+            NSLog(@"%@",e);
+        }*/
     }
 }
 
@@ -121,7 +175,5 @@
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
-
 
 @end

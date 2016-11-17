@@ -10,7 +10,6 @@
 
 @interface notificationTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
-@property (weak, nonatomic) IBOutlet UIImageView *destImage;
 @property (weak, nonatomic) IBOutlet UILabel *lblContent;
 
 @end

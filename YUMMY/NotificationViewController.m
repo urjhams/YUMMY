@@ -17,7 +17,6 @@
     NSMutableArray *newArrayContent;
     NSMutableArray *oldArray;
     NSMutableArray *oldArrayImg;
-    NSMutableArray *oldArrayDesImg;
     NSMutableArray *oldArrayContent;
     NSArray *sectionTitle;
 }
@@ -42,8 +41,6 @@
     oldArrayImg = [NSMutableArray arrayWithObjects:@"avatar.jpg",@"avatar.jpg", nil];
     newArrayContent = [NSMutableArray arrayWithObjects:@"abc was like your xyz",@"abc was like your xyz", nil];
     oldArrayContent = [NSMutableArray arrayWithObjects:@"abc was like your xyz",@"abc was like your xyz", nil];
-    newArrayDesImg = [NSMutableArray arrayWithObjects:@"avatar.jpg",@"avatar.jpg", nil];
-    oldArrayDesImg = [NSMutableArray arrayWithObjects:@"avatar.jpg",@"avatar.jpg", nil];
 }
 
 #pragma mark - UITableViewDelegate & Datasource
@@ -108,27 +105,23 @@
     [cell.userImage setClipsToBounds:YES];
     
     //uiimage bo góc
-    cell.destImage.layer.cornerRadius = 10.0f;
-    [cell.destImage setClipsToBounds:YES];
+    //cell.destImage.layer.cornerRadius = 10.0f;
+    //[cell.destImage setClipsToBounds:YES];
     
     //content
     if (newArrayImg && oldArrayImg) {
         if (indexPath.section == 0) {
             cell.userImage.image = [UIImage imageNamed:[newArrayImg objectAtIndex:indexPath.row]];
-            cell.destImage.image = [UIImage imageNamed:[newArrayDesImg objectAtIndex:indexPath.row]];
             cell.lblContent.text = [NSString stringWithFormat:@"%@",[newArrayContent objectAtIndex:indexPath.row]];
         } else {
             cell.userImage.image = [UIImage imageNamed:[oldArrayImg objectAtIndex:indexPath.row]];
-            cell.destImage.image = [UIImage imageNamed:[oldArrayDesImg objectAtIndex:indexPath.row]];
             cell.lblContent.text = [NSString stringWithFormat:@"%@",[oldArrayContent objectAtIndex:indexPath.row]];
         }
     } else if (!newArrayImg && oldArrayImg) {
         cell.userImage.image = [UIImage imageNamed:[oldArrayImg objectAtIndex:indexPath.row]];
-        cell.destImage.image = [UIImage imageNamed:[oldArrayDesImg objectAtIndex:indexPath.row]];
         cell.lblContent.text = [NSString stringWithFormat:@"%@",[oldArrayContent objectAtIndex:indexPath.row]];
     } else {
         cell.userImage.image = [UIImage imageNamed:[newArrayImg objectAtIndex:indexPath.row]];
-        cell.destImage.image = [UIImage imageNamed:[newArrayDesImg objectAtIndex:indexPath.row]];
         cell.lblContent.text = [NSString stringWithFormat:@"%@",[newArrayContent objectAtIndex:indexPath.row]];
     }
     
