@@ -32,6 +32,7 @@
 		F494A5DB1DB6893E00D173E0 /* YUMMYTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5DA1DB6893E00D173E0 /* YUMMYTests.m */; };
 		F494A5E61DB6893E00D173E0 /* YUMMYUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5E51DB6893E00D173E0 /* YUMMYUITests.m */; };
 		F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */; };
+		F4A6BD481DDF62EA0063139B /* AMScrollingNavbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */; };
 		F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */; };
 		F4B7FF991DC6247A003F6960 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B7FF981DC6247A003F6960 /* NotificationViewController.m */; };
 		F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B9169F1DD5CBA60024C110 /* cateCell.m */; };
@@ -107,6 +108,7 @@
 		F494A5E71DB6893E00D173E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49EDE811DDF091B00412FC4 /* UserWhoFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserWhoFollowViewController.h; sourceTree = "<group>"; };
 		F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWhoFollowViewController.m; sourceTree = "<group>"; };
+		F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMScrollingNavbar.framework; path = Carthage/Build/iOS/AMScrollingNavbar.framework; sourceTree = "<group>"; };
 		F4A7EE4B1DC5DEBC0064F576 /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
 		F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		F4B7FF971DC6247A003F6960 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			files = (
 				F41422A51DB7D7480010F9A8 /* QuartzCore.framework in Frameworks */,
 				F41422A31DB7D7410010F9A8 /* CoreImage.framework in Frameworks */,
+				F4A6BD481DDF62EA0063139B /* AMScrollingNavbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +177,7 @@
 		F41422A11DB7D7410010F9A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */,
 				F41422A41DB7D7480010F9A8 /* QuartzCore.framework */,
 				F41422A21DB7D7410010F9A8 /* CoreImage.framework */,
 			);
@@ -422,6 +426,7 @@
 				F494A5B91DB6893E00D173E0 /* Sources */,
 				F494A5BA1DB6893E00D173E0 /* Frameworks */,
 				F494A5BB1DB6893E00D173E0 /* Resources */,
+				F4A6BD491DDF63340063139B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -632,6 +637,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F4A6BD491DDF63340063139B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(SRCROOT)/Carthage/Build/iOS/AMScrollingNavbar.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -809,6 +828,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TX9R26AVUZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = YUMMY/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HOU.YUMMY;
@@ -825,6 +848,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TX9R26AVUZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = YUMMY/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HOU.YUMMY;
