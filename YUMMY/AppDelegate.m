@@ -26,6 +26,9 @@
     [[UITabBar appearance] setAlpha:0.96];
     [[UITabBar appearance] setFrame:CGRectMake(0, 15, 320, 30)];
     
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
     
     return YES;
 }

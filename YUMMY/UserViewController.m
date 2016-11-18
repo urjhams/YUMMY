@@ -22,12 +22,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *userFolow;
 @property (weak, nonatomic) IBOutlet UILabel *userBookmark;
 @property (weak, nonatomic) IBOutlet UILabel *userLike;
-@property (weak, nonatomic) IBOutlet UICollectionView *userRecipeTableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *userRecipeCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userRecipeCollectionViewHeight;
 
 - (IBAction)settingClick:(id)sender;
 - (IBAction)toFollower:(id)sender;
 - (IBAction)toLike:(id)sender;
 - (IBAction)toBookmark:(id)sender;
+- (IBAction)changeAvatar:(id)sender;
 
 @end
 
@@ -36,9 +38,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.userRecipeTableView.delegate = self;
-    self.userRecipeTableView.dataSource = self;
+    self.userRecipeCollectionView.delegate = self;
+    self.userRecipeCollectionView.dataSource = self;
     
+    //round avatar
+    self.userAvatar.layer.cornerRadius = self.userAvatar.frame.size.width / 2;
+    [self.userAvatar setClipsToBounds:YES];
+    
+    //cover
+    self.imgCover.image = [UIImage imageNamed:@"cover-default"];
+    
+    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    
+}
+
+#pragma mark - chỉnh màu status bar
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - delegate & datasource
@@ -48,11 +64,13 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UserRecipeCollectionViewCell *cell = [self.userRecipeTableView dequeueReusableCellWithReuseIdentifier:@"UserRecipe" forIndexPath:indexPath];
+    UserRecipeCollectionViewCell *cell = [self.userRecipeCollectionView dequeueReusableCellWithReuseIdentifier:@"UserRecipe" forIndexPath:indexPath];
     
     cell.recipeImage.image = [UIImage imageNamed:[recipeImg objectAtIndex:indexPath.item]];
     cell.RecipeCate.text = [NSString stringWithFormat:@"%@",[recipeCate objectAtIndex:indexPath.item]];
     cell.lblRecipeName.text = [NSString stringWithFormat:@"%@",[recipeName objectAtIndex:indexPath.item]];
+    
+    self.userRecipeCollectionViewHeight.constant = self.userRecipeCollectionView.contentSize.height;
     
     return cell;
 }
@@ -64,6 +82,13 @@
     return sectionInset;
 }
 
+#pragma mark - collectionview cell size config
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat cellWidth = [UIScreen mainScreen].bounds.size.width /2.2;
+    CGFloat cellHeight = cellWidth * 1.36;
+    return CGSizeMake(cellWidth, cellHeight);
+}
+
 #pragma mark - action
 
 - (IBAction)settingClick:(id)sender {
@@ -71,11 +96,19 @@
 }
 
 - (IBAction)toFollower:(id)sender {
+    
 }
 
 - (IBAction)toLike:(id)sender {
+    
 }
 
 - (IBAction)toBookmark:(id)sender {
+    
 }
+
+- (IBAction)changeAvatar:(id)sender {
+    
+}
+
 @end

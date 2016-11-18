@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
 }
 
 
@@ -150,6 +150,8 @@
     if ([segue.identifier isEqualToString:@"loginSuccess"]) {
         TabBarController *destinationController = [segue destinationViewController];
         destinationController.userName = userAcc;
+        
+        
         NSLog(@"Username la: %@",userAcc);
     }
 }

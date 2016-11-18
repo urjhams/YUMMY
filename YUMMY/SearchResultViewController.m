@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSMutableArray *nameArr;
 @property (strong, nonatomic) NSMutableArray *likeArr;
 @property (strong, nonatomic) NSMutableArray *selectedArr;
+@property (weak, nonatomic) IBOutlet UINavigationBar *theNavigationBar;
+
 - (IBAction)btnLikeClick:(id)sender;
 - (IBAction)btnBookmarkClick:(id)sender;
 @end
@@ -26,6 +28,10 @@
     self.collectionViewController.prefetchDataSource = self;
     self.collectionViewController.dataSource = self;
     self.collectionViewController.delegate = self;
+    
+    self.theNavigationBar.barTintColor = [UIColor whiteColor];
+    self.theNavigationBar.backgroundColor = [UIColor whiteColor];
+    //[self.theNavigationBar setAlpha:0.7];
     
     //thay code lấy dữ liệu dưới đây
     self.imageArr = [NSMutableArray arrayWithObjects:@"1.png",@"2.png",@"3.png",@"1.png",@"2.png",@"3.png", nil];
@@ -134,7 +140,7 @@
 #pragma mark - điều chỉnh khoảng cách giữa cell với nhau và với viền
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(-10, 10, 55, 10);  //top left bottom right
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(54, 10, 55, 10);  //top left bottom right
     return sectionInset;
 }
 

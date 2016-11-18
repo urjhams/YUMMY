@@ -31,6 +31,7 @@
 		F494A5D01DB6893E00D173E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F494A5CE1DB6893E00D173E0 /* LaunchScreen.storyboard */; };
 		F494A5DB1DB6893E00D173E0 /* YUMMYTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5DA1DB6893E00D173E0 /* YUMMYTests.m */; };
 		F494A5E61DB6893E00D173E0 /* YUMMYUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5E51DB6893E00D173E0 /* YUMMYUITests.m */; };
+		F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */; };
 		F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */; };
 		F4B7FF991DC6247A003F6960 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B7FF981DC6247A003F6960 /* NotificationViewController.m */; };
 		F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B9169F1DD5CBA60024C110 /* cateCell.m */; };
@@ -104,6 +105,8 @@
 		F494A5E11DB6893E00D173E0 /* YUMMYUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YUMMYUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F494A5E51DB6893E00D173E0 /* YUMMYUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YUMMYUITests.m; sourceTree = "<group>"; };
 		F494A5E71DB6893E00D173E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F49EDE811DDF091B00412FC4 /* UserWhoFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserWhoFollowViewController.h; sourceTree = "<group>"; };
+		F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWhoFollowViewController.m; sourceTree = "<group>"; };
 		F4A7EE4B1DC5DEBC0064F576 /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
 		F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		F4B7FF971DC6247A003F6960 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 			children = (
 				F47C69FB1DCBB27500AD951E /* UserViewController.h */,
 				F47C69FC1DCBB27500AD951E /* UserViewController.m */,
+				F49EDE841DDF092000412FC4 /* 2nd step view controller */,
 				F48067871DDC7B27009BC684 /* outlet */,
 			);
 			name = UserScreen;
@@ -356,6 +360,15 @@
 				F494A5E71DB6893E00D173E0 /* Info.plist */,
 			);
 			path = YUMMYUITests;
+			sourceTree = "<group>";
+		};
+		F49EDE841DDF092000412FC4 /* 2nd step view controller */ = {
+			isa = PBXGroup;
+			children = (
+				F49EDE811DDF091B00412FC4 /* UserWhoFollowViewController.h */,
+				F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */,
+			);
+			name = "2nd step view controller";
 			sourceTree = "<group>";
 		};
 		F4A7EE4E1DC5DEC30064F576 /* Create Recipe */ = {
@@ -629,6 +642,7 @@
 				F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */,
 				F494A5C81DB6893E00D173E0 /* ViewController.m in Sources */,
 				F414229A1DB70DA80010F9A8 /* SignUpViewController.m in Sources */,
+				F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */,
 				F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */,
 				F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */,
 				F4F080501DBF9525008175A2 /* SearchResultViewController.m in Sources */,

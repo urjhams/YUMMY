@@ -108,6 +108,8 @@
     //cell.destImage.layer.cornerRadius = 10.0f;
     //[cell.destImage setClipsToBounds:YES];
     
+    cell.userImage.contentMode = UIViewContentModeScaleAspectFit;   //scale lại ảnh cho vừa với kích thước imageview chứ không bị to ra theo ảnh
+    
     //content
     if (newArrayImg && oldArrayImg) {
         if (indexPath.section == 0) {
