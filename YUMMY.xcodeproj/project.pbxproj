@@ -18,6 +18,7 @@
 		F4197CA31DB8D43800194D9B /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA01DB8D43800194D9B /* 2.png */; };
 		F4197CA41DB8D43800194D9B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA11DB8D43800194D9B /* 1.png */; };
 		F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */; };
+		F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4417F511DE096FE00ABB015 /* anotherUserViewController.m */; };
 		F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */; };
 		F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4730B0E1DDB569100BB10D5 /* avatar.jpg */; };
 		F47C69FD1DCBB27500AD951E /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C69FC1DCBB27500AD951E /* UserViewController.m */; };
@@ -33,7 +34,6 @@
 		F494A5DB1DB6893E00D173E0 /* YUMMYTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5DA1DB6893E00D173E0 /* YUMMYTests.m */; };
 		F494A5E61DB6893E00D173E0 /* YUMMYUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5E51DB6893E00D173E0 /* YUMMYUITests.m */; };
 		F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */; };
-		F4A6BD481DDF62EA0063139B /* AMScrollingNavbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */; };
 		F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */; };
 		F4B7FF991DC6247A003F6960 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B7FF981DC6247A003F6960 /* NotificationViewController.m */; };
 		F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B9169F1DD5CBA60024C110 /* cateCell.m */; };
@@ -82,6 +82,8 @@
 		F4197CA11DB8D43800194D9B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		F4417F501DE096FE00ABB015 /* anotherUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anotherUserViewController.h; sourceTree = "<group>"; };
+		F4417F511DE096FE00ABB015 /* anotherUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = anotherUserViewController.m; sourceTree = "<group>"; };
 		F4730B081DDB33F900BB10D5 /* notificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationTableViewCell.h; sourceTree = "<group>"; };
 		F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationTableViewCell.m; sourceTree = "<group>"; };
 		F4730B0E1DDB569100BB10D5 /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 		F494A5E71DB6893E00D173E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49EDE811DDF091B00412FC4 /* UserWhoFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserWhoFollowViewController.h; sourceTree = "<group>"; };
 		F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserWhoFollowViewController.m; sourceTree = "<group>"; };
-		F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMScrollingNavbar.framework; path = Carthage/Build/iOS/AMScrollingNavbar.framework; sourceTree = "<group>"; };
 		F4A7EE4B1DC5DEBC0064F576 /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
 		F4A7EE4C1DC5DEBC0064F576 /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		F4B7FF971DC6247A003F6960 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 			files = (
 				F41422A51DB7D7480010F9A8 /* QuartzCore.framework in Frameworks */,
 				F41422A31DB7D7410010F9A8 /* CoreImage.framework in Frameworks */,
-				F4A6BD481DDF62EA0063139B /* AMScrollingNavbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +180,6 @@
 		F41422A11DB7D7410010F9A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F4A6BD471DDF62EA0063139B /* AMScrollingNavbar.framework */,
 				F41422A41DB7D7480010F9A8 /* QuartzCore.framework */,
 				F41422A21DB7D7410010F9A8 /* CoreImage.framework */,
 			);
@@ -212,6 +211,15 @@
 				F4730B0E1DDB569100BB10D5 /* avatar.jpg */,
 			);
 			name = exampleMaterials;
+			sourceTree = "<group>";
+		};
+		F4417F531DE0976200ABB015 /* clickOnUser */ = {
+			isa = PBXGroup;
+			children = (
+				F4417F501DE096FE00ABB015 /* anotherUserViewController.h */,
+				F4417F511DE096FE00ABB015 /* anotherUserViewController.m */,
+			);
+			name = clickOnUser;
 			sourceTree = "<group>";
 		};
 		F4599A451DB69F6A00014CD9 /* Login */ = {
@@ -294,13 +302,14 @@
 			name = outlet;
 			sourceTree = "<group>";
 		};
-		F483B20C1DE0111900D86DBA /* ManController2nd */ = {
+		F483B20C1DE0111900D86DBA /* MainController2nd */ = {
 			isa = PBXGroup;
 			children = (
 				F483B2091DE0110F00D86DBA /* RecipeContentViewController.h */,
 				F483B20A1DE0110F00D86DBA /* RecipeContentViewController.m */,
+				F4417F531DE0976200ABB015 /* clickOnUser */,
 			);
-			name = ManController2nd;
+			name = MainController2nd;
 			sourceTree = "<group>";
 		};
 		F48445FA1DBC9970003B09F4 /* library */ = {
@@ -346,8 +355,8 @@
 				F414229D1DB7863E0010F9A8 /* Sign up */,
 				F4599A451DB69F6A00014CD9 /* Login */,
 				F4F080511DBF9632008175A2 /* MainController */,
+				F483B20C1DE0111900D86DBA /* MainController2nd */,
 				F494A5C01DB6893E00D173E0 /* Supporting Files */,
-				F483B20C1DE0111900D86DBA /* ManController2nd */,
 			);
 			path = YUMMY;
 			sourceTree = "<group>";
@@ -439,7 +448,6 @@
 				F494A5B91DB6893E00D173E0 /* Sources */,
 				F494A5BA1DB6893E00D173E0 /* Frameworks */,
 				F494A5BB1DB6893E00D173E0 /* Resources */,
-				F4A6BD491DDF63340063139B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -650,20 +658,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F4A6BD491DDF63340063139B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/$(SRCROOT)/Carthage/Build/iOS/AMScrollingNavbar.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -688,6 +682,7 @@
 				F48067861DDC7B21009BC684 /* UserRecipeCollectionViewCell.m in Sources */,
 				F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				F494A5C21DB6893E00D173E0 /* main.m in Sources */,
+				F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */,
 				F4EB1ABA1DC0E48D00E10262 /* categoryLabel.m in Sources */,
 				F41422961DB6F2670010F9A8 /* MainViewController.m in Sources */,
 				F48445F91DBC8AD2003B09F4 /* mainCell.m in Sources */,

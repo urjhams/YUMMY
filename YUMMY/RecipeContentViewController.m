@@ -23,35 +23,80 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblIngredient;
 @property (weak, nonatomic) IBOutlet UITableView *stepTableView;
 @property (weak, nonatomic) IBOutlet UITableView *commentTableView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *theNaviBar;
+@property (weak, nonatomic) IBOutlet UIScrollView *theScrollView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ingredientsContentHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *aboutContentHeight;
 
-
+- (void) whenScrolling:(UIScrollView *)scrollView;
 @end
 
 @implementation RecipeContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.theScrollView.delegate = self;
+
+    self.theNaviBar.backgroundColor = [UIColor darkGrayColor];
+    [self.theNaviBar setAlpha:0.65];
+    self.theNaviBar.hidden = YES;
+    //[self.theNaviBar setFrame:CGRectMake(0, 0, 320, 300)];
+    
+    //[self whenScrollviewScroll:self.theScrollView];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self whenScrolling:self.theScrollView];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)whenScrolling:(UIScrollView *)scrollView {
+    float offSetY = scrollView.contentOffset.y;
+    if (offSetY < 60) {
+        if (self.theNaviBar.hidden == NO) {
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^(void) {
+                                 [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+                                 if (offSetY >50) {
+                                     [self.theNaviBar setAlpha:0.5];
+                                     [self.theNaviBar setHidden:NO];
+                                 } else if (offSetY > 45) {
+                                     [self.theNaviBar setAlpha:0.35];
+                                     [self.theNaviBar setHidden:NO];
+                                 } else if (offSetY > 40) {
+                                     [self.theNaviBar setAlpha:0.2];
+                                     [self.theNaviBar setHidden:NO];
+                                 } else if (offSetY > 35) {
+                                     [self.theNaviBar setAlpha:0.15];
+                                     [self.theNaviBar setHidden:NO];
+                                 } else {
+                                     [self.theNaviBar setHidden:YES];
+                                 }
+                             }
+                             completion:nil];
+        }
+    }
+    else {
+        if (self.theNaviBar.hidden == YES) {
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^(void) {
+                                 [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+                                 [self.theNaviBar setAlpha:0.65];
+                                 [self.theNaviBar setHidden:NO];
+                             }
+                             completion:nil];
+        }
+    }
 }
-*/
+
 
 @end

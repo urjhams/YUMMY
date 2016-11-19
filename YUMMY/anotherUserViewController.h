@@ -1,5 +1,5 @@
 //
-//  RecipeContentViewController.h
+//  anotherUserViewController.h
 //  YUMMY
 //
 //  Created by Đinh Quân on 11/19/16.
@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface RecipeContentViewController : ViewController <UIScrollViewDelegate>
+@interface anotherUserViewController : ViewController
 
 @end
