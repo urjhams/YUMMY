@@ -22,6 +22,7 @@
 		F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4730B0E1DDB569100BB10D5 /* avatar.jpg */; };
 		F47C69FD1DCBB27500AD951E /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C69FC1DCBB27500AD951E /* UserViewController.m */; };
 		F48067861DDC7B21009BC684 /* UserRecipeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F48067851DDC7B21009BC684 /* UserRecipeCollectionViewCell.m */; };
+		F483B20B1DE0110F00D86DBA /* RecipeContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B20A1DE0110F00D86DBA /* RecipeContentViewController.m */; };
 		F48445F91DBC8AD2003B09F4 /* mainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F48445F81DBC8AD2003B09F4 /* mainCell.m */; };
 		F494A5C21DB6893E00D173E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5C11DB6893E00D173E0 /* main.m */; };
 		F494A5C51DB6893E00D173E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F494A5C41DB6893E00D173E0 /* AppDelegate.m */; };
@@ -88,6 +89,8 @@
 		F47C69FC1DCBB27500AD951E /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		F48067841DDC7B21009BC684 /* UserRecipeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRecipeCollectionViewCell.h; sourceTree = "<group>"; };
 		F48067851DDC7B21009BC684 /* UserRecipeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRecipeCollectionViewCell.m; sourceTree = "<group>"; };
+		F483B2091DE0110F00D86DBA /* RecipeContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeContentViewController.h; sourceTree = "<group>"; };
+		F483B20A1DE0110F00D86DBA /* RecipeContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeContentViewController.m; sourceTree = "<group>"; };
 		F48445F71DBC8AD2003B09F4 /* mainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainCell.h; sourceTree = "<group>"; };
 		F48445F81DBC8AD2003B09F4 /* mainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainCell.m; sourceTree = "<group>"; };
 		F494A5BD1DB6893E00D173E0 /* YUMMY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YUMMY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +294,15 @@
 			name = outlet;
 			sourceTree = "<group>";
 		};
+		F483B20C1DE0111900D86DBA /* ManController2nd */ = {
+			isa = PBXGroup;
+			children = (
+				F483B2091DE0110F00D86DBA /* RecipeContentViewController.h */,
+				F483B20A1DE0110F00D86DBA /* RecipeContentViewController.m */,
+			);
+			name = ManController2nd;
+			sourceTree = "<group>";
+		};
 		F48445FA1DBC9970003B09F4 /* library */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +347,7 @@
 				F4599A451DB69F6A00014CD9 /* Login */,
 				F4F080511DBF9632008175A2 /* MainController */,
 				F494A5C01DB6893E00D173E0 /* Supporting Files */,
+				F483B20C1DE0111900D86DBA /* ManController2nd */,
 			);
 			path = YUMMY;
 			sourceTree = "<group>";
@@ -661,6 +674,7 @@
 				F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */,
 				F494A5C81DB6893E00D173E0 /* ViewController.m in Sources */,
 				F414229A1DB70DA80010F9A8 /* SignUpViewController.m in Sources */,
+				F483B20B1DE0110F00D86DBA /* RecipeContentViewController.m in Sources */,
 				F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */,
 				F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */,
 				F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */,
