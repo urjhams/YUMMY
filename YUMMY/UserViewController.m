@@ -24,12 +24,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *userLike;
 @property (weak, nonatomic) IBOutlet UICollectionView *userRecipeCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userRecipeCollectionViewHeight;
+@property (weak, nonatomic) IBOutlet UINavigationBar *theNaviBar;
+@property (weak, nonatomic) IBOutlet UIScrollView *theScrollView;
+@property (weak, nonatomic) IBOutlet UIButton *btnSetting;
 
-- (IBAction)settingClick:(id)sender;
 - (IBAction)toFollower:(id)sender;
 - (IBAction)toLike:(id)sender;
 - (IBAction)toBookmark:(id)sender;
 - (IBAction)changeAvatar:(id)sender;
+- (IBAction)toSetting:(id)sender;
 
 @end
 
@@ -91,9 +94,6 @@
 
 #pragma mark - action
 
-- (IBAction)settingClick:(id)sender {
-    
-}
 
 - (IBAction)toFollower:(id)sender {
     
@@ -110,5 +110,66 @@
 - (IBAction)changeAvatar:(id)sender {
     
 }
+
+- (IBAction)toSetting:(id)sender {
+}
+
+#pragma mark - navibar hidden/show
+- (void)whenScrolling:(UIScrollView *)scrollView effectNavibar:(UINavigationBar *)naviBar {
+    float offSetY = scrollView.contentOffset.y;
+    if (offSetY < 60) {
+        
+        if (self.btnSetting.hidden == YES) [self.btnSetting setHidden:NO];
+        
+        if (naviBar.hidden == NO) {
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^(void) {
+                                 [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+                                 if (offSetY >50) {
+                                     [naviBar setAlpha:0.5];
+                                     [naviBar setHidden:NO];
+                                     [self.btnSetting setAlpha:0.2];
+                                 } else if (offSetY > 45) {
+                                     [naviBar setAlpha:0.35];
+                                     [naviBar setHidden:NO];
+                                     [self.btnSetting setAlpha:0.35];
+                                 } else if (offSetY > 40) {
+                                     [naviBar setAlpha:0.2];
+                                     [naviBar setHidden:NO];
+                                     [self.btnSetting setAlpha:0.5];
+                                 } else if (offSetY > 35) {
+                                     [naviBar setAlpha:0.15];
+                                     [naviBar setHidden:NO];
+                                     [self.btnSetting setAlpha:0.8];
+                                 } else {
+                                     [naviBar setHidden:YES];
+                                     [self.btnSetting setAlpha:1];
+                                 }
+                             }
+                             completion:nil];
+        }
+        
+    }
+    else {
+        
+        if (self.btnSetting.hidden == NO) [self.btnSetting setHidden:YES];
+        
+        if (naviBar.hidden == YES) {
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^(void) {
+                                 [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+                                 [naviBar setAlpha:0.65];
+                                 [naviBar setHidden:NO];
+                             }
+                             completion:nil];
+        }
+        
+    }
+}
+
 
 @end

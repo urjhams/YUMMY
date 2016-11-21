@@ -450,23 +450,31 @@
                                 </connections>
                             </collectionView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8A-Bx-Glq">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QT3-c1-3sy"/>
+                                </constraints>
                                 <items>
                                     <navigationItem id="cQm-v8-HsN">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="YlA-jM-W3P"/>
+                                        <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="YlA-jM-W3P">
+                                            <inset key="imageInsets" minX="-16" minY="4" maxX="10" maxY="-8"/>
+                                            <connections>
+                                                <action selector="backVC:" destination="fIt-ZX-Gr1" id="zZH-xn-Bwc"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W8A-Bx-Glq" firstAttribute="top" secondItem="byn-NO-un2" secondAttribute="bottom" id="3xM-ub-pT8"/>
                             <constraint firstItem="wcn-cA-clq" firstAttribute="bottom" secondItem="MBG-NO-tLK" secondAttribute="top" id="7a7-cS-Ttn"/>
-                            <constraint firstItem="W8A-Bx-Glq" firstAttribute="leading" secondItem="Qwp-OX-CYC" secondAttribute="leadingMargin" constant="-16" id="KN0-v7-p29"/>
+                            <constraint firstAttribute="trailing" secondItem="W8A-Bx-Glq" secondAttribute="trailing" id="ETz-L3-Akw"/>
                             <constraint firstItem="wcn-cA-clq" firstAttribute="top" secondItem="byn-NO-un2" secondAttribute="bottom" id="O9V-Ex-stJ"/>
                             <constraint firstItem="wcn-cA-clq" firstAttribute="leading" secondItem="Qwp-OX-CYC" secondAttribute="leading" id="PMD-b2-9gD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="W8A-Bx-Glq" secondAttribute="trailing" constant="-16" id="VM4-TH-FfH"/>
+                            <constraint firstItem="W8A-Bx-Glq" firstAttribute="top" secondItem="Qwp-OX-CYC" secondAttribute="top" id="Vc8-jN-6tW"/>
                             <constraint firstAttribute="trailing" secondItem="wcn-cA-clq" secondAttribute="trailing" id="kTk-bV-iBb"/>
+                            <constraint firstItem="W8A-Bx-Glq" firstAttribute="leading" secondItem="Qwp-OX-CYC" secondAttribute="leading" id="wsX-3P-oBq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -753,6 +761,9 @@ beat until ingredients are well combined.</string>
                                             <navigationItem id="zLe-bv-rCN">
                                                 <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="ybs-5k-gSg">
                                                     <inset key="imageInsets" minX="-16" minY="4" maxX="-10" maxY="-8"/>
+                                                    <connections>
+                                                        <action selector="backVC:" destination="tZU-fG-D3n" id="Od9-o8-woS"/>
+                                                    </connections>
                                                 </barButtonItem>
                                             </navigationItem>
                                         </items>
@@ -1177,7 +1188,7 @@ beat until ingredients are well combined.</string>
                         <viewControllerLayoutGuide type="bottom" id="7u4-fh-JVM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sxb-AW-0dc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="472"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ww5-Sc-UGq">
@@ -1201,7 +1212,7 @@ beat until ingredients are well combined.</string>
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMN-1N-5Kf">
-                                <rect key="frame" x="0.0" y="64" width="320" height="536"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="410"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tên công thức" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k90-Yv-fxd">
                                         <rect key="frame" x="20" y="0.0" width="280" height="30"/>
@@ -1371,9 +1382,6 @@ beat until ingredients are well combined.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jWX-p9-SiQ">
-                                        <rect key="frame" x="27" y="271" width="270" height="139"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MOC-9s-CvL">
                                         <rect key="frame" x="27" y="271" width="270" height="30"/>
                                         <connections>
@@ -1396,8 +1404,21 @@ beat until ingredients are well combined.</string>
                                             <action selector="addIngredient:" destination="0wJ-d5-frr" eventType="touchUpInside" id="7vg-q1-bN0"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-dU-s5a">
+                                        <rect key="frame" x="20" y="271" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="DdM-zA-LsS"/>
+                                            <constraint firstAttribute="width" constant="40" id="qxa-Vm-Vx6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ảnh đại diện công thức" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liK-d8-QWg">
+                                        <rect key="frame" x="68" y="270" width="229" height="42"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-ne-l9Z">
-                                        <rect key="frame" x="27" y="418" width="270" height="8"/>
+                                        <rect key="frame" x="25" y="320" width="270" height="8"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="8" id="B4a-hh-D2X"/>
@@ -1458,7 +1479,7 @@ beat until ingredients are well combined.</string>
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHu-5s-c7I">
-                                        <rect key="frame" x="22" y="440" width="280" height="30"/>
+                                        <rect key="frame" x="20" y="342" width="280" height="30"/>
                                         <state key="normal" title="Thêm Bước Làm"/>
                                         <connections>
                                             <action selector="addStep:" destination="0wJ-d5-frr" eventType="touchUpInside" id="QjH-4Q-hd0"/>
@@ -1467,6 +1488,7 @@ beat until ingredients are well combined.</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="k90-Yv-fxd" secondAttribute="trailing" constant="20" id="2H8-EF-OLB"/>
+                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="57" id="2nM-eT-CBa"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="trailing" secondItem="xgd-IZ-ZbG" secondAttribute="trailing" id="489-Ar-xHf"/>
                                     <constraint firstItem="k90-Yv-fxd" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="5GM-c5-O2t"/>
                                     <constraint firstItem="cUg-sc-Qus" firstAttribute="baseline" secondItem="es8-Cf-SF3" secondAttribute="baseline" id="7KU-Cq-jy7"/>
@@ -1475,17 +1497,16 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="9dT-uA-Pwp"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="top" secondItem="39X-WK-i00" secondAttribute="bottom" constant="8" symbolic="YES" id="A92-BN-2Ot"/>
                                     <constraint firstItem="MOC-9s-CvL" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="27" id="Aob-YO-3Y1"/>
-                                    <constraint firstItem="jWX-p9-SiQ" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="8" symbolic="YES" id="BjQ-Em-nYU"/>
+                                    <constraint firstItem="liK-d8-QWg" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="7" id="CpR-7R-OGO"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="trailing" secondItem="Dc0-T5-yT2" secondAttribute="trailing" id="CyJ-iS-gpO"/>
                                     <constraint firstItem="1hf-fp-xZ9" firstAttribute="leading" secondItem="JgU-BS-J94" secondAttribute="leading" id="E0S-0B-b9R"/>
                                     <constraint firstItem="FwH-la-fkM" firstAttribute="leading" secondItem="Tpy-SR-8c6" secondAttribute="leading" id="Ee1-mi-6WN"/>
-                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="27" id="FWs-lr-3SB"/>
-                                    <constraint firstItem="jWX-p9-SiQ" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="27" id="Hdt-h9-4Jh"/>
-                                    <constraint firstItem="RHu-5s-c7I" firstAttribute="leading" secondItem="vVR-SJ-zbz" secondAttribute="leading" id="IUJ-2f-cry"/>
+                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="25" id="FWs-lr-3SB"/>
+                                    <constraint firstItem="RHu-5s-c7I" firstAttribute="leading" secondItem="vVR-SJ-zbz" secondAttribute="leading" constant="-2" id="IUJ-2f-cry"/>
                                     <constraint firstItem="luf-gG-ZYm" firstAttribute="leading" secondItem="39X-WK-i00" secondAttribute="leading" id="Ifb-Xd-WRF"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="top" secondItem="k90-Yv-fxd" secondAttribute="bottom" constant="10" id="Jkh-Pv-b25"/>
                                     <constraint firstItem="90y-Gg-sYi" firstAttribute="centerX" secondItem="L0j-8V-Ac3" secondAttribute="centerX" id="K23-42-O7z"/>
-                                    <constraint firstAttribute="trailing" secondItem="42Y-ne-l9Z" secondAttribute="trailing" constant="23" id="Kms-NY-UnR"/>
+                                    <constraint firstAttribute="trailing" secondItem="42Y-ne-l9Z" secondAttribute="trailing" constant="25" id="Kms-NY-UnR"/>
                                     <constraint firstItem="RHu-5s-c7I" firstAttribute="top" secondItem="42Y-ne-l9Z" secondAttribute="bottom" constant="14" id="MVR-xW-FCC"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="12" id="NAQ-GW-bqS"/>
                                     <constraint firstItem="90y-Gg-sYi" firstAttribute="baseline" secondItem="Tpy-SR-8c6" secondAttribute="baseline" id="NdC-83-znY"/>
@@ -1500,6 +1521,7 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="leading" secondItem="Dc0-T5-yT2" secondAttribute="leading" id="UgA-d6-KrP"/>
                                     <constraint firstAttribute="bottom" secondItem="RHu-5s-c7I" secondAttribute="bottom" constant="38" id="Vwu-f9-e9B"/>
                                     <constraint firstItem="L0j-8V-Ac3" firstAttribute="top" secondItem="90y-Gg-sYi" secondAttribute="bottom" constant="38" id="WiI-jC-RHQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="liK-d8-QWg" secondAttribute="trailing" constant="23" id="Wrl-kz-cIZ"/>
                                     <constraint firstItem="Dc0-T5-yT2" firstAttribute="baseline" secondItem="90y-Gg-sYi" secondAttribute="baseline" id="Xgc-Bf-YXb"/>
                                     <constraint firstItem="uin-0D-yb0" firstAttribute="leading" secondItem="90y-Gg-sYi" secondAttribute="leading" id="Xic-tv-msu"/>
                                     <constraint firstItem="es8-Cf-SF3" firstAttribute="trailing" secondItem="lMN-1N-5Kf" secondAttribute="trailingMargin" id="Xm6-0k-3ua"/>
@@ -1512,20 +1534,21 @@ beat until ingredients are well combined.</string>
                                     <constraint firstAttribute="trailing" secondItem="MOC-9s-CvL" secondAttribute="trailing" constant="23" id="d6P-tb-5oL"/>
                                     <constraint firstItem="cUg-sc-Qus" firstAttribute="top" secondItem="uin-0D-yb0" secondAttribute="top" id="dAa-ZP-FW9"/>
                                     <constraint firstItem="FwH-la-fkM" firstAttribute="leading" secondItem="es8-Cf-SF3" secondAttribute="leading" id="dnc-kp-gun"/>
+                                    <constraint firstItem="liK-d8-QWg" firstAttribute="height" secondItem="wc9-dU-s5a" secondAttribute="height" constant="2" id="e2z-KS-d1M"/>
                                     <constraint firstItem="P27-YG-aNI" firstAttribute="top" secondItem="vVR-SJ-zbz" secondAttribute="bottom" constant="8" symbolic="YES" id="eBg-xY-YdH"/>
                                     <constraint firstAttribute="trailing" secondItem="gIL-8L-mDt" secondAttribute="trailing" constant="20" id="eBn-Wn-jyg"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="centerX" secondItem="P27-YG-aNI" secondAttribute="centerX" id="f1y-6y-BK5"/>
                                     <constraint firstItem="es8-Cf-SF3" firstAttribute="leading" secondItem="cUg-sc-Qus" secondAttribute="trailing" id="fI7-55-TlO"/>
                                     <constraint firstItem="Dc0-T5-yT2" firstAttribute="top" secondItem="8ge-yV-ORf" secondAttribute="bottom" constant="10" id="gLO-Ef-aCS"/>
-                                    <constraint firstAttribute="trailing" secondItem="jWX-p9-SiQ" secondAttribute="trailing" constant="23" id="mKu-0u-c7w"/>
-                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="top" secondItem="MOC-9s-CvL" secondAttribute="bottom" constant="117" id="mZD-nF-l3A"/>
+                                    <constraint firstItem="liK-d8-QWg" firstAttribute="leading" secondItem="wc9-dU-s5a" secondAttribute="trailing" constant="8" id="htz-CC-7mx"/>
                                     <constraint firstItem="39X-WK-i00" firstAttribute="top" secondItem="JgU-BS-J94" secondAttribute="top" id="nZ0-vc-zdq"/>
                                     <constraint firstItem="L0j-8V-Ac3" firstAttribute="top" secondItem="1hf-fp-xZ9" secondAttribute="bottom" constant="8" symbolic="YES" id="oA2-0n-Tqo"/>
-                                    <constraint firstItem="RHu-5s-c7I" firstAttribute="trailing" secondItem="vVR-SJ-zbz" secondAttribute="trailing" id="oAh-td-bUs"/>
+                                    <constraint firstItem="RHu-5s-c7I" firstAttribute="trailing" secondItem="vVR-SJ-zbz" secondAttribute="trailing" constant="-2" id="oAh-td-bUs"/>
+                                    <constraint firstItem="wc9-dU-s5a" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="8" id="oCg-rl-aac"/>
+                                    <constraint firstItem="wc9-dU-s5a" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="pT6-SO-hjN"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="leading" secondItem="xgd-IZ-ZbG" secondAttribute="leading" id="r8C-9S-heR"/>
                                     <constraint firstItem="k90-Yv-fxd" firstAttribute="top" secondItem="lMN-1N-5Kf" secondAttribute="top" id="sOF-TO-7FX"/>
                                     <constraint firstItem="39X-WK-i00" firstAttribute="top" secondItem="L0j-8V-Ac3" secondAttribute="bottom" constant="-3" id="slv-Jw-WJR"/>
-                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="top" secondItem="jWX-p9-SiQ" secondAttribute="bottom" constant="8" id="ssj-dc-8qk"/>
                                     <constraint firstItem="L0j-8V-Ac3" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="22" id="tCZ-fm-7hd"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="top" secondItem="xgd-IZ-ZbG" secondAttribute="bottom" constant="8" symbolic="YES" id="teO-hV-Zhf"/>
                                     <constraint firstItem="xgd-IZ-ZbG" firstAttribute="top" secondItem="gIL-8L-mDt" secondAttribute="bottom" constant="12" id="up3-Tj-wfn"/>
@@ -1544,7 +1567,7 @@ beat until ingredients are well combined.</string>
                             <constraint firstItem="Ww5-Sc-UGq" firstAttribute="leading" secondItem="Sxb-AW-0dc" secondAttribute="leading" id="LCo-nJ-hJt"/>
                             <constraint firstAttribute="trailing" secondItem="lMN-1N-5Kf" secondAttribute="trailing" id="TMH-AG-0iM"/>
                             <constraint firstItem="lMN-1N-5Kf" firstAttribute="top" secondItem="Ww5-Sc-UGq" secondAttribute="bottom" id="UNw-tj-j4D"/>
-                            <constraint firstAttribute="bottom" secondItem="lMN-1N-5Kf" secondAttribute="bottom" id="buU-QS-jGF"/>
+                            <constraint firstAttribute="bottom" secondItem="lMN-1N-5Kf" secondAttribute="bottom" constant="-2" id="buU-QS-jGF"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="createReipe" selectedImage="createReipe" id="S2j-hU-LJA">
@@ -1552,10 +1575,9 @@ beat until ingredients are well combined.</string>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Kkx-WM-g3x"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="600"/>
+                    <size key="freeformSize" width="320" height="472"/>
                     <connections>
                         <outlet property="addAvatar" destination="MOC-9s-CvL" id="7Fc-Q8-wAj"/>
-                        <outlet property="avatar" destination="jWX-p9-SiQ" id="Ebd-J3-1Ay"/>
                         <outlet property="btnAvatar" destination="MOC-9s-CvL" id="pUA-ek-NY4"/>
                         <outlet property="btnDifficult" destination="Tpy-SR-8c6" id="e66-AM-wiC"/>
                         <outlet property="btnPerson" destination="Dc0-T5-yT2" id="aQJ-EC-3EM"/>
@@ -1571,11 +1593,30 @@ beat until ingredients are well combined.</string>
                         <outlet property="stepTableView" destination="42Y-ne-l9Z" id="64r-TN-lsd"/>
                         <outlet property="stepTableViewHeight" destination="B4a-hh-D2X" id="8ND-Tz-V7s"/>
                         <outlet property="txtAbout" destination="P27-YG-aNI" id="39e-cp-WNG"/>
+                        <segue destination="Xye-pv-4tQ" kind="presentation" identifier="getRecipeImg" modalTransitionStyle="flipHorizontal" id="YZQ-f4-qnY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eAY-ct-cFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="951"/>
+            <point key="canvasLocation" x="2010" y="950.70422535211264"/>
+        </scene>
+        <!--Recipe Avatar View Controller-->
+        <scene sceneID="9cl-bT-pwT">
+            <objects>
+                <viewController id="Xye-pv-4tQ" customClass="recipeAvatarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H2c-4i-u8e"/>
+                        <viewControllerLayoutGuide type="bottom" id="sOz-4X-WU0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WqV-41-utw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L4k-WW-vJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3142.5" y="2536.2676056338028"/>
         </scene>
         <!--Notification View Controller-->
         <scene sceneID="9ca-i4-U3r">
@@ -1772,7 +1813,7 @@ beat until ingredients are well combined.</string>
                                             <constraint firstAttribute="height" constant="50" id="8LN-0Y-86l"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="settingClick:" destination="9IW-eE-YNa" eventType="touchUpInside" id="7V6-bf-zsa"/>
+                                            <action selector="toSetting:" destination="9IW-eE-YNa" eventType="touchUpInside" id="Gw7-T3-AO4"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0t7-AV-XsJ">
@@ -1940,10 +1981,29 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="3bq-vd-kp4" firstAttribute="top" secondItem="CmH-iT-RsP" secondAttribute="bottom" constant="45" id="zwG-WS-jdz"/>
                                 </constraints>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDc-3J-EXh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="t2p-Y4-rnd"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="OgP-wN-FPS">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="TPs-NH-7eI">
+                                            <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                                            <connections>
+                                                <action selector="toSetting:" destination="9IW-eE-YNa" id="vwb-cE-wXW"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vDc-3J-EXh" secondAttribute="trailing" id="SR2-bG-mqQ"/>
                             <constraint firstItem="frG-av-bmJ" firstAttribute="top" secondItem="W5u-G3-3Wt" secondAttribute="bottom" constant="-20" id="W1c-6t-wHw"/>
+                            <constraint firstItem="vDc-3J-EXh" firstAttribute="top" secondItem="rCG-iM-lZc" secondAttribute="top" id="bic-sL-DOq"/>
+                            <constraint firstItem="vDc-3J-EXh" firstAttribute="leading" secondItem="rCG-iM-lZc" secondAttribute="leading" id="f1P-Pe-SDv"/>
                             <constraint firstAttribute="bottom" secondItem="frG-av-bmJ" secondAttribute="bottom" id="mer-o1-tHX"/>
                             <constraint firstAttribute="trailing" secondItem="frG-av-bmJ" secondAttribute="trailing" id="scL-d1-ruh"/>
                             <constraint firstItem="frG-av-bmJ" firstAttribute="leading" secondItem="rCG-iM-lZc" secondAttribute="leading" id="yvZ-Lf-4JM"/>
@@ -1953,7 +2013,10 @@ beat until ingredients are well combined.</string>
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="btnSetting" destination="6f0-Yq-0QT" id="fXT-vn-qIm"/>
                         <outlet property="imgCover" destination="CmH-iT-RsP" id="hae-Ld-cx1"/>
+                        <outlet property="theNaviBar" destination="vDc-3J-EXh" id="XZb-dx-EmY"/>
+                        <outlet property="theScrollView" destination="frG-av-bmJ" id="TeM-ZS-UZa"/>
                         <outlet property="userAccount" destination="3bq-vd-kp4" id="EXF-Cl-D8c"/>
                         <outlet property="userAvatar" destination="Irf-9j-4Bg" id="Epg-tS-Vqr"/>
                         <outlet property="userBookmark" destination="jik-65-zBn" id="oHg-GV-Kpd"/>
@@ -1987,7 +2050,11 @@ beat until ingredients are well combined.</string>
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Người dùng theo dõi bạn" id="JNC-H8-q1B">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="08B-jC-JL6"/>
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="08B-jC-JL6">
+                                            <connections>
+                                                <action selector="backVC:" destination="pD6-5K-Y8L" id="iBf-GU-LW8"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1995,7 +2062,7 @@ beat until ingredients are well combined.</string>
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FUserCell" rowHeight="60" id="iNZ-1p-5Bw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FUserCell" rowHeight="60" id="iNZ-1p-5Bw" customClass="userTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iNZ-1p-5Bw" id="IzV-4v-RQo">
@@ -2024,6 +2091,10 @@ beat until ingredients are well combined.</string>
                                                 <constraint firstItem="3ZZ-qL-9bl" firstAttribute="leading" secondItem="IzV-4v-RQo" secondAttribute="leadingMargin" constant="2" id="wI2-cU-8oK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="image" destination="3ZZ-qL-9bl" id="dle-1E-4Gc"/>
+                                            <outlet property="name" destination="9r6-p4-tDv" id="4yB-Dy-qEf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -2039,10 +2110,13 @@ beat until ingredients are well combined.</string>
                             <constraint firstAttribute="trailing" secondItem="GDC-2J-YM7" secondAttribute="trailing" id="sfZ-Fg-9Yz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="theTableView" destination="kPq-3L-gCm" id="Dc0-lC-p9g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkM-6p-QW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1727" y="2948"/>
+            <point key="canvasLocation" x="1851" y="2974"/>
         </scene>
         <!--Another User View Controller-->
         <scene sceneID="I8U-5Z-z6d">
@@ -2162,6 +2236,9 @@ beat until ingredients are well combined.</string>
                                             <constraint firstAttribute="width" constant="50" id="D3C-ph-gk9"/>
                                             <constraint firstAttribute="height" constant="50" id="R7F-B4-Q6A"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="follow:" destination="N6c-pA-jrX" eventType="touchUpInside" id="jwp-MN-yxh"/>
+                                        </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QF7-Qz-zNr">
                                         <rect key="frame" x="8" y="317" width="304" height="223"/>
@@ -2229,50 +2306,52 @@ beat until ingredients are well combined.</string>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbT-QK-lLb">
-                                        <rect key="frame" x="92" y="220" width="60" height="60"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GfU-y9-zdm">
-                                        <rect key="frame" x="170" y="220" width="60" height="60"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i79-XB-779">
-                                        <rect key="frame" x="248" y="220" width="60" height="60"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Eq-6q-nnK">
-                                        <rect key="frame" x="120" y="77" width="80" height="80"/>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ly-9C-n5h">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="m9j-hP-bFA"/>
+                                        </constraints>
+                                        <items>
+                                            <navigationItem id="dJy-3p-gnS">
+                                                <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="fIC-jF-etb">
+                                                    <inset key="imageInsets" minX="-16" minY="4" maxX="10" maxY="-8"/>
+                                                    <connections>
+                                                        <action selector="backVC:" destination="N6c-pA-jrX" id="nxZ-BE-XUc"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWi-8n-tLU">
+                                        <rect key="frame" x="5" y="15" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="9CD-hH-tcW"/>
+                                            <constraint firstAttribute="height" constant="40" id="f8N-ZX-rio"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="backVC:" destination="N6c-pA-jrX" eventType="touchUpInside" id="UOG-ux-lae"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="7Eq-6q-nnK" firstAttribute="leading" secondItem="vBH-sc-dt9" secondAttribute="leading" id="0Mf-jY-aGp"/>
                                     <constraint firstItem="i3D-On-MtX" firstAttribute="baseline" secondItem="9ju-3S-Np2" secondAttribute="baseline" id="19m-Nl-Ds1"/>
-                                    <constraint firstItem="7Eq-6q-nnK" firstAttribute="top" secondItem="vBH-sc-dt9" secondAttribute="top" id="20P-No-hJc"/>
-                                    <constraint firstItem="7Eq-6q-nnK" firstAttribute="height" secondItem="vBH-sc-dt9" secondAttribute="height" id="3cD-S2-cU7"/>
                                     <constraint firstItem="vBH-sc-dt9" firstAttribute="top" secondItem="Z9W-Vv-BHN" secondAttribute="top" constant="77" id="3eh-Xh-o9n"/>
-                                    <constraint firstItem="7Eq-6q-nnK" firstAttribute="width" secondItem="vBH-sc-dt9" secondAttribute="width" id="3m3-bo-I9u"/>
                                     <constraint firstItem="UqJ-iv-PXg" firstAttribute="leading" secondItem="Z9W-Vv-BHN" secondAttribute="leading" id="4eL-rV-OqA"/>
                                     <constraint firstItem="UqJ-iv-PXg" firstAttribute="top" secondItem="Z9W-Vv-BHN" secondAttribute="top" id="7si-gC-Unz"/>
                                     <constraint firstItem="cGQ-98-R0w" firstAttribute="trailing" secondItem="Y6z-Vg-Fxc" secondAttribute="trailing" id="9v4-jv-yDr"/>
                                     <constraint firstItem="U57-Mq-7tS" firstAttribute="top" secondItem="Z9W-Vv-BHN" secondAttribute="topMargin" constant="10" id="A3t-E7-sSH"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="centerX" secondItem="9ju-3S-Np2" secondAttribute="centerX" id="BH6-rt-Rzm"/>
-                                    <constraint firstItem="i79-XB-779" firstAttribute="top" secondItem="cGQ-98-R0w" secondAttribute="top" id="C18-Up-QJW"/>
+                                    <constraint firstItem="DWi-8n-tLU" firstAttribute="leading" secondItem="Z9W-Vv-BHN" secondAttribute="leading" constant="5" id="CCf-aF-TVo"/>
                                     <constraint firstItem="5fZ-wS-MTO" firstAttribute="baseline" secondItem="Y6z-Vg-Fxc" secondAttribute="baseline" id="CeG-6Y-q3F"/>
                                     <constraint firstItem="7a8-TI-T75" firstAttribute="top" secondItem="iYe-PM-fz8" secondAttribute="bottom" constant="8" symbolic="YES" id="Czk-kI-rFO"/>
                                     <constraint firstItem="9ju-3S-Np2" firstAttribute="baseline" secondItem="5fZ-wS-MTO" secondAttribute="baseline" id="D2U-cY-toO"/>
                                     <constraint firstItem="oPq-hP-T8s" firstAttribute="leading" secondItem="9ju-3S-Np2" secondAttribute="leading" id="DNM-ew-hlu"/>
                                     <constraint firstItem="oPq-hP-T8s" firstAttribute="leading" secondItem="rHh-mY-Dqj" secondAttribute="trailing" constant="10" id="DO6-oh-qCO"/>
                                     <constraint firstItem="vBH-sc-dt9" firstAttribute="centerX" secondItem="iYe-PM-fz8" secondAttribute="centerX" id="DdS-Qx-k3M"/>
-                                    <constraint firstItem="i79-XB-779" firstAttribute="leading" secondItem="GfU-y9-zdm" secondAttribute="trailing" constant="18" id="FLZ-MJ-lyx"/>
-                                    <constraint firstItem="sbw-GB-fvp" firstAttribute="top" secondItem="GfU-y9-zdm" secondAttribute="bottom" constant="8" symbolic="YES" id="Fr8-N3-rCD"/>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="top" secondItem="7a8-TI-T75" secondAttribute="bottom" constant="21" id="G2p-H1-pn4"/>
-                                    <constraint firstItem="i79-XB-779" firstAttribute="firstBaseline" secondItem="CbT-QK-lLb" secondAttribute="firstBaseline" id="G45-7z-72Q"/>
                                     <constraint firstItem="iYe-PM-fz8" firstAttribute="leading" secondItem="QF7-Qz-zNr" secondAttribute="leading" id="GVh-rw-Kxz"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="baseline" secondItem="i79-XB-779" secondAttribute="baseline" id="GYo-Ff-HiF"/>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="leading" secondItem="Z9W-Vv-BHN" secondAttribute="leading" constant="10" id="HsD-lI-Iao"/>
                                     <constraint firstItem="eGP-Ta-1sL" firstAttribute="trailing" secondItem="5fZ-wS-MTO" secondAttribute="trailing" id="I8F-0Y-rkx"/>
-                                    <constraint firstItem="GfU-y9-zdm" firstAttribute="baseline" secondItem="i79-XB-779" secondAttribute="baseline" id="IaD-Hx-5jX"/>
-                                    <constraint firstItem="GfU-y9-zdm" firstAttribute="leading" secondItem="CbT-QK-lLb" secondAttribute="trailing" constant="18" id="IuM-LU-IHS"/>
-                                    <constraint firstItem="i79-XB-779" firstAttribute="firstBaseline" secondItem="GfU-y9-zdm" secondAttribute="firstBaseline" id="JGR-9l-mbm"/>
-                                    <constraint firstItem="sbw-GB-fvp" firstAttribute="top" secondItem="i79-XB-779" secondAttribute="bottom" constant="8" symbolic="YES" id="KX4-Gl-VWK"/>
+                                    <constraint firstItem="2Ly-9C-n5h" firstAttribute="leading" secondItem="Z9W-Vv-BHN" secondAttribute="leading" id="JmU-t5-dgQ"/>
                                     <constraint firstItem="5fZ-wS-MTO" firstAttribute="firstBaseline" secondItem="Y6z-Vg-Fxc" secondAttribute="firstBaseline" id="KlS-CE-Gm3"/>
                                     <constraint firstItem="eGP-Ta-1sL" firstAttribute="leading" secondItem="5fZ-wS-MTO" secondAttribute="leading" id="LC3-W6-jFj"/>
                                     <constraint firstItem="U57-Mq-7tS" firstAttribute="trailing" secondItem="iYe-PM-fz8" secondAttribute="trailing" id="Lne-sM-oI8"/>
@@ -2280,20 +2359,17 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="firstBaseline" secondItem="oPq-hP-T8s" secondAttribute="firstBaseline" id="OLg-tb-bHr"/>
                                     <constraint firstItem="UqJ-iv-PXg" firstAttribute="centerX" secondItem="Z9W-Vv-BHN" secondAttribute="centerX" id="OoX-iH-2Yl"/>
                                     <constraint firstItem="UqJ-iv-PXg" firstAttribute="centerX" secondItem="vBH-sc-dt9" secondAttribute="centerX" id="Oxj-01-BJf"/>
-                                    <constraint firstItem="GfU-y9-zdm" firstAttribute="centerX" secondItem="eGP-Ta-1sL" secondAttribute="centerX" id="P8o-Fg-8me"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="top" secondItem="oPq-hP-T8s" secondAttribute="top" id="PNh-Ec-Nao"/>
                                     <constraint firstItem="QF7-Qz-zNr" firstAttribute="top" secondItem="sbw-GB-fvp" secondAttribute="bottom" constant="8" symbolic="YES" id="Pdf-bV-XT4"/>
                                     <constraint firstItem="sbw-GB-fvp" firstAttribute="trailing" secondItem="QF7-Qz-zNr" secondAttribute="trailing" id="QYL-xn-KOf"/>
                                     <constraint firstItem="oPq-hP-T8s" firstAttribute="trailing" secondItem="9ju-3S-Np2" secondAttribute="trailing" id="SwQ-Pk-Kj4"/>
                                     <constraint firstItem="iYe-PM-fz8" firstAttribute="top" secondItem="UqJ-iv-PXg" secondAttribute="bottom" constant="45" id="UAA-YM-B51"/>
                                     <constraint firstItem="i3D-On-MtX" firstAttribute="firstBaseline" secondItem="9ju-3S-Np2" secondAttribute="firstBaseline" id="Ue0-qu-GTL"/>
-                                    <constraint firstItem="sbw-GB-fvp" firstAttribute="top" secondItem="CbT-QK-lLb" secondAttribute="bottom" constant="8" symbolic="YES" id="V7g-cH-aqp"/>
+                                    <constraint firstItem="DWi-8n-tLU" firstAttribute="top" secondItem="Z9W-Vv-BHN" secondAttribute="top" constant="15" id="Ugf-dN-wfW"/>
                                     <constraint firstItem="Y6z-Vg-Fxc" firstAttribute="trailing" secondItem="sbw-GB-fvp" secondAttribute="trailing" id="VJH-iD-lct"/>
                                     <constraint firstItem="oPq-hP-T8s" firstAttribute="baseline" secondItem="eGP-Ta-1sL" secondAttribute="baseline" id="cAU-d5-dKj"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="leading" secondItem="i3D-On-MtX" secondAttribute="trailing" constant="14" id="ddD-KA-fvR"/>
                                     <constraint firstItem="sbw-GB-fvp" firstAttribute="top" secondItem="i3D-On-MtX" secondAttribute="bottom" constant="16" id="eLE-e9-D8N"/>
                                     <constraint firstItem="QF7-Qz-zNr" firstAttribute="bottom" secondItem="Z9W-Vv-BHN" secondAttribute="bottomMargin" constant="-20" id="fYL-ia-v6Z"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="baseline" secondItem="GfU-y9-zdm" secondAttribute="baseline" id="gFZ-Rs-62c"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Ly-9C-n5h" secondAttribute="trailing" id="gUU-9n-efv"/>
                                     <constraint firstItem="eGP-Ta-1sL" firstAttribute="baseline" secondItem="cGQ-98-R0w" secondAttribute="baseline" id="gpg-bt-pwV"/>
                                     <constraint firstItem="cGQ-98-R0w" firstAttribute="leading" secondItem="Y6z-Vg-Fxc" secondAttribute="leading" id="iQK-20-nRD"/>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="leading" secondItem="i3D-On-MtX" secondAttribute="leading" id="irt-Ve-mto"/>
@@ -2301,19 +2377,17 @@ beat until ingredients are well combined.</string>
                                     <constraint firstAttribute="trailing" secondItem="UqJ-iv-PXg" secondAttribute="trailing" id="kAh-Aj-ZMD"/>
                                     <constraint firstItem="iYe-PM-fz8" firstAttribute="centerX" secondItem="7a8-TI-T75" secondAttribute="centerX" id="kKd-04-Tab"/>
                                     <constraint firstItem="oPq-hP-T8s" firstAttribute="firstBaseline" secondItem="eGP-Ta-1sL" secondAttribute="firstBaseline" id="l2F-Iz-Bu6"/>
-                                    <constraint firstItem="i79-XB-779" firstAttribute="centerX" secondItem="Y6z-Vg-Fxc" secondAttribute="centerX" id="lvF-gX-TfK"/>
                                     <constraint firstItem="eGP-Ta-1sL" firstAttribute="firstBaseline" secondItem="cGQ-98-R0w" secondAttribute="firstBaseline" id="oXJ-3C-L2F"/>
                                     <constraint firstItem="i3D-On-MtX" firstAttribute="top" secondItem="rHh-mY-Dqj" secondAttribute="bottom" id="qf7-El-x9X"/>
                                     <constraint firstItem="i3D-On-MtX" firstAttribute="leading" secondItem="sbw-GB-fvp" secondAttribute="leading" id="r2M-ET-mLE"/>
                                     <constraint firstItem="iYe-PM-fz8" firstAttribute="leading" secondItem="Z9W-Vv-BHN" secondAttribute="leadingMargin" id="rGF-Is-m8o"/>
                                     <constraint firstItem="iYe-PM-fz8" firstAttribute="trailing" secondItem="cGQ-98-R0w" secondAttribute="trailing" id="rMl-hJ-iib"/>
                                     <constraint firstItem="cGQ-98-R0w" firstAttribute="leading" secondItem="eGP-Ta-1sL" secondAttribute="trailing" constant="10" id="rWU-kP-Nqs"/>
-                                    <constraint firstItem="CbT-QK-lLb" firstAttribute="firstBaseline" secondItem="GfU-y9-zdm" secondAttribute="firstBaseline" id="rc1-n0-4Nd"/>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="trailing" secondItem="i3D-On-MtX" secondAttribute="trailing" id="uQ7-8z-eda"/>
                                     <constraint firstItem="rHh-mY-Dqj" firstAttribute="baseline" secondItem="oPq-hP-T8s" secondAttribute="baseline" id="wKL-vS-Ky8"/>
+                                    <constraint firstItem="2Ly-9C-n5h" firstAttribute="top" secondItem="Z9W-Vv-BHN" secondAttribute="top" id="wPO-6P-b7q"/>
                                     <constraint firstItem="9ju-3S-Np2" firstAttribute="firstBaseline" secondItem="5fZ-wS-MTO" secondAttribute="firstBaseline" id="yvy-Rw-z1z"/>
                                     <constraint firstItem="eGP-Ta-1sL" firstAttribute="leading" secondItem="oPq-hP-T8s" secondAttribute="trailing" constant="10" id="z34-t2-JBo"/>
-                                    <constraint firstItem="GfU-y9-zdm" firstAttribute="top" secondItem="eGP-Ta-1sL" secondAttribute="top" id="zRz-l2-c2O"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -2331,8 +2405,19 @@ beat until ingredients are well combined.</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="userLike" destination="cGQ-98-R0w" id="Z0o-M6-zPu"/>
-                        <outlet property="userRecipeCollectionViewHeight" destination="WII-es-rhE" id="VG5-pD-lqz"/>
+                        <outlet property="btnBack" destination="DWi-8n-tLU" id="wl5-9T-B4w"/>
+                        <outlet property="btnFollow" destination="U57-Mq-7tS" id="yJP-Eb-Rby"/>
+                        <outlet property="coverImg" destination="UqJ-iv-PXg" id="uFp-fh-1Sl"/>
+                        <outlet property="lblBookmarkNumber" destination="eGP-Ta-1sL" id="7nh-lK-FBl"/>
+                        <outlet property="lblFollowNumber" destination="oPq-hP-T8s" id="4pG-Ou-vAQ"/>
+                        <outlet property="lblLikeNumber" destination="cGQ-98-R0w" id="9pX-Im-E7K"/>
+                        <outlet property="lblRecipeNumber" destination="rHh-mY-Dqj" id="BSN-6b-FQP"/>
+                        <outlet property="lblUsername" destination="iYe-PM-fz8" id="RWh-YI-Lb1"/>
+                        <outlet property="recipeCollectionview" destination="QF7-Qz-zNr" id="F2C-2s-KdN"/>
+                        <outlet property="recipeCollectionviewHeight" destination="WII-es-rhE" id="tIS-gx-vlP"/>
+                        <outlet property="theNavibar" destination="2Ly-9C-n5h" id="ds2-2z-WGl"/>
+                        <outlet property="theScrollview" destination="Z9W-Vv-BHN" id="D49-2f-iw0"/>
+                        <outlet property="userImg" destination="vBH-sc-dt9" id="mqv-3P-1Vo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qg-yk-GhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2352,7 +2437,7 @@ beat until ingredients are well combined.</string>
         <image name="searchTabbarButton-Active" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OID-hS-O4a"/>
+        <segue reference="S4v-6E-P1D"/>
         <segue reference="Rv3-Uz-HIV"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface UserWhoFollowViewController : ViewController
+@interface UserWhoFollowViewController : ViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

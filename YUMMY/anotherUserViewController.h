@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface anotherUserViewController : ViewController
+@interface anotherUserViewController : ViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
 
 @end

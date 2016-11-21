@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *likeArr;
 @property (strong, nonatomic) NSMutableArray *selectedArr;
 @property (weak, nonatomic) IBOutlet UINavigationBar *theNavigationBar;
+- (IBAction)backVC:(id)sender;
 
 - (IBAction)btnLikeClick:(id)sender;
 - (IBAction)btnBookmarkClick:(id)sender;
@@ -152,6 +153,10 @@
     
 }
 
+- (IBAction)backVC:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)btnLikeClick:(id)sender {
     if ([sender isSelected]) {
         // thêm code thay đổi dữ liệu vào đây
@@ -173,4 +178,5 @@
         [sender setSelected:YES];
     }
 }
+
 @end

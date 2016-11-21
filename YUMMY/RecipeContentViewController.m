@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ingredientsContentHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *aboutContentHeight;
 
+- (IBAction)backVC:(id)sender;
+
 - (void) whenScrolling:(UIScrollView *)scrollView;
 @end
 
@@ -50,11 +52,19 @@
     
 }
 
-
+#pragma mark - scrollviewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self whenScrolling:self.theScrollView];
 }
 
+#pragma mark - action
+
+- (IBAction)backVC:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - hide/show navbar
 - (void)whenScrolling:(UIScrollView *)scrollView {
     float offSetY = scrollView.contentOffset.y;
     if (offSetY < 60) {

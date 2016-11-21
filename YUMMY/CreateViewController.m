@@ -38,10 +38,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPerson;
 @property (weak, nonatomic) IBOutlet UIButton *btnTime;
 
-@property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UIButton *btnAvatar;
 @property (weak, nonatomic) IBOutlet UIButton *addAvatar;
 @property (weak, nonatomic) IBOutlet UITextView *txtAbout;
+
+@property (strong, nonatomic) UIImage *RecipeAvatar;
 
 - (IBAction)CancelCreate:(id)sender;
 - (IBAction)Create:(id)sender;
@@ -55,6 +56,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.RecipeAvatar = [[UIImage alloc] init];
     
     //Background
     self.view.backgroundColor = [UIColor clearColor];
