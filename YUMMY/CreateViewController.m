@@ -9,14 +9,18 @@
 //#import <QuartzCore/QuartzCore.h>
 #import "CreateViewController.h"
 #import "cateCell.h"
+#import "stepCell.h"
 
 
 @interface CreateViewController ()
 //array hold value
 {
+    int step;
     NSMutableArray *cateArray;
     NSMutableArray *ingredientArray;
     NSMutableArray *stepArray;
+    NSMutableArray *stepContentArr;
+    NSMutableArray *stepImgArr;
 }
 //outlet
 @property (weak, nonatomic) IBOutlet UITextField *recipeName;
@@ -38,8 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPerson;
 @property (weak, nonatomic) IBOutlet UIButton *btnTime;
 
-@property (weak, nonatomic) IBOutlet UIButton *btnAvatar;
-@property (weak, nonatomic) IBOutlet UIButton *addAvatar;
+
 @property (weak, nonatomic) IBOutlet UITextView *txtAbout;
 
 @property (strong, nonatomic) UIImage *RecipeAvatar;
@@ -57,11 +60,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //remove line of tableviewcell
+    self.stepTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.ingredientTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    //placeholder color config
+    UIColor *placeholderColor = [UIColor lightGrayColor];
+    [self.recipeName setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Tên công thức" attributes:@{NSForegroundColorAttributeName: placeholderColor}]];
+    
+    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    
     self.RecipeAvatar = [[UIImage alloc] init];
     
     //Background
     self.view.backgroundColor = [UIColor clearColor];
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     [blurEffectView setFrame:self.view.bounds];
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -88,11 +101,15 @@
     self.ingredientTableView.delegate = self;
     self.ingredientTableView.dataSource = self;
     
+    step = 0;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+#pragma mark - chỉnh màu status bar
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - tableView delegate & datasource
@@ -100,9 +117,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (tableView == self.stepTableView) {
-        UITableViewCell *cell = [self.stepTableView dequeueReusableCellWithIdentifier:@"stepCell" forIndexPath:indexPath];
+        stepCell *cell = [self.stepTableView dequeueReusableCellWithIdentifier:@"stepCell" forIndexPath:indexPath];
+        cell.stepImage.image = [UIImage imageNamed:[stepImgArr objectAtIndex:indexPath.row]];
+        cell.lblContent.text = [NSString stringWithFormat:@"%@",[stepContentArr objectAtIndex:indexPath.row]];
         
-        
+        //config
+        cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         self.stepTableViewHeight.constant = self.stepTableView.contentSize.height;  //resize
         
         return cell;
@@ -111,6 +131,7 @@
         //cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.ingredientArray objectAtIndex:indexPath.row]];
         
         self.ingredientTablewViewHeight.constant = self.ingredientTableView.contentSize.height; //resize
+        
         return cell;
     }
 
@@ -159,6 +180,84 @@
 }
 
 - (IBAction)addStep:(id)sender {
+    /*
+    step++;
+    if (!stepArray) {
+        stepArray = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",step], nil];
+        [self.stepTableView reloadData];
+    } else {
+        [stepArray addObject:[NSString stringWithFormat:@"%d",step]];
+        [UIView transitionWithView: self.stepTableView
+                          duration: 0.4f
+                           options: UIViewAnimationOptionTransitionCrossDissolve
+                        animations: ^(void)
+         {
+             [self.stepTableView reloadData];
+             //[self.infoView resizeToFitSubviews];
+         }
+                        completion: nil];
+    }*/
+    if (!stepArray) {
+        step ++;
+        stepArray = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",step], nil];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nhập nội dung bước làm" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Nội dung";
+            textField.textColor = [UIColor darkGrayColor];
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textField.borderStyle = UITextBorderStyleNone;
+        }];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if (!stepContentArr) {
+                stepContentArr = [[NSMutableArray alloc] initWithObjects:(alert.textFields[0]).text, nil];
+                [self.stepTableView reloadData];
+            } else {
+                [stepContentArr addObject:alert.textFields[0].text];
+                [self.stepTableView reloadData];
+            }
+        }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+        step++;
+        [stepArray addObject:[NSString stringWithFormat:@"%d",step]];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nhập nội dung bước làm" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Nội dung";
+            textField.textColor = [UIColor darkGrayColor];
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textField.borderStyle = UITextBorderStyleNone;
+        }];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if (!stepContentArr) {
+                stepContentArr = [[NSMutableArray alloc] initWithObjects:alert.textFields[0].text, nil];
+                [UIView transitionWithView: self.stepTableView
+                                  duration: 0.4f
+                                   options: UIViewAnimationOptionTransitionCrossDissolve
+                                animations: ^(void)
+                 {
+                     [self.stepTableView reloadData];
+                     //[self.infoView resizeToFitSubviews];
+                 }
+                                completion: nil];
+            } else {
+                [stepContentArr addObject:alert.textFields[0].text];
+                [UIView transitionWithView: self.stepTableView
+                                  duration: 0.4f
+                                   options: UIViewAnimationOptionTransitionCrossDissolve
+                                animations: ^(void)
+                 {
+                     [self.stepTableView reloadData];
+                     //[self.infoView resizeToFitSubviews];
+                 }
+                                completion: nil];
+            }
+        }];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
 }
 
@@ -288,9 +387,6 @@
     }
 }
 
-- (IBAction)addAvatar:(id)sender {
-    
-}
 
 
 @end

@@ -7,9 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "TabBarController.h"
-#import "MainViewController.h"
-#import "SearchViewController.h"
+#import "CreateViewController.h"
+
 @interface AppDelegate ()
 
 @end

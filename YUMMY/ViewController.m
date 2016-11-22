@@ -61,7 +61,7 @@
             success = 0;
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-            NSURL *url = [NSURL URLWithString:@"http://localhost/yummy/login.php"];
+            NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/login.php"];
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
             NSString *parameters = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
             [urlRequest setHTTPMethod:@"POST"];
@@ -73,10 +73,13 @@
                     success = [jsonData[@"code"] integerValue];
                     if (success == 1) {
                         NSString *message = (NSString *) jsonData[@"message"];
-                        NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
-                        [self performSegueWithIdentifier:@"loginSuccess" sender:self];
+                        //NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
+                        NSArray *rsArray = [jsonData objectForKey:@"results"];
+                        NSDictionary *userInfoDict = [rsArray objectAtIndex:0];
+                        NSString *userID = [userInfoDict objectForKey:@"UserID"];
                         NSLog(@"%@",message);
                         NSLog(@"UserID la %@",userID);
+                        [self performSegueWithIdentifier:@"loginSuccess" sender:self];
                     } else {
                         NSString *message = (NSString *) jsonData[@"message"];
                         NSLog(@"%@",message);

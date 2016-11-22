@@ -10,7 +10,7 @@
 
 @interface stepCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *stepImage;
-@property (weak, nonatomic) IBOutlet UITextView *step;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddImage;
+@property (weak, nonatomic) IBOutlet UILabel *lblContent;
 
 @end

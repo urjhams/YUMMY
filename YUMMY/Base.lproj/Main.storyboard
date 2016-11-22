@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tZU-fG-D3n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -170,14 +170,14 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OZa-GI-cr0">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Suggest" rowHeight="120" id="j7l-0m-3kx">
                                         <rect key="frame" x="0.0" y="28" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j7l-0m-3kx" id="JQH-e2-c6D">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f6S-ed-ozr">
@@ -240,7 +240,7 @@
                             <constraint firstItem="cT9-Ql-Im0" firstAttribute="leading" secondItem="bjs-Nt-t4Z" secondAttribute="leading" id="dtp-dQ-XfY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="searchTabbarButton" selectedImage="searchTabbarButton-Active" id="3ar-vI-IzQ">
+                    <tabBarItem key="tabBarItem" title="" image="tabbtn2" selectedImage="tabbtn2-active" id="3ar-vI-IzQ">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="QQK-tt-uKJ"/>
@@ -277,7 +277,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wcn-cA-clq">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="gJN-EI-gNf" customClass="CHTCollectionViewWaterfallLayout"/>
                                 <cells>
@@ -456,8 +456,8 @@
                                 </constraints>
                                 <items>
                                     <navigationItem id="cQm-v8-HsN">
-                                        <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="YlA-jM-W3P">
-                                            <inset key="imageInsets" minX="-16" minY="4" maxX="10" maxY="-8"/>
+                                        <barButtonItem key="leftBarButtonItem" image="backbtn-yellow" id="YlA-jM-W3P">
+                                            <inset key="imageInsets" minX="-12" minY="4" maxX="5" maxY="-8"/>
                                             <connections>
                                                 <action selector="backVC:" destination="fIt-ZX-Gr1" id="zZH-xn-Bwc"/>
                                             </connections>
@@ -500,7 +500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ3-xP-gBa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="931"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEz-2v-dLv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -631,7 +631,7 @@ with this wonderful French toast recipe.</string>
                                                 <rect key="frame" x="0.0" y="28" width="320" height="320"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="geO-75-AXn" id="Aft-yT-11g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bước 1/4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1M-SV-Ifv">
@@ -703,7 +703,7 @@ beat until ingredients are well combined.</string>
                                                 <rect key="frame" x="0.0" y="28" width="320" height="65"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bjx-Mn-Yby" id="7ds-PY-vpF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-zd-41G">
@@ -760,7 +760,7 @@ beat until ingredients are well combined.</string>
                                         <items>
                                             <navigationItem id="zLe-bv-rCN">
                                                 <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="ybs-5k-gSg">
-                                                    <inset key="imageInsets" minX="-16" minY="4" maxX="-10" maxY="-8"/>
+                                                    <inset key="imageInsets" minX="-12" minY="4" maxX="-5" maxY="-8"/>
                                                     <connections>
                                                         <action selector="backVC:" destination="tZU-fG-D3n" id="Od9-o8-woS"/>
                                                     </connections>
@@ -1166,7 +1166,7 @@ beat until ingredients are well combined.</string>
                             <constraint firstAttribute="bottom" secondItem="Dn6-0G-3DI" secondAttribute="bottom" constant="-49" id="whz-be-ddG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="homeTabbarButton-Active" selectedImage="homeTabbarButton" id="Qqs-Pk-86g">
+                    <tabBarItem key="tabBarItem" title="" image="tabbtn1-active" selectedImage="tabbtn1" id="Qqs-Pk-86g">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="RwG-wb-YOL"/>
@@ -1198,12 +1198,14 @@ beat until ingredients are well combined.</string>
                                 </textAttributes>
                                 <items>
                                     <navigationItem id="D0e-J3-qvX">
-                                        <barButtonItem key="leftBarButtonItem" title="Huỷ" id="TYB-xA-Agd">
+                                        <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="TYB-xA-Agd">
+                                            <inset key="imageInsets" minX="-12" minY="0.0" maxX="5" maxY="0.0"/>
                                             <connections>
                                                 <action selector="CancelCreate:" destination="0wJ-d5-frr" id="BM4-3s-ZOO"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Tạo" id="RiQ-zN-4x1">
+                                        <barButtonItem key="rightBarButtonItem" image="createbtn-white" id="RiQ-zN-4x1">
+                                            <inset key="imageInsets" minX="-20" minY="0.0" maxX="10" maxY="0.0"/>
                                             <connections>
                                                 <action selector="Create:" destination="0wJ-d5-frr" id="tdi-XC-qfK"/>
                                             </connections>
@@ -1220,14 +1222,14 @@ beat until ingredients are well combined.</string>
                                             <constraint firstAttribute="height" constant="30" id="Ryq-3c-zcf"/>
                                             <constraint firstAttribute="width" constant="280" id="d3w-aK-0mR"/>
                                         </constraints>
-                                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@urjhams" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgd-IZ-ZbG">
                                         <rect key="frame" x="20" y="53" width="280" height="12"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gIL-8L-mDt">
@@ -1236,26 +1238,26 @@ beat until ingredients are well combined.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dành cho:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ge-yV-ORf">
                                         <rect key="frame" x="12" y="73" width="100" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thời gian:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUg-sc-Qus">
                                         <rect key="frame" x="112" y="73" width="100" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Độ khó:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="es8-Cf-SF3">
                                         <rect key="frame" x="212" y="73" width="100" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc0-T5-yT2">
                                         <rect key="frame" x="12" y="100" width="100" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         <state key="normal" title="2 người">
-                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addPerson:" destination="0wJ-d5-frr" eventType="touchUpInside" id="Hly-2B-Nqd"/>
@@ -1265,7 +1267,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="112" y="100" width="100" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         <state key="normal" title="15 phút">
-                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addTime:" destination="0wJ-d5-frr" eventType="touchUpInside" id="BG6-b1-aZX"/>
@@ -1275,7 +1277,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="212" y="100" width="100" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         <state key="normal" title="Dễ">
-                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addLevel:" destination="0wJ-d5-frr" eventType="touchUpInside" id="f2p-Y2-yhE"/>
@@ -1345,14 +1347,14 @@ beat until ingredients are well combined.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Danh mục" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luf-gG-ZYm">
                                         <rect key="frame" x="20" y="128" width="60" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hf-fp-xZ9">
                                         <rect key="frame" x="274" y="128" width="30" height="30"/>
                                         <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="+">
-                                            <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addCate:" destination="0wJ-d5-frr" eventType="touchUpInside" id="at0-KD-9e6"/>
@@ -1369,7 +1371,7 @@ beat until ingredients are well combined.</string>
                                                 <rect key="frame" x="0.0" y="28" width="280" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IuE-0R-opV" id="LFb-g1-9Vg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="14"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1379,32 +1381,27 @@ beat until ingredients are well combined.</string>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Mo ta" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="P27-YG-aNI">
                                         <rect key="frame" x="24" y="230" width="276" height="33"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MOC-9s-CvL">
-                                        <rect key="frame" x="27" y="271" width="270" height="30"/>
-                                        <connections>
-                                            <action selector="addAvatar:" destination="0wJ-d5-frr" eventType="touchUpInside" id="3Gg-Os-Wi2"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nguyên liệu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39X-WK-i00">
                                         <rect key="frame" x="20" y="181" width="69" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgU-BS-J94">
                                         <rect key="frame" x="274" y="181" width="30" height="30"/>
                                         <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="+">
-                                            <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addIngredient:" destination="0wJ-d5-frr" eventType="touchUpInside" id="7vg-q1-bN0"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-dU-s5a">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnCamera-white" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-dU-s5a">
                                         <rect key="frame" x="20" y="271" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="DdM-zA-LsS"/>
@@ -1414,7 +1411,7 @@ beat until ingredients are well combined.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ảnh đại diện công thức" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liK-d8-QWg">
                                         <rect key="frame" x="68" y="270" width="229" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-ne-l9Z">
@@ -1427,8 +1424,8 @@ beat until ingredients are well combined.</string>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCell" rowHeight="100" id="noM-Ee-j5X" customClass="stepCell">
                                                 <rect key="frame" x="0.0" y="28" width="270" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="noM-Ee-j5X" id="C4a-BH-6nU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="99"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="center" tableViewCell="noM-Ee-j5X" id="C4a-BH-6nU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-Bh-VrO">
@@ -1438,41 +1435,42 @@ beat until ingredients are well combined.</string>
                                                                 <constraint firstAttribute="width" constant="90" id="nmQ-mt-Ndh"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Buoc lam" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TGd-Gu-X8k">
-                                                            <rect key="frame" x="103" y="8" width="159" height="83"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbK-VH-9dH">
                                                             <rect key="frame" x="5" y="5" width="90" height="90"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="90" id="9t4-D7-WIX"/>
                                                                 <constraint firstAttribute="height" constant="90" id="JaM-FF-Fcz"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button"/>
+                                                            <state key="normal" title="Ảnh">
+                                                                <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="addStepImage:" destination="0wJ-d5-frr" eventType="touchUpInside" id="YLD-IH-Ich"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtW-Vu-zgu">
+                                                            <rect key="frame" x="103" y="8" width="159" height="84"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                            <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
+                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="mtW-Vu-zgu" firstAttribute="trailing" secondItem="C4a-BH-6nU" secondAttribute="trailingMargin" id="0UC-Oa-65d"/>
                                                         <constraint firstItem="bbK-VH-9dH" firstAttribute="leading" secondItem="C4a-BH-6nU" secondAttribute="leading" constant="5" id="8LW-nA-UtT"/>
                                                         <constraint firstItem="vIp-Bh-VrO" firstAttribute="leading" secondItem="C4a-BH-6nU" secondAttribute="leadingMargin" constant="-3" id="9OJ-OC-cLJ"/>
-                                                        <constraint firstItem="TGd-Gu-X8k" firstAttribute="leading" secondItem="bbK-VH-9dH" secondAttribute="trailing" constant="8" id="A5e-8d-az5"/>
                                                         <constraint firstItem="vIp-Bh-VrO" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="topMargin" constant="-3" id="CPJ-gm-RFb"/>
-                                                        <constraint firstItem="TGd-Gu-X8k" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="topMargin" id="GT6-BD-1Ss"/>
-                                                        <constraint firstItem="TGd-Gu-X8k" firstAttribute="leading" secondItem="vIp-Bh-VrO" secondAttribute="trailing" constant="8" symbolic="YES" id="McF-VF-1PO"/>
+                                                        <constraint firstItem="mtW-Vu-zgu" firstAttribute="bottom" secondItem="C4a-BH-6nU" secondAttribute="bottomMargin" id="Iik-j0-esk"/>
                                                         <constraint firstItem="bbK-VH-9dH" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="top" constant="5" id="NZP-Q0-Te9"/>
                                                         <constraint firstAttribute="bottom" secondItem="bbK-VH-9dH" secondAttribute="bottom" constant="4" id="RfW-c4-Zw3"/>
-                                                        <constraint firstItem="TGd-Gu-X8k" firstAttribute="bottom" secondItem="C4a-BH-6nU" secondAttribute="bottomMargin" id="ftK-MV-5lO"/>
-                                                        <constraint firstItem="vIp-Bh-VrO" firstAttribute="centerY" secondItem="TGd-Gu-X8k" secondAttribute="centerY" id="lig-lG-wlC"/>
-                                                        <constraint firstItem="TGd-Gu-X8k" firstAttribute="trailing" secondItem="C4a-BH-6nU" secondAttribute="trailingMargin" id="vJ5-YG-yk2"/>
+                                                        <constraint firstItem="mtW-Vu-zgu" firstAttribute="leading" secondItem="bbK-VH-9dH" secondAttribute="trailing" constant="8" id="dDC-uM-Vru"/>
+                                                        <constraint firstItem="mtW-Vu-zgu" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="topMargin" id="kIf-m3-cTi"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="btnAddImage" destination="bbK-VH-9dH" id="FaA-ag-qDK"/>
-                                                    <outlet property="step" destination="TGd-Gu-X8k" id="ZkY-iN-JS8"/>
+                                                    <outlet property="lblContent" destination="mtW-Vu-zgu" id="NL0-Ix-GGj"/>
                                                     <outlet property="stepImage" destination="vIp-Bh-VrO" id="Dne-x7-R1P"/>
                                                 </connections>
                                             </tableViewCell>
@@ -1480,7 +1478,9 @@ beat until ingredients are well combined.</string>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHu-5s-c7I">
                                         <rect key="frame" x="20" y="342" width="280" height="30"/>
-                                        <state key="normal" title="Thêm Bước Làm"/>
+                                        <state key="normal" title="Thêm Bước Làm">
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="addStep:" destination="0wJ-d5-frr" eventType="touchUpInside" id="QjH-4Q-hd0"/>
                                         </connections>
@@ -1496,7 +1496,6 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="luf-gG-ZYm" firstAttribute="top" secondItem="1hf-fp-xZ9" secondAttribute="top" id="8wY-kz-xZz"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="9dT-uA-Pwp"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="top" secondItem="39X-WK-i00" secondAttribute="bottom" constant="8" symbolic="YES" id="A92-BN-2Ot"/>
-                                    <constraint firstItem="MOC-9s-CvL" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="27" id="Aob-YO-3Y1"/>
                                     <constraint firstItem="liK-d8-QWg" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="7" id="CpR-7R-OGO"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="trailing" secondItem="Dc0-T5-yT2" secondAttribute="trailing" id="CyJ-iS-gpO"/>
                                     <constraint firstItem="1hf-fp-xZ9" firstAttribute="leading" secondItem="JgU-BS-J94" secondAttribute="leading" id="E0S-0B-b9R"/>
@@ -1526,12 +1525,10 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="uin-0D-yb0" firstAttribute="leading" secondItem="90y-Gg-sYi" secondAttribute="leading" id="Xic-tv-msu"/>
                                     <constraint firstItem="es8-Cf-SF3" firstAttribute="trailing" secondItem="lMN-1N-5Kf" secondAttribute="trailingMargin" id="Xm6-0k-3ua"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="top" secondItem="L0j-8V-Ac3" secondAttribute="bottom" constant="35" id="YRz-yK-MQQ"/>
-                                    <constraint firstItem="MOC-9s-CvL" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="8" id="bp5-we-fkn"/>
                                     <constraint firstItem="P27-YG-aNI" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="24" id="bsp-rC-AoT"/>
                                     <constraint firstItem="xgd-IZ-ZbG" firstAttribute="trailing" secondItem="P27-YG-aNI" secondAttribute="trailing" id="btE-m5-jNu"/>
                                     <constraint firstItem="xgd-IZ-ZbG" firstAttribute="leading" secondItem="luf-gG-ZYm" secondAttribute="leading" id="c7o-Yp-BPe"/>
                                     <constraint firstItem="L0j-8V-Ac3" firstAttribute="trailing" secondItem="vVR-SJ-zbz" secondAttribute="trailing" id="cuR-XV-2hH"/>
-                                    <constraint firstAttribute="trailing" secondItem="MOC-9s-CvL" secondAttribute="trailing" constant="23" id="d6P-tb-5oL"/>
                                     <constraint firstItem="cUg-sc-Qus" firstAttribute="top" secondItem="uin-0D-yb0" secondAttribute="top" id="dAa-ZP-FW9"/>
                                     <constraint firstItem="FwH-la-fkM" firstAttribute="leading" secondItem="es8-Cf-SF3" secondAttribute="leading" id="dnc-kp-gun"/>
                                     <constraint firstItem="liK-d8-QWg" firstAttribute="height" secondItem="wc9-dU-s5a" secondAttribute="height" constant="2" id="e2z-KS-d1M"/>
@@ -1570,15 +1567,13 @@ beat until ingredients are well combined.</string>
                             <constraint firstAttribute="bottom" secondItem="lMN-1N-5Kf" secondAttribute="bottom" constant="-2" id="buU-QS-jGF"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="createReipe" selectedImage="createReipe" id="S2j-hU-LJA">
-                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabbtn3-active" selectedImage="tabbtn3" id="S2j-hU-LJA">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Kkx-WM-g3x"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="472"/>
                     <connections>
-                        <outlet property="addAvatar" destination="MOC-9s-CvL" id="7Fc-Q8-wAj"/>
-                        <outlet property="btnAvatar" destination="MOC-9s-CvL" id="pUA-ek-NY4"/>
                         <outlet property="btnDifficult" destination="Tpy-SR-8c6" id="e66-AM-wiC"/>
                         <outlet property="btnPerson" destination="Dc0-T5-yT2" id="aQJ-EC-3EM"/>
                         <outlet property="btnTime" destination="90y-Gg-sYi" id="RF7-kn-1PJ"/>
@@ -1631,7 +1626,7 @@ beat until ingredients are well combined.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G52-w3-bSz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -1639,7 +1634,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="0.0" y="28" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GeG-na-CAA" id="Mfa-b6-W7d">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kng-eH-rej">
@@ -1683,7 +1678,7 @@ beat until ingredients are well combined.</string>
                             <constraint firstItem="G52-w3-bSz" firstAttribute="leading" secondItem="H27-zk-mk9" secondAttribute="leading" id="wEc-1C-tEw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="notification" selectedImage="notification-Active" id="CpZ-EB-c4e">
+                    <tabBarItem key="tabBarItem" title="" image="tabbtn4" selectedImage="tabbtn4-active" id="CpZ-EB-c4e">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <connections>
@@ -1988,8 +1983,8 @@ beat until ingredients are well combined.</string>
                                 </constraints>
                                 <items>
                                     <navigationItem id="OgP-wN-FPS">
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="TPs-NH-7eI">
-                                            <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                                        <barButtonItem key="rightBarButtonItem" image="settingbtn-white" id="TPs-NH-7eI">
+                                            <inset key="imageInsets" minX="-10" minY="8" maxX="10" maxY="-8"/>
                                             <connections>
                                                 <action selector="toSetting:" destination="9IW-eE-YNa" id="vwb-cE-wXW"/>
                                             </connections>
@@ -2009,7 +2004,7 @@ beat until ingredients are well combined.</string>
                             <constraint firstItem="frG-av-bmJ" firstAttribute="leading" secondItem="rCG-iM-lZc" secondAttribute="leading" id="yvZ-Lf-4JM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="homeTabbarButton" selectedImage="homeTabbarButton-Active" id="m0F-Ko-0RB">
+                    <tabBarItem key="tabBarItem" title="" image="tabbtn5" selectedImage="tabbtn5-active" id="m0F-Ko-0RB">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <connections>
@@ -2066,7 +2061,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iNZ-1p-5Bw" id="IzV-4v-RQo">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-qL-9bl">
@@ -2314,7 +2309,7 @@ beat until ingredients are well combined.</string>
                                         <items>
                                             <navigationItem id="dJy-3p-gnS">
                                                 <barButtonItem key="leftBarButtonItem" image="backButtonWhite" id="fIC-jF-etb">
-                                                    <inset key="imageInsets" minX="-16" minY="4" maxX="10" maxY="-8"/>
+                                                    <inset key="imageInsets" minX="-12" minY="4" maxX="5" maxY="-8"/>
                                                     <connections>
                                                         <action selector="backVC:" destination="N6c-pA-jrX" id="nxZ-BE-XUc"/>
                                                     </connections>
@@ -2428,16 +2423,25 @@ beat until ingredients are well combined.</string>
     <resources>
         <image name="Login Background" width="160" height="284"/>
         <image name="backButtonWhite" width="40" height="40"/>
-        <image name="createReipe" width="40" height="40"/>
+        <image name="backbtn-yellow" width="40" height="40"/>
+        <image name="btnCamera-white" width="40" height="40"/>
+        <image name="createbtn-white" width="40" height="40"/>
         <image name="homeTabbarButton" width="42" height="42"/>
         <image name="homeTabbarButton-Active" width="42" height="42"/>
-        <image name="notification" width="40" height="41"/>
-        <image name="notification-Active" width="40" height="40"/>
-        <image name="searchTabbarButton" width="42" height="42"/>
-        <image name="searchTabbarButton-Active" width="42" height="42"/>
+        <image name="settingbtn-white" width="40" height="40"/>
+        <image name="tabbtn1" width="40" height="40"/>
+        <image name="tabbtn1-active" width="40" height="40"/>
+        <image name="tabbtn2" width="40" height="40"/>
+        <image name="tabbtn2-active" width="40" height="40"/>
+        <image name="tabbtn3" width="40" height="40"/>
+        <image name="tabbtn3-active" width="40" height="40"/>
+        <image name="tabbtn4" width="40" height="40"/>
+        <image name="tabbtn4-active" width="40" height="40"/>
+        <image name="tabbtn5" width="40" height="40"/>
+        <image name="tabbtn5-active" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="S4v-6E-P1D"/>
+        <segue reference="eFA-2q-MFP"/>
         <segue reference="Rv3-Uz-HIV"/>
     </inferredMetricsTieBreakers>
 </document>

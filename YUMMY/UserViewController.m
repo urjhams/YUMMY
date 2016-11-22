@@ -51,6 +51,11 @@
     //cover
     self.imgCover.image = [UIImage imageNamed:@"cover-default"];
     
+    [self.btnSetting setImage:[UIImage imageNamed:@"settingbtn-white"] forState:UIControlStateNormal];
+    self.theNaviBar.backgroundColor = [UIColor darkGrayColor];
+    [self.theNaviBar setAlpha:0.65];
+    self.theNaviBar.hidden = YES;
+    
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
     
 }

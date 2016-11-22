@@ -136,7 +136,7 @@
 #pragma mark - điều chỉnh khoảng cách giữa cell với nhau và với viền
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(-15, 10, 55, 10);  //top left bottom right
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 55, 10);  //top left bottom right
     return sectionInset;
 }
 
@@ -147,6 +147,8 @@
 - (void)collectionView:(UICollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
     
 }
+
+#pragma mark - action
 
 - (IBAction)btnLikeClick:(id)sender {
     if ([sender isSelected]) {
