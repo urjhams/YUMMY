@@ -17,10 +17,14 @@
 {
     int step;
     NSMutableArray *cateArray;
-    NSMutableArray *ingredientArray;
+    NSMutableArray *cateIDArray;
+    NSMutableArray *ingredientArray;        //mảng các nguyên liệu sẽ hiện khi add
+    NSMutableArray *ingredientIDArray;      //mảng các ID nguyên liệu (thuôc tính ID của ingredient cell)
     NSMutableArray *stepArray;
     NSMutableArray *stepContentArr;
     NSMutableArray *stepImgArr;
+    NSMutableArray *cateArrayToGet;                // mảng các category sẽ lấy trên server
+    NSMutableArray *cateIDArrayToGet;
 }
 //outlet
 @property (weak, nonatomic) IBOutlet UITextField *recipeName;
@@ -72,7 +76,7 @@
     
     self.RecipeAvatar = [[UIImage alloc] init];
     
-    //Background
+    //Background config
     self.view.backgroundColor = [UIColor clearColor];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -102,7 +106,50 @@
     self.ingredientTableView.dataSource = self;
     
     step = 0;
-    
+    //get all the category & category ID from server
+    @try {
+        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_all_loai_congthuc.php"];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error == nil) {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                NSArray *rsArray = [jsonData objectForKey:@"results"];
+                //NSString *firstValue = [[rsArray objectAtIndex:0] valueForKey:@"Ten"];
+                //NSLog(@"%@",firstValue);
+                //NSString *rightFirstValue = [NSString stringWithUTF8String:[firstValue cStringUsingEncoding:NSUTF8StringEncoding]];
+                for (NSUInteger i = 0; i < rsArray.count; i++) {
+                    id ten = [[rsArray objectAtIndex:i] valueForKey:@"Ten"];
+                    NSString *correct = [NSString stringWithUTF8String:[ten cStringUsingEncoding:NSUTF8StringEncoding]];
+                    if (!cateArrayToGet) {
+                        cateArrayToGet = [[NSMutableArray alloc] initWithObjects:correct, nil];
+                    } else {
+                        [cateArrayToGet addObject:correct];
+                    }
+                }
+                for (NSUInteger i = 0; i < rsArray.count; i++) {
+                    id cateID = [[rsArray objectAtIndex:i] valueForKey:@"LoaicongthucID"];
+                    if (!cateIDArrayToGet) {
+                        cateIDArrayToGet = [[NSMutableArray alloc] initWithObjects:cateID, nil];
+                    } else {
+                        [cateIDArrayToGet addObject:cateID];
+                    }
+                }
+                
+                NSLog(@"%@",cateArrayToGet);
+                NSLog(@"%@",cateIDArrayToGet);
+            }
+        }];
+        [dataTask resume];
+    } @catch (NSException *exception) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
+                                                                       message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:alright];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 
@@ -347,13 +394,36 @@
 }
 
 - (IBAction)addCate:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thêm danh mục" message:@"lựa chọn danh mục của công thức" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thêm danh mục" message:@"lựa chọn danh mục của công thức" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert setModalInPopover:YES];
+    for (NSInteger i = 0; i < cateArrayToGet.count; i++) {
+        [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@",[cateArrayToGet objectAtIndex:i]] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if (!cateArray) {
+                cateArray = [[NSMutableArray alloc] initWithObjects:[cateArrayToGet objectAtIndex:i], nil];
+                [self.cateCollectionView reloadData];
+            } else {
+                [cateArray addObject:[cateArrayToGet objectAtIndex:i]];
+                [UIView transitionWithView: self.cateCollectionView
+                                  duration: 0.4f
+                                   options: UIViewAnimationOptionTransitionCrossDissolve
+                                animations: ^(void)
+                 {
+                     [self.cateCollectionView reloadData];
+                 }
+                                completion: nil];
+            }
+            
+        }]];
+    }
+    
+    //CGRect frame = CGRectMake(0, self.view.frame.size.height*2/3, self.view.frame.size.width, self.view.frame.size.height/3);
+    /*
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (!cateArray) {
-            cateArray = [[NSMutableArray alloc] initWithObjects:@"Init", nil];
+            cateArray = [[NSMutableArray alloc] initWithObjects:[cateArrayToGet objectAtIndex:0], nil];
             [self.cateCollectionView reloadData];
         } else {
-            [cateArray addObject:@"New Category"];
+            [cateArray addObject:[cateArrayToGet objectAtIndex:1]];
             [UIView transitionWithView: self.cateCollectionView
                               duration: 0.4f
                                options: UIViewAnimationOptionTransitionCrossDissolve
@@ -365,6 +435,7 @@
         }
         
     }]];
+     */
     [alert addAction:[UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -386,7 +457,5 @@
                         completion: nil];
     }
 }
-
-
 
 @end

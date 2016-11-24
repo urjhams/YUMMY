@@ -44,7 +44,13 @@
     self.theScrollView.delegate = self;
 
     self.theNaviBar.backgroundColor = [UIColor darkGrayColor];
-    [self.theNaviBar setAlpha:0.65];
+    //[self.theNaviBar setAlpha:0.7];
+    [self.theNaviBar setBackgroundColor:[UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:0.65]];
+    self.RecipeAvatar.contentMode = UIViewContentModeScaleAspectFill;
+    
+    //self.RecipeAvatar.image = [UIImage imageNamed:@"cover-default"];
+
+    
     self.theNaviBar.hidden = YES;
     //[self.theNaviBar setFrame:CGRectMake(0, 0, 320, 300)];
     
@@ -100,7 +106,7 @@
                                 options:UIViewAnimationOptionCurveEaseOut
                              animations:^(void) {
                                  [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-                                 [self.theNaviBar setAlpha:0.65];
+                                 [self.theNaviBar setAlpha:1];
                                  [self.theNaviBar setHidden:NO];
                              }
                              completion:nil];

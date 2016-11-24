@@ -40,7 +40,9 @@
     self.recipeCollectionview.dataSource = self;
     self.theScrollview.delegate = self;
     
-    
+    [self.theNavibar setBackgroundColor:[UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:0.6]];
+    [self.theNavibar setHidden:YES];
+
 }
 
 #pragma mark - delegate & datasource

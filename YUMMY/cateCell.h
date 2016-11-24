@@ -11,4 +11,5 @@
 
 @interface cateCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet categoryLabel *category;
+@property (nonatomic) NSString *cateID;
 @end

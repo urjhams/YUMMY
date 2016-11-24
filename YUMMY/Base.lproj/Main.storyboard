@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Fns-3m-TNq">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -170,14 +170,14 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OZa-GI-cr0">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Suggest" rowHeight="120" id="j7l-0m-3kx">
                                         <rect key="frame" x="0.0" y="28" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j7l-0m-3kx" id="JQH-e2-c6D">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f6S-ed-ozr">
@@ -277,7 +277,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wcn-cA-clq">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="gJN-EI-gNf" customClass="CHTCollectionViewWaterfallLayout"/>
                                 <cells>
@@ -500,7 +500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ3-xP-gBa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="931"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEz-2v-dLv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -631,7 +631,7 @@ with this wonderful French toast recipe.</string>
                                                 <rect key="frame" x="0.0" y="28" width="320" height="320"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="geO-75-AXn" id="Aft-yT-11g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bước 1/4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1M-SV-Ifv">
@@ -703,7 +703,7 @@ beat until ingredients are well combined.</string>
                                                 <rect key="frame" x="0.0" y="28" width="320" height="65"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bjx-Mn-Yby" id="7ds-PY-vpF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e7f-zd-41G">
@@ -1371,7 +1371,7 @@ beat until ingredients are well combined.</string>
                                                 <rect key="frame" x="0.0" y="28" width="280" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IuE-0R-opV" id="LFb-g1-9Vg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="15"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="14"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1425,7 +1425,7 @@ beat until ingredients are well combined.</string>
                                                 <rect key="frame" x="0.0" y="28" width="270" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="center" tableViewCell="noM-Ee-j5X" id="C4a-BH-6nU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="99"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-Bh-VrO">
@@ -1611,7 +1611,7 @@ beat until ingredients are well combined.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4k-WW-vJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3142.5" y="2536.2676056338028"/>
+            <point key="canvasLocation" x="3259" y="2356"/>
         </scene>
         <!--Notification View Controller-->
         <scene sceneID="9ca-i4-U3r">
@@ -1626,7 +1626,7 @@ beat until ingredients are well combined.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G52-w3-bSz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -1634,7 +1634,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="0.0" y="28" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GeG-na-CAA" id="Mfa-b6-W7d">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kng-eH-rej">
@@ -1687,7 +1687,7 @@ beat until ingredients are well combined.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Saf-7V-95O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1530" y="1692"/>
+            <point key="canvasLocation" x="1536" y="1618"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="S4B-QR-akD">
@@ -2023,11 +2023,12 @@ beat until ingredients are well combined.</string>
                         <segue destination="pD6-5K-Y8L" kind="show" identifier="WhoFollowMe" id="g75-gn-eHM"/>
                         <segue destination="fIt-ZX-Gr1" kind="show" identifier="liked" id="eFA-2q-MFP"/>
                         <segue destination="fIt-ZX-Gr1" kind="show" identifier="bookmarked" id="S4v-6E-P1D"/>
+                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="myRecipe" id="KLg-0K-8Yf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqm-j5-4xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="2497"/>
+            <point key="canvasLocation" x="1031" y="2356"/>
         </scene>
         <!--User Who Follow View Controller-->
         <scene sceneID="eah-wv-lhO">
@@ -2061,7 +2062,7 @@ beat until ingredients are well combined.</string>
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iNZ-1p-5Bw" id="IzV-4v-RQo">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-qL-9bl">
@@ -2111,7 +2112,7 @@ beat until ingredients are well combined.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkM-6p-QW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851" y="2974"/>
+            <point key="canvasLocation" x="2428" y="2356"/>
         </scene>
         <!--Another User View Controller-->
         <scene sceneID="I8U-5Z-z6d">
@@ -2394,7 +2395,7 @@ beat until ingredients are well combined.</string>
                             <constraint firstAttribute="bottom" secondItem="Z9W-Vv-BHN" secondAttribute="bottom" id="rx9-xK-gow"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="homeTabbarButton" selectedImage="homeTabbarButton-Active" id="cZJ-gB-6Hi">
+                    <tabBarItem key="tabBarItem" title="" id="cZJ-gB-6Hi">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -2413,6 +2414,7 @@ beat until ingredients are well combined.</string>
                         <outlet property="theNavibar" destination="2Ly-9C-n5h" id="ds2-2z-WGl"/>
                         <outlet property="theScrollview" destination="Z9W-Vv-BHN" id="D49-2f-iw0"/>
                         <outlet property="userImg" destination="vBH-sc-dt9" id="mqv-3P-1Vo"/>
+                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="createdRecipe" id="qGs-g9-Ntq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qg-yk-GhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2426,8 +2428,6 @@ beat until ingredients are well combined.</string>
         <image name="backbtn-yellow" width="40" height="40"/>
         <image name="btnCamera-white" width="40" height="40"/>
         <image name="createbtn-white" width="40" height="40"/>
-        <image name="homeTabbarButton" width="42" height="42"/>
-        <image name="homeTabbarButton-Active" width="42" height="42"/>
         <image name="settingbtn-white" width="40" height="40"/>
         <image name="tabbtn1" width="40" height="40"/>
         <image name="tabbtn1-active" width="40" height="40"/>
