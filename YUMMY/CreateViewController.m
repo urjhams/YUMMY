@@ -10,21 +10,33 @@
 #import "CreateViewController.h"
 #import "cateCell.h"
 #import "stepCell.h"
+#import "recipeAvatarViewController.h"
+#import "recipeIngredientViewController.h"
 
 
 @interface CreateViewController ()
 //array hold value
 {
     int step;
-    NSMutableArray *cateArray;
-    NSMutableArray *cateIDArray;
-    NSMutableArray *ingredientArray;        //mảng các nguyên liệu sẽ hiện khi add
-    NSMutableArray *ingredientIDArray;      //mảng các ID nguyên liệu (thuôc tính ID của ingredient cell)
+    
+    //mảng để lưu giá trị
+    NSMutableArray *cateArray;                      //mảng các category name sẽ lưu để gửi lên
+    NSMutableArray *cateIDArray;                    //mảng các categoryID sẽ lưu để gửi lên
+    
+    //mảng để lấy giá trị từ json về để hiện trên phần lựa chọn
+    NSMutableArray *cateArrayToGet;                 //mảng các category sẽ lấy trên server
+    NSMutableArray *cateIDArrayToGet;               //mảng các category ID sẽ lấy trên server
+    
+    //mảng để lưu giá trị
+    NSMutableArray *ingredientArray;
+    NSMutableArray *ingredientIDArray;          //mảng các ID nguyên liệu (thuôc tính ID của ingredient cell)
+    NSMutableArray *ingredientUnitArray;
+    
+    
     NSMutableArray *stepArray;
     NSMutableArray *stepContentArr;
     NSMutableArray *stepImgArr;
-    NSMutableArray *cateArrayToGet;                // mảng các category sẽ lấy trên server
-    NSMutableArray *cateIDArrayToGet;
+
 }
 //outlet
 @property (weak, nonatomic) IBOutlet UITextField *recipeName;
@@ -46,7 +58,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPerson;
 @property (weak, nonatomic) IBOutlet UIButton *btnTime;
 
-
 @property (weak, nonatomic) IBOutlet UITextView *txtAbout;
 
 @property (strong, nonatomic) UIImage *RecipeAvatar;
@@ -55,6 +66,8 @@
 - (IBAction)Create:(id)sender;
 - (IBAction)addStep:(id)sender;
 - (IBAction)addStepImage:(id)sender;
+- (IBAction)aceptPickIngredient:(id)sender;
+- (IBAction)cancelPickIngredient:(id)sender;
 
 
 @end
@@ -63,6 +76,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //init arrays
+    if (!ingredientArray) {
+        ingredientArray = [[NSMutableArray alloc] init];
+    }
+    if (!ingredientIDArray) {
+        ingredientIDArray = [[NSMutableArray alloc] init];
+    }
+    if (!ingredientUnitArray) {
+        ingredientUnitArray = [[NSMutableArray alloc] init];
+    }
+    if (!cateIDArray) {
+        cateIDArray = [[NSMutableArray alloc] init];
+    }
+    if (!cateArray) {
+        cateArray = [[NSMutableArray alloc] init];
+    }
+    if (!stepArray) {
+        stepArray = [[NSMutableArray alloc] init];
+    }
+    if (!stepImgArr) {
+        stepImgArr = [[NSMutableArray alloc] init];
+    }
+    if (!stepContentArr) {
+        stepContentArr = [[NSMutableArray alloc] init];
+    }
+
     
     //remove line of tableviewcell
     self.stepTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -105,8 +145,18 @@
     self.ingredientTableView.delegate = self;
     self.ingredientTableView.dataSource = self;
     
+    //chưa có bước làm nào được tạo khi mở view
     step = 0;
+    
+    
     //get all the category & category ID from server
+    [self getCateAndCateID];
+    
+}
+
+#pragma mark - get JSON Data - category
+
+- (void) getCateAndCateID {
     @try {
         NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -136,7 +186,6 @@
                         [cateIDArrayToGet addObject:cateID];
                     }
                 }
-                
                 NSLog(@"%@",cateArrayToGet);
                 NSLog(@"%@",cateIDArrayToGet);
             }
@@ -151,7 +200,6 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
-
 
 
 #pragma mark - chỉnh màu status bar
@@ -244,6 +292,7 @@
          }
                         completion: nil];
     }*/
+    /*
     if (!stepArray) {
         step ++;
         stepArray = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",step], nil];
@@ -305,10 +354,16 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
+    */
 }
 
 - (IBAction)addStepImage:(id)sender {
+}
+
+- (IBAction)aceptPickIngredient:(id)sender {
+}
+
+- (IBAction)cancelPickIngredient:(id)sender {
 }
 
 - (IBAction)addPerson:(id)sender {
@@ -396,34 +451,15 @@
 - (IBAction)addCate:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thêm danh mục" message:@"lựa chọn danh mục của công thức" preferredStyle:UIAlertControllerStyleActionSheet];
     [alert setModalInPopover:YES];
+    
     for (NSInteger i = 0; i < cateArrayToGet.count; i++) {
         [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@",[cateArrayToGet objectAtIndex:i]] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            if (!cateArray) {
-                cateArray = [[NSMutableArray alloc] initWithObjects:[cateArrayToGet objectAtIndex:i], nil];
-                [self.cateCollectionView reloadData];
-            } else {
-                [cateArray addObject:[cateArrayToGet objectAtIndex:i]];
-                [UIView transitionWithView: self.cateCollectionView
-                                  duration: 0.4f
-                                   options: UIViewAnimationOptionTransitionCrossDissolve
-                                animations: ^(void)
-                 {
-                     [self.cateCollectionView reloadData];
-                 }
-                                completion: nil];
-            }
             
-        }]];
-    }
-    
-    //CGRect frame = CGRectMake(0, self.view.frame.size.height*2/3, self.view.frame.size.width, self.view.frame.size.height/3);
-    /*
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (!cateArray) {
-            cateArray = [[NSMutableArray alloc] initWithObjects:[cateArrayToGet objectAtIndex:0], nil];
-            [self.cateCollectionView reloadData];
-        } else {
-            [cateArray addObject:[cateArrayToGet objectAtIndex:1]];
+            //[cateIDArray addObject:[cateIDArrayToGet objectAtIndex:i]];
+            [self addObjectToCateIDArrayWithObject:[cateIDArrayToGet objectAtIndex:i]];
+            //[cateArray addObject:[cateArrayToGet objectAtIndex:i]];
+            [self addObjectToCateArrayWithObject:[cateArrayToGet objectAtIndex:i]];
+
             [UIView transitionWithView: self.cateCollectionView
                               duration: 0.4f
                                options: UIViewAnimationOptionTransitionCrossDissolve
@@ -432,29 +468,42 @@
                  [self.cateCollectionView reloadData];
              }
                             completion: nil];
-        }
-        
-    }]];
-     */
+        }]];
+    }
     [alert addAction:[UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil]];
+    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (IBAction)addIngredient:(id)sender {
-    if (!ingredientArray) {
-        ingredientArray = [[NSMutableArray alloc] initWithObjects:@"new ingredient", nil];
-        [self.ingredientTableView reloadData];
+- (void) addObjectToCateIDArrayWithObject:(id)object {
+    if (![cateIDArray containsObject:object]) {
+        [cateIDArray addObject:object];
+        NSLog(@"CateIDArray chưa có object, thêm");
     } else {
-        [ingredientArray addObject:@"new ingredient"];
-        [UIView transitionWithView: self.ingredientTableView
-                          duration: 0.4f
-                           options: UIViewAnimationOptionTransitionCrossDissolve
-                        animations: ^(void)
-         {
-             [self.ingredientTableView reloadData];
-             //[self.infoView resizeToFitSubviews];
-         }
-                        completion: nil];
+        NSLog(@"CateIDArray object có rồi, không thêm");
+    }
+}
+- (void) addObjectToCateArrayWithObject:(id)object {
+    if (![cateArray containsObject:object]) {
+        [cateArray addObject:object];
+        NSLog(@"CateArray chưa có object, thêm");
+    } else {
+        NSLog(@"CateArray có object rồi, không thêm");
+    }
+}
+
+- (IBAction)addIngredient:(id)sender {
+    [self performSegueWithIdentifier:@"addIngredient" sender:self];
+    
+    
+}
+
+#pragma mark - managing segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"addIngredient"]) {
+        recipeIngredientViewController *destinationController = [segue destinationViewController];
+        destinationController.IngredientArrayIDAlreadyHave = ingredientIDArray;
     }
 }
 
