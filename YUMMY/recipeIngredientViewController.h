@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ingredientContentDelegate <NSObject>
+
+- (void)sendBackContent:(NSString *)contentString;
+- (void)sendBackIndex:(NSString *)index content:(NSString *)content unit:(NSString *)unit;
+
+@end
+
 @interface recipeIngredientViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+
+@property (weak,nonatomic) id<ingredientContentDelegate>delegate;
+
 @property (nonatomic) NSMutableArray *IngredientArrayIDAlreadyHave;
+
 @end

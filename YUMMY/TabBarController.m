@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TabBarController.h"
 #import "CreateViewController.h"
+#import "UserViewController.h"
 
 @interface TabBarController ()
 @property (strong,nonatomic) UITabBarItem *currentItem;

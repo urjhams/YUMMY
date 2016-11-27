@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Fns-3m-TNq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -277,7 +277,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wcn-cA-clq">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="gJN-EI-gNf" customClass="CHTCollectionViewWaterfallLayout"/>
                                 <cells>
@@ -500,7 +500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ3-xP-gBa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="931"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEz-2v-dLv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -1415,28 +1415,28 @@ beat until ingredients are well combined.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-ne-l9Z">
-                                        <rect key="frame" x="25" y="320" width="270" height="8"/>
+                                        <rect key="frame" x="8" y="320" width="304" height="8"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="8" id="B4a-hh-D2X"/>
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCell" rowHeight="100" id="noM-Ee-j5X" customClass="stepCell">
-                                                <rect key="frame" x="0.0" y="28" width="270" height="100"/>
+                                                <rect key="frame" x="0.0" y="28" width="304" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="center" tableViewCell="noM-Ee-j5X" id="C4a-BH-6nU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="99"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="99"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-Bh-VrO">
-                                                            <rect key="frame" x="5" y="5" width="90" height="90"/>
+                                                            <rect key="frame" x="1" y="5" width="90" height="90"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="90" id="IDH-71-izA"/>
                                                                 <constraint firstAttribute="width" constant="90" id="nmQ-mt-Ndh"/>
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbK-VH-9dH">
-                                                            <rect key="frame" x="5" y="5" width="90" height="90"/>
+                                                            <rect key="frame" x="5" y="4" width="90" height="90"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="90" id="9t4-D7-WIX"/>
                                                                 <constraint firstAttribute="height" constant="90" id="JaM-FF-Fcz"/>
@@ -1449,23 +1449,34 @@ beat until ingredients are well combined.</string>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtW-Vu-zgu">
-                                                            <rect key="frame" x="103" y="8" width="159" height="83"/>
+                                                            <rect key="frame" x="103" y="8" width="193" height="84"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIF-Kz-2LV">
+                                                            <rect key="frame" x="103" y="8" width="193" height="87"/>
+                                                            <connections>
+                                                                <action selector="editStepContent:" destination="0wJ-d5-frr" eventType="touchUpInside" id="Nwe-op-yAm"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="mtW-Vu-zgu" firstAttribute="trailing" secondItem="C4a-BH-6nU" secondAttribute="trailingMargin" id="0UC-Oa-65d"/>
                                                         <constraint firstItem="bbK-VH-9dH" firstAttribute="leading" secondItem="C4a-BH-6nU" secondAttribute="leading" constant="5" id="8LW-nA-UtT"/>
-                                                        <constraint firstItem="vIp-Bh-VrO" firstAttribute="leading" secondItem="C4a-BH-6nU" secondAttribute="leadingMargin" constant="-3" id="9OJ-OC-cLJ"/>
+                                                        <constraint firstItem="vIp-Bh-VrO" firstAttribute="leading" secondItem="C4a-BH-6nU" secondAttribute="leadingMargin" constant="-7" id="9OJ-OC-cLJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bIF-Kz-2LV" secondAttribute="bottom" constant="5" id="C27-io-R4f"/>
                                                         <constraint firstItem="vIp-Bh-VrO" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="topMargin" constant="-3" id="CPJ-gm-RFb"/>
+                                                        <constraint firstItem="bIF-Kz-2LV" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="top" constant="8" id="ChV-hf-SNh"/>
                                                         <constraint firstItem="mtW-Vu-zgu" firstAttribute="bottom" secondItem="C4a-BH-6nU" secondAttribute="bottomMargin" id="Iik-j0-esk"/>
-                                                        <constraint firstItem="bbK-VH-9dH" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="top" constant="5" id="NZP-Q0-Te9"/>
-                                                        <constraint firstAttribute="bottom" secondItem="bbK-VH-9dH" secondAttribute="bottom" constant="4" id="RfW-c4-Zw3"/>
+                                                        <constraint firstItem="bbK-VH-9dH" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="top" constant="4" id="NZP-Q0-Te9"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bbK-VH-9dH" secondAttribute="bottom" constant="5" id="RfW-c4-Zw3"/>
                                                         <constraint firstItem="mtW-Vu-zgu" firstAttribute="leading" secondItem="bbK-VH-9dH" secondAttribute="trailing" constant="8" id="dDC-uM-Vru"/>
+                                                        <constraint firstItem="bIF-Kz-2LV" firstAttribute="leading" secondItem="bbK-VH-9dH" secondAttribute="trailing" constant="8" id="ez8-Op-vhi"/>
                                                         <constraint firstItem="mtW-Vu-zgu" firstAttribute="top" secondItem="C4a-BH-6nU" secondAttribute="topMargin" id="kIf-m3-cTi"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bIF-Kz-2LV" secondAttribute="trailing" constant="8" id="nat-Tj-A7d"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="vIp-Bh-VrO" secondAttribute="bottom" constant="-4" id="zXC-NL-zSF"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -1501,12 +1512,12 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="trailing" secondItem="Dc0-T5-yT2" secondAttribute="trailing" id="CyJ-iS-gpO"/>
                                     <constraint firstItem="1hf-fp-xZ9" firstAttribute="leading" secondItem="JgU-BS-J94" secondAttribute="leading" id="E0S-0B-b9R"/>
                                     <constraint firstItem="FwH-la-fkM" firstAttribute="leading" secondItem="Tpy-SR-8c6" secondAttribute="leading" id="Ee1-mi-6WN"/>
-                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="25" id="FWs-lr-3SB"/>
+                                    <constraint firstItem="42Y-ne-l9Z" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="8" id="FWs-lr-3SB"/>
                                     <constraint firstItem="RHu-5s-c7I" firstAttribute="leading" secondItem="vVR-SJ-zbz" secondAttribute="leading" constant="-2" id="IUJ-2f-cry"/>
                                     <constraint firstItem="luf-gG-ZYm" firstAttribute="leading" secondItem="39X-WK-i00" secondAttribute="leading" id="Ifb-Xd-WRF"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="top" secondItem="k90-Yv-fxd" secondAttribute="bottom" constant="10" id="Jkh-Pv-b25"/>
                                     <constraint firstItem="90y-Gg-sYi" firstAttribute="centerX" secondItem="L0j-8V-Ac3" secondAttribute="centerX" id="K23-42-O7z"/>
-                                    <constraint firstAttribute="trailing" secondItem="42Y-ne-l9Z" secondAttribute="trailing" constant="25" id="Kms-NY-UnR"/>
+                                    <constraint firstAttribute="trailing" secondItem="42Y-ne-l9Z" secondAttribute="trailing" constant="8" id="Kms-NY-UnR"/>
                                     <constraint firstItem="RHu-5s-c7I" firstAttribute="top" secondItem="42Y-ne-l9Z" secondAttribute="bottom" constant="14" id="MVR-xW-FCC"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="12" id="NAQ-GW-bqS"/>
                                     <constraint firstItem="90y-Gg-sYi" firstAttribute="baseline" secondItem="Tpy-SR-8c6" secondAttribute="baseline" id="NdC-83-znY"/>
@@ -1591,11 +1602,89 @@ beat until ingredients are well combined.</string>
                         <outlet property="txtAbout" destination="P27-YG-aNI" id="39e-cp-WNG"/>
                         <segue destination="Xye-pv-4tQ" kind="presentation" identifier="getRecipeImg" modalTransitionStyle="flipHorizontal" id="YZQ-f4-qnY"/>
                         <segue destination="hjs-wQ-eFV" kind="presentation" identifier="addIngredient" id="PnK-tQ-DWb"/>
+                        <segue destination="WgX-zg-JJJ" kind="presentation" identifier="addStep" id="f5m-pI-QLe"/>
+                        <segue destination="WgX-zg-JJJ" kind="presentation" identifier="editStep" id="6Py-LU-b80"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eAY-ct-cFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2010" y="950.70422535211264"/>
+        </scene>
+        <!--Recipe Step View Controller-->
+        <scene sceneID="fsm-CX-hRz">
+            <objects>
+                <viewController storyboardIdentifier="stepConfig" id="WgX-zg-JJJ" customClass="recipeStepViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RYD-1w-1QB"/>
+                        <viewControllerLayoutGuide type="bottom" id="KDX-H9-ZU7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9bh-qE-4vp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6x8-gP-tMn">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Bước làm" id="DTY-Sp-p4g">
+                                        <barButtonItem key="leftBarButtonItem" title="Huỷ" id="Ztp-on-nAv">
+                                            <connections>
+                                                <action selector="cancel:" destination="WgX-zg-JJJ" id="5ni-Uk-44y"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkJ-Uc-dYE">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2dO-00-uyw">
+                                        <rect key="frame" x="40" y="32" width="240" height="375"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="375" id="HVB-H2-jxg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRE-Pl-pgA">
+                                        <rect key="frame" x="40" y="440" width="240" height="30"/>
+                                        <state key="normal" title="Lưu"/>
+                                        <connections>
+                                            <action selector="save:" destination="WgX-zg-JJJ" eventType="touchUpInside" id="Mpf-SO-jcA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2dO-00-uyw" firstAttribute="centerX" secondItem="DkJ-Uc-dYE" secondAttribute="centerX" id="1ze-v4-fPg"/>
+                                    <constraint firstItem="2dO-00-uyw" firstAttribute="leading" secondItem="DkJ-Uc-dYE" secondAttribute="leading" constant="40" id="BtH-3F-ejZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="GRE-Pl-pgA" secondAttribute="trailing" constant="40" id="ckM-P9-ugH"/>
+                                    <constraint firstItem="GRE-Pl-pgA" firstAttribute="leading" secondItem="DkJ-Uc-dYE" secondAttribute="leading" constant="40" id="e27-qx-h9L"/>
+                                    <constraint firstItem="2dO-00-uyw" firstAttribute="top" secondItem="DkJ-Uc-dYE" secondAttribute="top" constant="32" id="fpv-z1-PkE"/>
+                                    <constraint firstAttribute="bottom" secondItem="GRE-Pl-pgA" secondAttribute="bottom" constant="34" id="qtm-e1-lhs"/>
+                                    <constraint firstItem="GRE-Pl-pgA" firstAttribute="top" secondItem="2dO-00-uyw" secondAttribute="bottom" constant="33" id="sbr-VJ-bcL"/>
+                                    <constraint firstAttribute="trailing" secondItem="2dO-00-uyw" secondAttribute="trailing" constant="40" id="vwY-4z-K08"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DkJ-Uc-dYE" firstAttribute="top" secondItem="6x8-gP-tMn" secondAttribute="bottom" id="5Qr-gp-db3"/>
+                            <constraint firstItem="6x8-gP-tMn" firstAttribute="leading" secondItem="9bh-qE-4vp" secondAttribute="leading" id="Ax4-H8-d2a"/>
+                            <constraint firstItem="6x8-gP-tMn" firstAttribute="top" secondItem="RYD-1w-1QB" secondAttribute="bottom" id="clf-ME-lo3"/>
+                            <constraint firstAttribute="trailing" secondItem="6x8-gP-tMn" secondAttribute="trailing" id="jV1-11-wxD"/>
+                            <constraint firstAttribute="trailing" secondItem="DkJ-Uc-dYE" secondAttribute="trailing" id="kim-PI-nIb"/>
+                            <constraint firstItem="DkJ-Uc-dYE" firstAttribute="leading" secondItem="9bh-qE-4vp" secondAttribute="leading" id="mlf-Ll-9ZT"/>
+                            <constraint firstItem="KDX-H9-ZU7" firstAttribute="top" secondItem="DkJ-Uc-dYE" secondAttribute="bottom" id="nfz-Mz-QnP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentHeight" destination="HVB-H2-jxg" id="0Q4-mC-e0d"/>
+                        <outlet property="stepContent" destination="2dO-00-uyw" id="tNX-ds-0ZB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bHd-8q-w9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3007.5" y="799.64788732394368"/>
         </scene>
         <!--Recipe Ingredient View Controller-->
         <scene sceneID="Taj-v8-BBh">
@@ -1667,11 +1756,12 @@ beat until ingredients are well combined.</string>
                     </view>
                     <connections>
                         <outlet property="ingredientPicker" destination="Q40-CX-7Tu" id="WcI-NZ-fOn"/>
+                        <outlet property="txtValue" destination="uPn-lF-zh7" id="GF0-yA-LVk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4b-Sx-WC9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3142.5" y="682.3943661971831"/>
+            <point key="canvasLocation" x="3011" y="138"/>
         </scene>
         <!--Recipe Avatar View Controller-->
         <scene sceneID="9cl-bT-pwT">
@@ -2519,7 +2609,8 @@ beat until ingredients are well combined.</string>
         <image name="tabbtn5-active" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="f5m-pI-QLe"/>
+        <segue reference="eFA-2q-MFP"/>
         <segue reference="Rv3-Uz-HIV"/>
-        <segue reference="qGs-g9-Ntq"/>
     </inferredMetricsTieBreakers>
 </document>

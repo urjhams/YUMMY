@@ -16,6 +16,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *ingredientPicker;
+@property (weak, nonatomic) IBOutlet UITextField *txtValue;
 
 - (IBAction)dissmiss:(id)sender;
 - (IBAction)add:(id)sender;
@@ -103,8 +104,18 @@
 #pragma mark - action
 
 - (IBAction)dissmiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)add:(id)sender {
+    NSInteger row = [self.ingredientPicker selectedRowInComponent:0];
+    NSString *part1 = [ingredientArrayToGet objectAtIndex:row];
+    NSString *part3 = [ingredientUnitArrayToGet objectAtIndex:row];
+    NSString *part2 = self.txtValue.text;
+    NSString *part4 = [ingredientIDArrayToGet objectAtIndex:row];
+    NSString *finalString = [NSString stringWithFormat:@"%@ : %@ %@",part1,part2,part3];
+    [self.delegate sendBackContent:finalString];
+    [self.delegate sendBackIndex:part4 content:part1 unit:part3];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

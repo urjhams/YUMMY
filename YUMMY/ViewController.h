@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface ViewController : UIViewController
-
-
+@property (nonatomic) NSMutableArray *userInfoArr;    //global variable
 @end
 

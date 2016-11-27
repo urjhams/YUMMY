@@ -10,4 +10,6 @@
 
 @interface UserViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property (nonatomic) NSMutableArray *myInfos;
+
 @end

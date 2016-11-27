@@ -8,6 +8,7 @@
 
 #import "UserViewController.h"
 #import "UserRecipeCollectionViewCell.h"
+#import "ViewController.h"
 
 @interface UserViewController () {
     NSMutableArray *recipeID;
@@ -57,8 +58,11 @@
     self.theNaviBar.hidden = YES;
     
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    //self.myInfos = userInfoArr;
+    //NSLog(@"%@",self.myInfos);
     
 }
+
 
 #pragma mark - chỉnh màu status bar
 - (UIStatusBarStyle)preferredStatusBarStyle {

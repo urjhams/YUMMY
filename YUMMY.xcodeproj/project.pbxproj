@@ -18,6 +18,7 @@
 		F4197CA31DB8D43800194D9B /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA01DB8D43800194D9B /* 2.png */; };
 		F4197CA41DB8D43800194D9B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA11DB8D43800194D9B /* 1.png */; };
 		F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */; };
+		F441701A1DEAC0F50048110A /* recipeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44170191DEAC0F50048110A /* recipeStepViewController.m */; };
 		F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4417F511DE096FE00ABB015 /* anotherUserViewController.m */; };
 		F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */; };
 		F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4730B0E1DDB569100BB10D5 /* avatar.jpg */; };
@@ -85,6 +86,8 @@
 		F4197CA11DB8D43800194D9B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		F44170181DEAC0F50048110A /* recipeStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = recipeStepViewController.h; sourceTree = "<group>"; };
+		F44170191DEAC0F50048110A /* recipeStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = recipeStepViewController.m; sourceTree = "<group>"; };
 		F4417F501DE096FE00ABB015 /* anotherUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anotherUserViewController.h; sourceTree = "<group>"; };
 		F4417F511DE096FE00ABB015 /* anotherUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = anotherUserViewController.m; sourceTree = "<group>"; };
 		F4730B081DDB33F900BB10D5 /* notificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationTableViewCell.h; sourceTree = "<group>"; };
@@ -268,8 +271,6 @@
 			children = (
 				F4EB1AB81DC0E48D00E10262 /* categoryLabel.h */,
 				F4EB1AB91DC0E48D00E10262 /* categoryLabel.m */,
-				F4197C921DB8B0A100194D9B /* TabBarController.h */,
-				F4197C931DB8B0A100194D9B /* TabBarController.m */,
 			);
 			name = outlet;
 			sourceTree = "<group>";
@@ -279,6 +280,8 @@
 			children = (
 				F41422941DB6F2670010F9A8 /* MainViewController.h */,
 				F41422951DB6F2670010F9A8 /* MainViewController.m */,
+				F4197C921DB8B0A100194D9B /* TabBarController.h */,
+				F4197C931DB8B0A100194D9B /* TabBarController.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -444,6 +447,8 @@
 				F4F02F731DE338FF005D52DB /* recipeAvatarViewController.m */,
 				F47630051DE9B64C0087EB3E /* recipeIngredientViewController.h */,
 				F47630061DE9B64C0087EB3E /* recipeIngredientViewController.m */,
+				F44170181DEAC0F50048110A /* recipeStepViewController.h */,
+				F44170191DEAC0F50048110A /* recipeStepViewController.m */,
 			);
 			name = "2nd Viewcontroller";
 			sourceTree = "<group>";
@@ -696,6 +701,7 @@
 				F4F02F741DE338FF005D52DB /* recipeAvatarViewController.m in Sources */,
 				F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */,
 				F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */,
+				F441701A1DEAC0F50048110A /* recipeStepViewController.m in Sources */,
 				F4F080501DBF9525008175A2 /* SearchResultViewController.m in Sources */,
 				F494A5C51DB6893E00D173E0 /* AppDelegate.m in Sources */,
 				F4F02F711DE3323F005D52DB /* userTableViewCell.m in Sources */,

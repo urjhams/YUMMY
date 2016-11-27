@@ -14,6 +14,7 @@
 @interface ViewController () {
     NSInteger success;
 }
+
 @property (weak, nonatomic) IBOutlet UITextField *txtAcc;
 @property (weak, nonatomic) IBOutlet UITextField *txtPwd;
 
@@ -77,8 +78,14 @@
                         NSArray *rsArray = [jsonData objectForKey:@"results"];
                         NSDictionary *userInfoDict = [rsArray objectAtIndex:0];
                         NSString *userID = [userInfoDict objectForKey:@"UserID"];
+                        NSString *userName = [userInfoDict objectForKey:@"Username"];
+                        NSString *email = [userInfoDict objectForKey:@"Email"];
+                        NSString *ngaytao = [userInfoDict objectForKey:@"Ngaytao"];
+                        NSString *mota = [userInfoDict objectForKey:@"Mota"];
+                        NSString *avatar = [userInfoDict objectForKey:@"Avatar"];
                         NSLog(@"%@",message);
-                        NSLog(@"UserID la %@",userID);
+                        self.userInfoArr = [[NSMutableArray alloc] initWithObjects:userID, userName, email, ngaytao, mota, avatar, nil];
+                        NSLog(@"%@",self.userInfoArr);
                         [self performSegueWithIdentifier:@"loginSuccess" sender:self];
                     } else {
                         NSString *message = (NSString *) jsonData[@"message"];
@@ -153,9 +160,6 @@
     if ([segue.identifier isEqualToString:@"loginSuccess"]) {
         TabBarController *destinationController = [segue destinationViewController];
         destinationController.userName = userAcc;
-        
-        
-        NSLog(@"Username la: %@",userAcc);
     }
 }
 
