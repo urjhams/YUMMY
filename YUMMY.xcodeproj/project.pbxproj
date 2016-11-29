@@ -40,6 +40,7 @@
 		F4B7FF991DC6247A003F6960 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B7FF981DC6247A003F6960 /* NotificationViewController.m */; };
 		F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B9169F1DD5CBA60024C110 /* cateCell.m */; };
 		F4B916A31DD5CCCD0024C110 /* stepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B916A21DD5CCCD0024C110 /* stepCell.m */; };
+		F4E6373B1DEDCD4600B4D815 /* userInfosSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E6373A1DEDCD4600B4D815 /* userInfosSingleton.m */; };
 		F4EB1ABA1DC0E48D00E10262 /* categoryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EB1AB91DC0E48D00E10262 /* categoryLabel.m */; };
 		F4F02F711DE3323F005D52DB /* userTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F02F701DE3323F005D52DB /* userTableViewCell.m */; };
 		F4F02F741DE338FF005D52DB /* recipeAvatarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F02F731DE338FF005D52DB /* recipeAvatarViewController.m */; };
@@ -129,6 +130,8 @@
 		F4B9169F1DD5CBA60024C110 /* cateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cateCell.m; sourceTree = "<group>"; };
 		F4B916A11DD5CCCD0024C110 /* stepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stepCell.h; sourceTree = "<group>"; };
 		F4B916A21DD5CCCD0024C110 /* stepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stepCell.m; sourceTree = "<group>"; };
+		F4E637391DEDCD4600B4D815 /* userInfosSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userInfosSingleton.h; sourceTree = "<group>"; };
+		F4E6373A1DEDCD4600B4D815 /* userInfosSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userInfosSingleton.m; sourceTree = "<group>"; };
 		F4EB1AB81DC0E48D00E10262 /* categoryLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryLabel.h; sourceTree = "<group>"; };
 		F4EB1AB91DC0E48D00E10262 /* categoryLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryLabel.m; sourceTree = "<group>"; };
 		F4F02F6F1DE3323F005D52DB /* userTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userTableViewCell.h; sourceTree = "<group>"; };
@@ -377,8 +380,10 @@
 		F494A5C01DB6893E00D173E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F48445FA1DBC9970003B09F4 /* library */,
+				F4E637391DEDCD4600B4D815 /* userInfosSingleton.h */,
+				F4E6373A1DEDCD4600B4D815 /* userInfosSingleton.m */,
 				F494A5C11DB6893E00D173E0 /* main.m */,
+				F48445FA1DBC9970003B09F4 /* library */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -705,6 +710,7 @@
 				F4F080501DBF9525008175A2 /* SearchResultViewController.m in Sources */,
 				F494A5C51DB6893E00D173E0 /* AppDelegate.m in Sources */,
 				F4F02F711DE3323F005D52DB /* userTableViewCell.m in Sources */,
+				F4E6373B1DEDCD4600B4D815 /* userInfosSingleton.m in Sources */,
 				F4197C941DB8B0A100194D9B /* TabBarController.m in Sources */,
 				F40FCC5C1DCF923E00A65B22 /* recipeInfoCell.m in Sources */,
 				F4B7FF991DC6247A003F6960 /* NotificationViewController.m in Sources */,

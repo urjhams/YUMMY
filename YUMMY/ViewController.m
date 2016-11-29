@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreImage/CoreImage.h>
 #import "TabBarController.h"
+#import "userInfosSingleton.h"
 
 @interface ViewController () {
     NSInteger success;
@@ -75,6 +76,7 @@
                     if (success == 1) {
                         NSString *message = (NSString *) jsonData[@"message"];
                         //NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
+                        
                         NSArray *rsArray = [jsonData objectForKey:@"results"];
                         NSDictionary *userInfoDict = [rsArray objectAtIndex:0];
                         NSString *userID = [userInfoDict objectForKey:@"UserID"];
@@ -83,9 +85,11 @@
                         NSString *ngaytao = [userInfoDict objectForKey:@"Ngaytao"];
                         NSString *mota = [userInfoDict objectForKey:@"Mota"];
                         NSString *avatar = [userInfoDict objectForKey:@"Avatar"];
+                        userInfoArr = [[NSMutableArray alloc] initWithObjects: userID, userName, email, ngaytao, mota, avatar, nil];
+                        [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
+                        NSLog(@"%@",userInfoArr);
                         NSLog(@"%@",message);
-                        self.userInfoArr = [[NSMutableArray alloc] initWithObjects:userID, userName, email, ngaytao, mota, avatar, nil];
-                        NSLog(@"%@",self.userInfoArr);
+                        NSLog(@"%@",userID);
                         [self performSegueWithIdentifier:@"loginSuccess" sender:self];
                     } else {
                         NSString *message = (NSString *) jsonData[@"message"];
@@ -108,58 +112,13 @@
             [alert addAction:alright];
             [self presentViewController:alert animated:YES completion:nil];
         }
-        /*
-        NSInteger success = 2;
-        @try {
-            NSString *post = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
-            NSLog(@"PostData: %@",post);
-            
-            NSURL *url = [NSURL URLWithString:@"http://localhost/yummy/login.php"];
-            
-            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-            
-            //NSString *postLenght = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-            
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-            [request setURL:url];
-            [request setHTTPMethod:@"POST"];
-            [request setHTTPBody:postData];
-            
-            NSError *error = [[NSError alloc] init];
-            NSHTTPURLResponse *response = nil;
-            NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            if ([response statusCode] >= 200 && [response statusCode] < 300) {
-                NSError *error = nil;
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:urlData
-                                                                         options:NSJSONReadingMutableContainers
-                                                                           error:&error];
-                success = [jsonData[@"code"] integerValue];
-                
-                if (success == 1) {
-                    NSString *message = (NSString *) jsonData[@"message"];
-                    [self performSegueWithIdentifier:@"loginSuccess" sender:self];
-                    NSLog(@"%@",message);
-                } else {
-                    NSString *message = (NSString *) jsonData[@"message"];
-                    NSLog(@"%@",message);
-                }
-            } else {
-                //NSString *message = (NSString *) jsonData[@"message"];
-                NSLog(@"Failed");
-            }
-        }
-        @catch (NSException *e) {
-            NSLog(@"%@",e);
-        }*/
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSString *userAcc = self.txtAcc.text;
     if ([segue.identifier isEqualToString:@"loginSuccess"]) {
-        TabBarController *destinationController = [segue destinationViewController];
-        destinationController.userName = userAcc;
+        __unused TabBarController *destinationController = [segue destinationViewController];
+        
     }
 }
 

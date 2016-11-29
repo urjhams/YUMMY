@@ -18,7 +18,6 @@
 
 @implementation TabBarController
 
-@synthesize userName;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

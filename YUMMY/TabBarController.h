@@ -11,8 +11,6 @@
 
 @interface TabBarController : UITabBarController <UITabBarControllerDelegate>
 
-@property (weak,nonatomic) NSString *userName;
-
 - (UIImage *)snapShot;
 
 @end

@@ -10,7 +10,8 @@
 
 
 
-@interface ViewController : UIViewController
-@property (nonatomic) NSMutableArray *userInfoArr;    //global variable
+@interface ViewController : UIViewController {
+    NSMutableArray *userInfoArr;
+}
 @end
 

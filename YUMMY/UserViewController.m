@@ -9,12 +9,15 @@
 #import "UserViewController.h"
 #import "UserRecipeCollectionViewCell.h"
 #import "ViewController.h"
+#import "TabBarController.h"
+#import "userInfosSingleton.h"
 
 @interface UserViewController () {
     NSMutableArray *recipeID;
     NSMutableArray *recipeImg;
     NSMutableArray *recipeName;
     NSMutableArray *recipeCate;
+    NSMutableArray *userInfomaton;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imgCover;
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -58,8 +61,16 @@
     self.theNaviBar.hidden = YES;
     
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
-    //self.myInfos = userInfoArr;
-    //NSLog(@"%@",self.myInfos);
+
+    //useravatar
+    userInfomaton = [[NSMutableArray alloc] init];
+    userInfomaton = [[userInfosSingleton sharedUserInfos] userInfos];
+    NSString *myAvatarName = [userInfomaton objectAtIndex:5];
+    NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",myAvatarName]];
+    NSData *avatarData = [[NSData alloc] initWithContentsOfURL:avatarUrl];
+    self.userAvatar.contentMode = UIViewContentModeScaleToFill;
+    self.userAvatar.image = [UIImage imageWithData:avatarData];
+    //NSLog(@"%@",userInfomaton);
     
 }
 

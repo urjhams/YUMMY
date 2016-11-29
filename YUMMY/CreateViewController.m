@@ -13,7 +13,7 @@
 #import "recipeAvatarViewController.h"
 #import "recipeIngredientViewController.h"
 #import "recipeStepViewController.h"
-
+#import "TabBarController.h"
 
 @interface CreateViewController ()
 
@@ -120,8 +120,6 @@
     self.cateCollectionView.delegate = self;
     self.ingredientTableView.delegate = self;
     self.ingredientTableView.dataSource = self;
-    
-    
     
     //get all the category & category ID from server
     [self getCateAndCateID];
