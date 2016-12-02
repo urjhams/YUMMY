@@ -13,7 +13,7 @@
 @implementation userInfosSingleton
 
 @synthesize userInfos;
-
+@synthesize userAvatar;
 +(userInfosSingleton *)sharedUserInfos {
     static userInfosSingleton *sharedUserInfos = nil;
     if (!sharedUserInfos) {
@@ -23,10 +23,20 @@
     return sharedUserInfos;
 }
 
++(userInfosSingleton *)sharedUserAvatar {
+    static userInfosSingleton *sharedUserAvatar = nil;
+    if (!sharedUserAvatar) {
+        sharedUserAvatar = [[userInfosSingleton alloc] init];
+        sharedUserAvatar.userAvatar = [NSData new];
+    }
+    return sharedUserAvatar;
+}
+
 -(id)init {
     self = [super init];
     if (self) {
         userInfos = [[NSMutableArray alloc] init];
+        userAvatar = [[NSData alloc] init];
     }
     return self;
 }
@@ -42,4 +52,17 @@
     //return [[userInfosSingleton sharedUserInfos] userInfos];
     return [self userInfos];
 }
+
+- (void)userAvatarIs:(NSData *)avatarData {
+    if (self.userAvatar == nil) {
+        self.userAvatar = [[NSData alloc] initWithData:avatarData];
+    } else {
+        self.userAvatar = avatarData;
+    }
+}
+
+- (NSData *)theUserAvatar {
+    return [self userAvatar];
+}
+
 @end

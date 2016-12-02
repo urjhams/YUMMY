@@ -20,6 +20,8 @@
 		F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */; };
 		F441701A1DEAC0F50048110A /* recipeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44170191DEAC0F50048110A /* recipeStepViewController.m */; };
 		F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4417F511DE096FE00ABB015 /* anotherUserViewController.m */; };
+		F46787471DF088B0007AD4B3 /* recipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = F46787461DF088B0007AD4B3 /* recipeIngredient.m */; };
+		F467874A1DF1CBC0007AD4B3 /* mainScreenRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = F46787491DF1CBC0007AD4B3 /* mainScreenRecipe.m */; };
 		F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */; };
 		F4730B0F1DDB569100BB10D5 /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4730B0E1DDB569100BB10D5 /* avatar.jpg */; };
 		F47630071DE9B64C0087EB3E /* recipeIngredientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47630061DE9B64C0087EB3E /* recipeIngredientViewController.m */; };
@@ -91,6 +93,10 @@
 		F44170191DEAC0F50048110A /* recipeStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = recipeStepViewController.m; sourceTree = "<group>"; };
 		F4417F501DE096FE00ABB015 /* anotherUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anotherUserViewController.h; sourceTree = "<group>"; };
 		F4417F511DE096FE00ABB015 /* anotherUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = anotherUserViewController.m; sourceTree = "<group>"; };
+		F46787451DF088B0007AD4B3 /* recipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = recipeIngredient.h; sourceTree = "<group>"; };
+		F46787461DF088B0007AD4B3 /* recipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = recipeIngredient.m; sourceTree = "<group>"; };
+		F46787481DF1CBC0007AD4B3 /* mainScreenRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainScreenRecipe.h; sourceTree = "<group>"; };
+		F46787491DF1CBC0007AD4B3 /* mainScreenRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainScreenRecipe.m; sourceTree = "<group>"; };
 		F4730B081DDB33F900BB10D5 /* notificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationTableViewCell.h; sourceTree = "<group>"; };
 		F4730B091DDB33F900BB10D5 /* notificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationTableViewCell.m; sourceTree = "<group>"; };
 		F4730B0E1DDB569100BB10D5 /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
@@ -177,6 +183,8 @@
 		F41422971DB6F2720010F9A8 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				F4197C921DB8B0A100194D9B /* TabBarController.h */,
+				F4197C931DB8B0A100194D9B /* TabBarController.m */,
 				F46EA6E51DD0AF9700C29E7C /* view */,
 				F46EA6E41DD0AF8E00C29E7C /* outlet */,
 			);
@@ -246,6 +254,35 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		F46787421DF08488007AD4B3 /* recipeIngredient */ = {
+			isa = PBXGroup;
+			children = (
+				F47630051DE9B64C0087EB3E /* recipeIngredientViewController.h */,
+				F47630061DE9B64C0087EB3E /* recipeIngredientViewController.m */,
+				F46787451DF088B0007AD4B3 /* recipeIngredient.h */,
+				F46787461DF088B0007AD4B3 /* recipeIngredient.m */,
+			);
+			name = recipeIngredient;
+			sourceTree = "<group>";
+		};
+		F46787431DF084A2007AD4B3 /* ingredientAvatar */ = {
+			isa = PBXGroup;
+			children = (
+				F4F02F721DE338FF005D52DB /* recipeAvatarViewController.h */,
+				F4F02F731DE338FF005D52DB /* recipeAvatarViewController.m */,
+			);
+			name = ingredientAvatar;
+			sourceTree = "<group>";
+		};
+		F46787441DF084AD007AD4B3 /* step */ = {
+			isa = PBXGroup;
+			children = (
+				F44170181DEAC0F50048110A /* recipeStepViewController.h */,
+				F44170191DEAC0F50048110A /* recipeStepViewController.m */,
+			);
+			name = step;
+			sourceTree = "<group>";
+		};
 		F46EA6E21DD05FB500C29E7C /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,8 +320,8 @@
 			children = (
 				F41422941DB6F2670010F9A8 /* MainViewController.h */,
 				F41422951DB6F2670010F9A8 /* MainViewController.m */,
-				F4197C921DB8B0A100194D9B /* TabBarController.h */,
-				F4197C931DB8B0A100194D9B /* TabBarController.m */,
+				F46787481DF1CBC0007AD4B3 /* mainScreenRecipe.h */,
+				F46787491DF1CBC0007AD4B3 /* mainScreenRecipe.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -448,12 +485,9 @@
 		F4F02F751DE33909005D52DB /* 2nd Viewcontroller */ = {
 			isa = PBXGroup;
 			children = (
-				F4F02F721DE338FF005D52DB /* recipeAvatarViewController.h */,
-				F4F02F731DE338FF005D52DB /* recipeAvatarViewController.m */,
-				F47630051DE9B64C0087EB3E /* recipeIngredientViewController.h */,
-				F47630061DE9B64C0087EB3E /* recipeIngredientViewController.m */,
-				F44170181DEAC0F50048110A /* recipeStepViewController.h */,
-				F44170191DEAC0F50048110A /* recipeStepViewController.m */,
+				F46787421DF08488007AD4B3 /* recipeIngredient */,
+				F46787441DF084AD007AD4B3 /* step */,
+				F46787431DF084A2007AD4B3 /* ingredientAvatar */,
 			);
 			name = "2nd Viewcontroller";
 			sourceTree = "<group>";
@@ -700,6 +734,7 @@
 			files = (
 				F4730B0A1DDB33F900BB10D5 /* notificationTableViewCell.m in Sources */,
 				F494A5C81DB6893E00D173E0 /* ViewController.m in Sources */,
+				F46787471DF088B0007AD4B3 /* recipeIngredient.m in Sources */,
 				F414229A1DB70DA80010F9A8 /* SignUpViewController.m in Sources */,
 				F483B20B1DE0110F00D86DBA /* RecipeContentViewController.m in Sources */,
 				F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */,
@@ -721,6 +756,7 @@
 				F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				F494A5C21DB6893E00D173E0 /* main.m in Sources */,
 				F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */,
+				F467874A1DF1CBC0007AD4B3 /* mainScreenRecipe.m in Sources */,
 				F4EB1ABA1DC0E48D00E10262 /* categoryLabel.m in Sources */,
 				F41422961DB6F2670010F9A8 /* MainViewController.m in Sources */,
 				F48445F91DBC8AD2003B09F4 /* mainCell.m in Sources */,

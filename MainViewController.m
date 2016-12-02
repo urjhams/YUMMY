@@ -7,9 +7,14 @@
 //
 
 #import "MainViewController.h"
+#import "userInfosSingleton.h"
+#import "mainScreenRecipe.h"
 #import "mainCell.h"
 
-@interface MainViewController ()
+@interface MainViewController () {
+    NSMutableArray *recipeObjects;
+    uint offset;
+}
 
 @property (strong, nonatomic) NSMutableArray *imageArr;
 @property (strong, nonatomic) NSMutableArray *categoryArr;
@@ -18,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedArr;
 - (IBAction)btnLikeClick:(id)sender;
 - (IBAction)btnBookmarkClick:(id)sender;
+
 @end
 
 @implementation MainViewController
@@ -27,27 +33,87 @@
     self.collectionViewController.prefetchDataSource = self;
     self.collectionViewController.dataSource = self;
     self.collectionViewController.delegate = self;
+    
+    offset = 0;
+    
+    [self loadRecipes];
+    
     /*
     //set ảnh cho nút của tab hiện tại ở tabbar
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[[UIImage imageNamed:@"homeTabbarButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"homeTabbarButton-Active"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     self.tabBarItem.imageInsets = UIEdgeInsetsMake(6.0, 0.0, -6.0, 0.0);
-    */
-    //thay code lấy dữ liệu dưới đây
+    */    /*
     self.imageArr = [NSMutableArray arrayWithObjects:@"1.png",@"2.png",@"3.png",@"1.png",@"2.png",@"3.png", nil];
     self.categoryArr = [NSMutableArray arrayWithObjects:@"Món Ý",@"Món Pháp",@"Món Xào",@"Low Carb",@"Món chay",@"Ăn kiêng", nil];
     self.nameArr = [NSMutableArray arrayWithObjects:@"Đùi gà nướng bơ",@"TacoBell sốt Mayone",@"Bánh mỳ quét mayone sốt cà chua",@"Đùi gà nướng bơ",@"TacoBell sốt Mayone",@"Bánh mỳ quét mayone sốt cà chua", nil];
     self.likeArr = [NSMutableArray arrayWithObjects:@"123",@"324",@"222",@"154",@"2004",@"353", nil];
     self.selectedArr = [NSMutableArray arrayWithObjects:@"yes",@"no",@"no",@"no",@"no",@"no", nil];
-    
-    
+    */
     //để cuối hàm!!!
     //self.tabBarController.selectedIndex = 0;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Load Data (Asynchoronus)
+
+- (void) loadRecipes {
+    @try {
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_cong_thuc_main.php"];
+        //shareSession = asynchoronus task
+        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (error == nil) {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                NSArray *rsArray = [jsonData objectForKey:@"results"];
+                id code = [jsonData objectForKey:@"code"];
+                if ([code integerValue] == 1) {
+                    for (int i = 0; i < rsArray.count; i++) {
+                        //values
+                        id recipeID = [[rsArray objectAtIndex:i] valueForKey:@"CongthucID"];
+                        
+                        id recipeName = [[rsArray objectAtIndex:i] valueForKey:@"Tencongthuc"];
+                        NSString *name = [NSString stringWithUTF8String:[recipeName cStringUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        id recipeAvatarName = [[rsArray objectAtIndex:i] valueForKey:@"Avatar"];
+                        NSString *avatar = [NSString stringWithUTF8String:[recipeAvatarName cStringUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        id recipeLikes = [[rsArray objectAtIndex:i] valueForKey:@"Like"];
+                        
+                        id recipesMainCate = [[rsArray objectAtIndex:i] valueForKey:@"TenLoaicongthuc"];
+                        NSString *mainCate = [NSString stringWithUTF8String:[recipesMainCate cStringUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        //recipe Object
+                        mainScreenRecipe *recipeObject = [[mainScreenRecipe alloc] init];
+                        recipeObject.recipeID = recipeID;
+                        recipeObject.recipeName = name;
+                        recipeObject.recipeAvatar = avatar;
+                        recipeObject.recipeLikes = recipeLikes;
+                        recipeObject.recipeCate = mainCate;
+                        [recipeObject recipeLiked:recipeID
+                                           byUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+                        [recipeObject recipeBookmarked:recipeID
+                                                byUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+                        
+                        if (!recipeObjects) {
+                            recipeObjects = [[NSMutableArray alloc] initWithObjects:recipeObject, nil];
+                        } else {
+                            [recipeObjects addObject:recipeObject];
+                        }
+                    }
+                    [self.collectionViewController reloadData];
+                    NSLog(@"%@",[jsonData objectForKey:@"message"]);
+                } else {
+                    NSLog(@"%@",[jsonData objectForKey:@"message"]);
+                }
+                
+            }
+        }];
+        [dataTask resume];
+    } @catch (NSException *exception) {
+        NSLog(@"Catch Exception: %@",exception);
+    }
 }
+
+
 /*
 #pragma mark - ẩn navigation bar
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,12 +128,14 @@
 }
 */
 #pragma mark - collectionview delegate
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.imageArr count];
+    //return [self.imageArr count];
+    return recipeObjects.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -81,20 +149,43 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"nCell" forIndexPath:indexPath];
     }
     
+    mainScreenRecipe *currentRecipe = [recipeObjects objectAtIndex:indexPath.item];
+    
     //gán dữ liệu
+    /*
     cell.image.image = [UIImage imageNamed:[self.imageArr objectAtIndex:indexPath.item]];
     cell.recipeName.text = [NSString stringWithFormat:@"%@",[self.nameArr objectAtIndex:indexPath.item]];
     cell.category.text = [NSString stringWithFormat:@"%@",[self.categoryArr objectAtIndex:indexPath.item]];
     cell.recipeLike.text = [NSString stringWithFormat:@"%@",[self.likeArr objectAtIndex:indexPath.item]];
+    */
     
-    //gọi giá trị arr chứa các string yes no để làm cơ sở cho việc chọn selected của button
-    //thay ở đây bằng 1 giá trị nào đó từ csdl để biết xem người dùng đã lựa chọn like hay bookmark chưa
+    NSString *currentAvatar = currentRecipe.recipeAvatar;
+    NSURL *avatarURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",currentAvatar]];
+    NSData *avatarData = [[NSData alloc] initWithContentsOfURL:avatarURL];
+    cell.image.image = [UIImage imageWithData:avatarData];
+    cell.recipeName.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeName];
+    cell.category.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeCate];
+    cell.recipeLike.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeLikes];
+    cell.recipeID = currentRecipe.recipeID;
+
+    /*
     NSString *selectedString = [NSString stringWithFormat:@"%@",[self.selectedArr objectAtIndex:indexPath.item]];
     if ([selectedString isEqualToString:@"yes"]) {
         [cell.btnLike setSelected:YES];
         [cell.btnBookmark setSelected:YES];
     } else {
         [cell.btnLike setSelected:NO];
+        [cell.btnBookmark setSelected:NO];
+    }*/
+    if (currentRecipe.likeRecipe == YES) {
+        [cell.btnLike setSelected:YES];
+    } else {
+        [cell.btnLike setSelected:NO];
+    }
+    
+    if (currentRecipe.bookmarkRecipe == YES) {
+        [cell.btnBookmark setSelected:YES];
+    } else {
         [cell.btnBookmark setSelected:NO];
     }
     
@@ -105,10 +196,14 @@
     [cell.btnBookmark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
     [cell.btnBookmark setImage:[UIImage imageNamed:@"bookmarked"] forState:UIControlStateSelected];
     
+    
+    //set tag for buttons
+    [cell.btnLike setTag:indexPath.item];
+    [cell.btnBookmark setTag:indexPath.item];
+    
     //điều chỉnh size của label tăng lên khi dữ liệu hiển thị dài hơn
     //[cell.recipeName sizeToFit];
     //[cell.category sizeToFit];
-    
      
     //chỉnh cho border của cell
     cell.layer.borderWidth = 1.0f;
@@ -136,7 +231,7 @@
 #pragma mark - điều chỉnh khoảng cách giữa cell với nhau và với viền
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 55, 10);  //top left bottom right
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 65, 10);  //top left bottom right
     return sectionInset;
 }
 
@@ -151,22 +246,36 @@
 #pragma mark - action
 
 - (IBAction)btnLikeClick:(id)sender {
-    if ([sender isSelected]) {
-        // thêm code thay đổi dữ liệu vào đây
-        
-        [sender setSelected:NO];
-    } else {
-        [sender setSelected:YES];
+    UIButton *thisButton = (UIButton *)sender;
+    NSIndexPath *index = [NSIndexPath indexPathForItem:thisButton.tag inSection:0];
+    if (recipeObjects) {
+        mainScreenRecipe *thisRecipe = [recipeObjects objectAtIndex:index.item];
+        if ([sender isSelected]) {
+            [thisRecipe me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] unlikeThisRecipe:thisRecipe.recipeID];
+            //reload cell
+            
+        } else {
+            [thisRecipe me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] likeThisRecipe:thisRecipe.recipeID];
+            //reload cell
+            
+        }
     }
 }
 
 - (IBAction)btnBookmarkClick:(id)sender {
-    if ([sender isSelected]) {
-        // thêm code thay đổi dữ liệu vào đây
-        
-        [sender setSelected:NO];
-    } else {
-        [sender setSelected:YES];
+    UIButton *thisButton = (UIButton *)sender;
+    NSIndexPath *index = [NSIndexPath indexPathForItem:thisButton.tag inSection:0];
+    if (recipeObjects) {
+        mainScreenRecipe *thisRecipe = [recipeObjects objectAtIndex:index.item];
+        if ([sender isSelected]) {
+            [thisRecipe me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] unbookmarkThisRecipe:thisRecipe.recipeID];
+            //reload cell
+            
+        } else {
+            [thisRecipe me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] bookmarkThisRecipe:thisRecipe.recipeID];
+            //reload cell
+            
+        }
     }
 }
 @end

@@ -63,6 +63,7 @@
             success = 0;
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+            
             NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/login.php"];
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
             NSString *parameters = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
@@ -85,11 +86,14 @@
                         NSString *ngaytao = [userInfoDict objectForKey:@"Ngaytao"];
                         NSString *mota = [userInfoDict objectForKey:@"Mota"];
                         NSString *avatar = [userInfoDict objectForKey:@"Avatar"];
+                        
                         userInfoArr = [[NSMutableArray alloc] initWithObjects: userID, userName, email, ngaytao, mota, avatar, nil];
                         [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
-                        NSLog(@"%@",userInfoArr);
+                        
+                        NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",avatar]];
+                        [[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
+                        
                         NSLog(@"%@",message);
-                        NSLog(@"%@",userID);
                         [self performSegueWithIdentifier:@"loginSuccess" sender:self];
                     } else {
                         NSString *message = (NSString *) jsonData[@"message"];
@@ -113,6 +117,13 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
+}
+
+
+
+- (NSData *)getUserAvatarFromUrl:(NSURL *)avatarUrl {
+    NSData *avatar = [[NSData alloc] initWithContentsOfURL:avatarUrl];
+    return avatar;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

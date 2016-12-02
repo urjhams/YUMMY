@@ -9,7 +9,9 @@
 #import "SignUpViewController.h"
 #import "ViewController.h"
 
-@interface SignUpViewController ()
+@interface SignUpViewController () {
+    NSInteger success;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UITextField *txtMail;
 @property (weak, nonatomic) IBOutlet UILabel *lblCreate;
@@ -57,7 +59,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark - action
 - (IBAction)SignUpClicked:(id)sender {
     if ([self.txtAcc.text isEqualToString:@""]||[self.txtPwd.text isEqualToString:@""]||[self.txtPwdAgain.text isEqualToString:@""]||[self.txtMail.text isEqualToString:@""]) {
         UIAlertController *alertMiss = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Vui lòng nhập đầy đủ thông tin" preferredStyle:UIAlertControllerStyleAlert];
@@ -71,12 +73,54 @@
             [alertPwd addAction:acept];
             [self presentViewController:alertPwd animated:YES completion:nil];
         } else {
-            
-            
             //code xử lý gửi form đi và nhận kết quả đăng ký trả về
-            
-            
+            [self signUpWithUsername:self.txtAcc.text password:self.txtPwd.text andEmail:self.txtMail.text];
         }
+    }
+}
+
+#pragma mark - webservice connect
+
+- (void)signUpWithUsername:(NSString *)username password:(NSString *)password andEmail:(NSString *)email {
+    @try {
+        success = 0;
+        NSURLSessionConfiguration *defaultConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        NSURL *url = [NSURL URLWithString:@""];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        NSString *parameters =[[NSString alloc] initWithFormat:@"username=%@&password=%@&email=%@",username,password,email];
+        [urlRequest setHTTPMethod:@"POST"];
+        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error == nil) {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                success = [jsonData[@"code"] integerValue];
+                if (success == 1) {
+                    NSString *message = (NSString *) jsonData[@"message"];
+                    UIAlertController *successAlert = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    [successAlert addAction:OK];
+                    [self presentViewController:successAlert animated:YES completion:nil];
+                } else {
+                    NSString *message = (NSString *) jsonData[@"message"];
+                    UIAlertController *failedAlert =[UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+                    [failedAlert addAction:alright];
+                    [self presentViewController:failedAlert animated:YES completion:nil];
+                }
+            }
+        }];
+        [dataTask resume];
+    } @catch (NSException *exception) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
+                                                                       message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:alright];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

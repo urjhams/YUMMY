@@ -201,7 +201,7 @@
     }  else {
         UITableViewCell *cell = [self.ingredientTableView dequeueReusableCellWithIdentifier:@"ingredientCell" forIndexPath:indexPath];
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.ingredientArray objectAtIndex:indexPath.row]];
-        
+        [cell.textLabel setTextColor:[UIColor lightTextColor]];
         self.ingredientTablewViewHeight.constant = self.ingredientTableView.contentSize.height; //resize
         
         return cell;

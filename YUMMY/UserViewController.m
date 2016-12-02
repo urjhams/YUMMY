@@ -17,7 +17,7 @@
     NSMutableArray *recipeImg;
     NSMutableArray *recipeName;
     NSMutableArray *recipeCate;
-    NSMutableArray *userInfomaton;
+    //NSMutableArray *userInfomaton;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imgCover;
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -63,15 +63,21 @@
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
 
     //useravatar
+    /*
     userInfomaton = [[NSMutableArray alloc] init];
     userInfomaton = [[userInfosSingleton sharedUserInfos] userInfos];
     NSString *myAvatarName = [userInfomaton objectAtIndex:5];
     NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",myAvatarName]];
-    NSData *avatarData = [[NSData alloc] initWithContentsOfURL:avatarUrl];
-    self.userAvatar.contentMode = UIViewContentModeScaleToFill;
-    self.userAvatar.image = [UIImage imageWithData:avatarData];
-    //NSLog(@"%@",userInfomaton);
-    
+    NSData *avatarData = [[NSData alloc] initWithContentsOfURL:avatarUrl];*/
+    NSData *userAvatar = [[NSData alloc] initWithData:[[userInfosSingleton sharedUserAvatar] theUserAvatar]];
+    if (userAvatar) {
+        self.userAvatar.image = [UIImage imageWithData:userAvatar];
+    }
+    self.userAvatar.contentMode = UIViewContentModeScaleAspectFit;
+    //self.userAvatar.image = [UIImage imageWithData:avatarData];
+
+    NSMutableArray *userInformation = [[NSMutableArray alloc] initWithArray:[[userInfosSingleton sharedUserInfos] theUserInfosArray]];
+    self.userAccount.text = [NSString stringWithFormat:@"@%@",[userInformation objectAtIndex:1]];
 }
 
 

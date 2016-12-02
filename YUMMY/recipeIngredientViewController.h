@@ -15,7 +15,7 @@
 
 @end
 
-@interface recipeIngredientViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface recipeIngredientViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate>
 
 @property (weak,nonatomic) id<ingredientContentDelegate>delegate;
 

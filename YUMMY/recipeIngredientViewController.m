@@ -7,16 +7,20 @@
 //
 
 #import "recipeIngredientViewController.h"
+#import "recipeIngredient.h"
 
 @interface recipeIngredientViewController () {
     //mảng để lấy giá trị từ json về để hiện trên phần lựa chọn
     NSMutableArray *ingredientArrayToGet;
     NSMutableArray *ingredientUnitArrayToGet;    //mảng chứa đơn vị của nguyên liệu sẽ hiện khi add
     NSMutableArray *ingredientIDArrayToGet;
+    NSMutableArray *objectArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *ingredientPicker;
 @property (weak, nonatomic) IBOutlet UITextField *txtValue;
+@property (weak, nonatomic) IBOutlet UINavigationBar *naviBar;
+@property (weak, nonatomic) IBOutlet UILabel *justALabel;
 
 - (IBAction)dissmiss:(id)sender;
 - (IBAction)add:(id)sender;
@@ -27,9 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.ingredientPicker.delegate = self;
     self.ingredientPicker.dataSource = self;
+    self.txtValue.delegate = self;
     // Do any additional setup after loading the view.
+    //[self getIngredientAndID];
+    
+    [self getIngredientAndID];
 }
 
 #pragma mark - get from json
@@ -37,7 +46,7 @@
     @try {
         NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURL *url = [NSURL URLWithString:@""];
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_all_nguyenlieu.php"];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
@@ -53,27 +62,18 @@
                     id Ten = [[rsArray objectAtIndex:i] valueForKey:@"Ten"];
                     NSString *tenCorrect = [NSString stringWithUTF8String:[Ten cStringUsingEncoding:NSUTF8StringEncoding]];
                     
-                    //lấy chuỗi giá trị nguyên liệu ID sẽ hiện để lựa chọn
-                    if (!ingredientIDArrayToGet) {
-                        ingredientIDArrayToGet = [[NSMutableArray alloc] initWithObjects:ingredientID, nil];
-                    } else {
-                        [ingredientIDArrayToGet addObject:ingredientID];
-                    }
+                    recipeIngredient *ingredientObject = [[recipeIngredient alloc] init];
+                    ingredientObject.ingredientID = ingredientID;
+                    ingredientObject.ingredientName = tenCorrect;
+                    ingredientObject.ingredientUnit = donviCorrect;
                     
-                    //lấy chuỗi giá trị tên nguyên liệu sẽ hiện để lựa chọn
-                    if (!ingredientArrayToGet) {
-                        ingredientArrayToGet = [[NSMutableArray alloc] initWithObjects:tenCorrect, nil];
+                    if (!objectArray) {
+                        objectArray = [[NSMutableArray alloc] initWithObjects:ingredientObject, nil];
                     } else {
-                        [ingredientArrayToGet addObject:tenCorrect];
-                    }
-                    
-                    //lấy chuỗi giá trị của đơn vị ứng với nguyên liệu sẽ hiện lên trên bảng lựa chọn
-                    if (!ingredientUnitArrayToGet) {
-                        ingredientUnitArrayToGet = [[NSMutableArray alloc] initWithObjects:donviCorrect, nil];
-                    } else {
-                        [ingredientUnitArrayToGet addObject:donviCorrect];
+                        [objectArray addObject:ingredientObject];
                     }
                 }
+                [self.ingredientPicker reloadAllComponents];
             }
         }];
         [dataTask resume];
@@ -94,11 +94,12 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [ingredientIDArrayToGet count];
+    return [objectArray count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSString *rowData = [NSString stringWithFormat:@"%@ - Đơn vị: %@",ingredientArrayToGet[row],ingredientUnitArrayToGet[row]];
+    recipeIngredient *currentIngredient = [objectArray objectAtIndex:row];
+    NSString *rowData = [NSString stringWithFormat:@"%@",currentIngredient.ingredientName];
     return rowData;
 }
 #pragma mark - action
@@ -109,13 +110,64 @@
 
 - (IBAction)add:(id)sender {
     NSInteger row = [self.ingredientPicker selectedRowInComponent:0];
-    NSString *part1 = [ingredientArrayToGet objectAtIndex:row];
-    NSString *part3 = [ingredientUnitArrayToGet objectAtIndex:row];
-    NSString *part2 = self.txtValue.text;
-    NSString *part4 = [ingredientIDArrayToGet objectAtIndex:row];
+    recipeIngredient *selectedIngredient = [objectArray objectAtIndex:row];
+    NSString *part1 = selectedIngredient.ingredientName;
+    selectedIngredient.valueOfIngredient = self.txtValue.text;
+    NSString *part2 = selectedIngredient.valueOfIngredient;
+    NSString *part3 = selectedIngredient.ingredientUnit;
+    NSString *part4 = selectedIngredient.ingredientID;
     NSString *finalString = [NSString stringWithFormat:@"%@ : %@ %@",part1,part2,part3];
     [self.delegate sendBackContent:finalString];
     [self.delegate sendBackIndex:part4 content:part1 unit:part3];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - ẩn keyboard khi chạm bên ngoài đối tượng textfield
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+}
+
+
+#pragma mark - move view up when show keyboard
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    return YES;
+}
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    [self.view endEditing:YES];
+    return YES;
+}
+
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    // Assign new frame to your view
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];  //thời gian slide up view
+    [self.view setFrame:CGRectMake(0, -80, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.naviBar setHidden:YES];
+    [self.justALabel setHidden:YES];
+    [UIView commitAnimations];
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];  //thời gian slide up view
+    [self.view setFrame:CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height)];
+    [self.naviBar setHidden:NO];
+    [self.justALabel setHidden:NO];
+    [UIView commitAnimations];
+}
+
+
+
 @end

@@ -10,12 +10,14 @@
 
 @interface userInfosSingleton : NSObject {
     NSMutableArray *userInfos;
+    NSData *userAvatar;
 }
 @property (nonatomic, retain) NSMutableArray *userInfos;
-
+@property (nonatomic, retain) NSData *userAvatar;
 +(userInfosSingleton *)sharedUserInfos;
-
++(userInfosSingleton *)sharedUserAvatar;
 - (void)userInfoArrayIs:(NSMutableArray *)array;
 - (NSMutableArray *)theUserInfosArray;
-
+- (void)userAvatarIs:(NSData *)avatarData;
+- (NSData *)theUserAvatar;
 @end
