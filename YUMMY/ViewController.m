@@ -91,7 +91,9 @@
                         [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
                         
                         NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",avatar]];
-                        [[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
+                        //[[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
+                        [[userInfosSingleton sharedUserAvatar] userAvatarIs:[self asynchoronusGetUserAvatarFromUrl:avatarUrl]];
+                        
                         
                         NSLog(@"%@",message);
                         [self performSegueWithIdentifier:@"loginSuccess" sender:self];
@@ -120,9 +122,18 @@
 }
 
 
-
+#pragma mark - get avatar from url
 - (NSData *)getUserAvatarFromUrl:(NSURL *)avatarUrl {
     NSData *avatar = [[NSData alloc] initWithContentsOfURL:avatarUrl];
+    return avatar;
+}
+-(NSData *)asynchoronusGetUserAvatarFromUrl:(NSURL *)url {
+    NSData *avatar = [[NSData alloc] initWithContentsOfURL:url];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        if (avatar == nil) {
+            return ;
+        }
+    });
     return avatar;
 }
 

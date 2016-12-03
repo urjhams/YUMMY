@@ -9,5 +9,5 @@
 #import "ViewController.h"
 
 @interface UserWhoFollowViewController : ViewController <UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic) NSString *myID;
 @end

@@ -8,16 +8,16 @@
 
 #import "UserViewController.h"
 #import "UserRecipeCollectionViewCell.h"
-#import "ViewController.h"
 #import "TabBarController.h"
 #import "userInfosSingleton.h"
+#import "UserWhoFollowViewController.h"
+#import "SearchResultViewController.h"
+#import "recipeOfUser.h"
+#import "RecipeContentViewController.h"
 
 @interface UserViewController () {
-    NSMutableArray *recipeID;
-    NSMutableArray *recipeImg;
-    NSMutableArray *recipeName;
-    NSMutableArray *recipeCate;
-    //NSMutableArray *userInfomaton;
+    NSMutableArray *recipeObject;
+    NSString *currentRecipeID;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imgCover;
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -37,6 +37,7 @@
 - (IBAction)toBookmark:(id)sender;
 - (IBAction)changeAvatar:(id)sender;
 - (IBAction)toSetting:(id)sender;
+- (IBAction)toMyRecipeContent:(id)sender;
 
 @end
 
@@ -47,6 +48,11 @@
     // Do any additional setup after loading the view.
     self.userRecipeCollectionView.delegate = self;
     self.userRecipeCollectionView.dataSource = self;
+    
+    self.userRecipes.text = @"";
+    self.userLike.text = @"";
+    self.userBookmark.text = @"";
+    self.userFolow.text = @"";
     
     //round avatar
     self.userAvatar.layer.cornerRadius = self.userAvatar.frame.size.width / 2;
@@ -61,6 +67,8 @@
     self.theNaviBar.hidden = YES;
     
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    
+    //userInfo
 
     //useravatar
     /*
@@ -76,10 +84,94 @@
     self.userAvatar.contentMode = UIViewContentModeScaleAspectFit;
     //self.userAvatar.image = [UIImage imageWithData:avatarData];
 
-    NSMutableArray *userInformation = [[NSMutableArray alloc] initWithArray:[[userInfosSingleton sharedUserInfos] theUserInfosArray]];
-    self.userAccount.text = [NSString stringWithFormat:@"@%@",[userInformation objectAtIndex:1]];
+    self.userAccount.text = [NSString stringWithFormat:@"@%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:1]];
+    
+    [self getUserInfoWithID:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+    
 }
 
+#pragma mark - getUserInfo (Asynchoronus)
+
+- (void) getUserInfoWithID:(NSString *)userID {
+    @try {
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_user_info.php"];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        NSString *parameters = [[NSString alloc] initWithFormat:@"UserID=%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+        [urlRequest setHTTPMethod:@"POST"];
+        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+        NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error == nil) {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                self.userRecipes.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoCongthucTao"]];
+                self.userLike.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoLike"]];
+                self.userBookmark.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoBookmark"]];
+                self.userFolow.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoNguoiFollow"]];
+            }
+        }];
+        [dataTask resume];
+    } @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+}
+
+#pragma mark - getUser's Recipe created (Asynchoronus)
+
+- (void) getRecipeByUser:(NSString *)userID {
+    @try {
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_congthuc_created.php"];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        NSString *parameters = [[NSString alloc] initWithFormat:@"UserID=%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+        [urlRequest setHTTPMethod:@"POST"];
+        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+        NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error == nil) {
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                NSMutableArray *rsArray = [jsonData objectForKey:@"results"];
+                for (int i = 0; i < rsArray.count; i++) {
+                    id recipeID = [[rsArray objectAtIndex:i] valueForKey:@"CongthucID"];
+                    id recipeName = [[rsArray objectAtIndex:i] valueForKey:@"Tencongthuc"];
+                    NSString *name = [NSString stringWithUTF8String:[recipeName cStringUsingEncoding:NSUTF8StringEncoding]];
+                    id recipeAvatarName = [[rsArray objectAtIndex:i] valueForKey:@"Avatar"];
+                    NSString *avatar = [NSString stringWithUTF8String:[recipeAvatarName cStringUsingEncoding:NSUTF8StringEncoding]];
+                    id recipeCate = [[rsArray objectAtIndex:i] valueForKey:@"TenLoaicongthuc"];
+                    NSString *cate = [NSString stringWithUTF8String:[recipeCate cStringUsingEncoding:NSUTF8StringEncoding]];
+                    
+                    recipeOfUser *currentRecipe = [[recipeOfUser alloc] init];
+                    currentRecipe.recipeID = recipeID;
+                    currentRecipe.recipeName = name;
+                    currentRecipe.recipeCate = cate;
+                    currentRecipe.recipeAvatar = avatar;
+                    //[self setRecipeAvatarOfObject:currentRecipe];     //tạm thời không dùng vì đang gán hàm ở cellForItemAtIndexPath
+                    
+                    if (!recipeObject) {
+                        recipeObject = [[NSMutableArray alloc] initWithObjects:currentRecipe, nil];
+                    } else {
+                        [recipeObject addObject:currentRecipe];
+                    }
+                }
+            }
+        }];
+        [dataTask resume];
+    } @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+}
+
+#pragma mark - lấy ảnh cho ô công thức (Asynchoronus)
+- (void)setRecipeAvatarOfObject:(recipeOfUser *)theRecipeObject {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/congthuc/%@",theRecipeObject.recipeAvatar]];
+    NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            if (image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    theRecipeObject.avatarImg = image;
+                });
+            }
+        }
+    }];
+    [dataTask resume];
+}
 
 #pragma mark - chỉnh màu status bar
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -89,18 +181,30 @@
 #pragma mark - delegate & datasource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [recipeName count];
+    return [recipeObject count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UserRecipeCollectionViewCell *cell = [self.userRecipeCollectionView dequeueReusableCellWithReuseIdentifier:@"UserRecipe" forIndexPath:indexPath];
-    
-    cell.recipeImage.image = [UIImage imageNamed:[recipeImg objectAtIndex:indexPath.item]];
-    cell.RecipeCate.text = [NSString stringWithFormat:@"%@",[recipeCate objectAtIndex:indexPath.item]];
-    cell.lblRecipeName.text = [NSString stringWithFormat:@"%@",[recipeName objectAtIndex:indexPath.item]];
-    
+    recipeOfUser *recipe = [recipeObject objectAtIndex:indexPath.item];
+    cell.RecipeCate.text = recipe.recipeCate;
+    cell.lblRecipeName.text = recipe.recipeName;
+    //cell.recipeImage.image = recipe.avatarImg;        //dùng khi chạy setRecipeAvatarOfObject: ở getRecipeByUser:
+    //getImage asynchoronus
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/congthuc/%@",recipe.recipeAvatar]];
     self.userRecipeCollectionViewHeight.constant = self.userRecipeCollectionView.contentSize.height;
-    
+    NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            if (image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UserRecipeCollectionViewCell *updateCell = (id)[collectionView cellForItemAtIndexPath:indexPath];
+                    updateCell.recipeImage.image = image;
+                });
+            }
+        }
+    }];
+    [dataTask resume];
     return cell;
 }
 
@@ -122,22 +226,66 @@
 
 
 - (IBAction)toFollower:(id)sender {
-    
+    [self performSegueWithIdentifier:@"WhoFollowMe" sender:self];
 }
 
 - (IBAction)toLike:(id)sender {
-    
+    [self performSegueWithIdentifier:@"myLiked" sender:self];
 }
 
 - (IBAction)toBookmark:(id)sender {
-    
+    [self performSegueWithIdentifier:@"myBookmarked" sender:self];
 }
 
 - (IBAction)changeAvatar:(id)sender {
-    
+    //[self performSegueWithIdentifier:@"" sender:self];
 }
 
 - (IBAction)toSetting:(id)sender {
+    //[self performSegueWithIdentifier:@"" sender:self];
+}
+
+- (IBAction)toMyRecipeContent:(id)sender {
+    UIButton *thisButton = (UIButton *)sender;
+    NSIndexPath *index = [NSIndexPath indexPathForItem:thisButton.tag inSection:0];
+    if (recipeObject) {
+        recipeOfUser *thisRecipe = [recipeObject objectAtIndex:index.item];
+        if (!currentRecipeID) {
+            currentRecipeID = [[NSString alloc] init];
+        }
+        currentRecipeID = thisRecipe.recipeID;
+    }
+    [self performSegueWithIdentifier:@"toRecipeContent" sender:self];
+}
+
+#pragma mark - segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"WhoFollowMe"]) {
+        UserWhoFollowViewController *destVC = [segue destinationViewController];
+        if (!destVC.myID) {
+            destVC.myID = [[NSString alloc] init];
+        }
+        destVC.myID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
+    }
+    if ([segue.identifier isEqualToString:@"myRecipe"]) {
+        SearchResultViewController *destVC = [segue destinationViewController];
+        destVC.key = 3;
+    }
+    if ([segue.identifier isEqualToString:@"myBookmarked"]) {
+        SearchResultViewController *destVC = [segue destinationViewController];
+        destVC.key = 4;
+    }
+    if ([segue.identifier isEqualToString:@"myLiked"]) {
+        SearchResultViewController *destVC = [segue destinationViewController];
+        destVC.key = 5;
+    }
+    if ([segue.identifier isEqualToString:@"toRecipeContent"]) {
+        RecipeContentViewController *destVC = [segue destinationViewController];
+        if (!destVC.inputRecipeID) {
+            destVC.inputRecipeID = [[NSString alloc] init];
+        }
+        destVC.inputRecipeID = currentRecipeID;
+    }
 }
 
 #pragma mark - navibar hidden/show

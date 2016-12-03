@@ -67,14 +67,17 @@
         [alertMiss addAction:acept];
         [self presentViewController:alertMiss animated:YES completion:nil];
     } else {
-        if (self.txtPwd.text != self.txtPwdAgain.text) {
+        NSString *pwdString = self.txtPwd.text;
+        NSString *pwdAgainString = self.txtPwdAgain.text;
+        if ([pwdString isEqualToString:pwdAgainString]) {
+            //code xử lý gửi form đi và nhận kết quả đăng ký trả về
+            [self signUpWithUsername:self.txtAcc.text password:self.txtPwd.text andEmail:self.txtMail.text];
+        } else {
             UIAlertController *alertPwd = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Mật khẩu gõ lại không khớp với mật khẩu đã nhập" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *acept = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
             [alertPwd addAction:acept];
             [self presentViewController:alertPwd animated:YES completion:nil];
-        } else {
-            //code xử lý gửi form đi và nhận kết quả đăng ký trả về
-            [self signUpWithUsername:self.txtAcc.text password:self.txtPwd.text andEmail:self.txtMail.text];
+            
         }
     }
 }
@@ -83,20 +86,18 @@
 
 - (void)signUpWithUsername:(NSString *)username password:(NSString *)password andEmail:(NSString *)email {
     @try {
-        success = 0;
         NSURLSessionConfiguration *defaultConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURL *url = [NSURL URLWithString:@""];
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/register.php"];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters =[[NSString alloc] initWithFormat:@"username=%@&password=%@&email=%@",username,password,email];
+        NSString *parameters =[[NSString alloc] initWithFormat:@"Username=%@&Pwd=%@&Email=%@",username,password,email];
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
         
         NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                success = [jsonData[@"code"] integerValue];
-                if (success == 1) {
+                if ([jsonData[@"code"] integerValue] == 1) {
                     NSString *message = (NSString *) jsonData[@"message"];
                     UIAlertController *successAlert = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

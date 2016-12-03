@@ -500,7 +500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQ3-xP-gBa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="931"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEz-2v-dLv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -1414,6 +1414,12 @@ beat until ingredients are well combined.</string>
                                         <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpp-xt-NdU">
+                                        <rect key="frame" x="20" y="271" width="277" height="40"/>
+                                        <connections>
+                                            <action selector="addStepImage:" destination="0wJ-d5-frr" eventType="touchUpInside" id="81T-Ci-6pm"/>
+                                        </connections>
+                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-ne-l9Z">
                                         <rect key="frame" x="8" y="320" width="304" height="8"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1444,9 +1450,6 @@ beat until ingredients are well combined.</string>
                                                             <state key="normal">
                                                                 <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="addStepImage:" destination="0wJ-d5-frr" eventType="touchUpInside" id="YLD-IH-Ich"/>
-                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtW-Vu-zgu">
                                                             <rect key="frame" x="103" y="8" width="193" height="83"/>
@@ -1503,16 +1506,20 @@ beat until ingredients are well combined.</string>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="trailing" secondItem="xgd-IZ-ZbG" secondAttribute="trailing" id="489-Ar-xHf"/>
                                     <constraint firstAttribute="trailing" secondItem="es8-Cf-SF3" secondAttribute="trailing" constant="8" id="4LG-1q-snF"/>
                                     <constraint firstItem="k90-Yv-fxd" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="5GM-c5-O2t"/>
+                                    <constraint firstItem="Hpp-xt-NdU" firstAttribute="height" secondItem="wc9-dU-s5a" secondAttribute="height" id="6x2-cx-1LI"/>
                                     <constraint firstItem="cUg-sc-Qus" firstAttribute="baseline" secondItem="es8-Cf-SF3" secondAttribute="baseline" id="7KU-Cq-jy7"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="top" secondItem="JgU-BS-J94" secondAttribute="bottom" constant="8" symbolic="YES" id="7f6-em-PZ5"/>
                                     <constraint firstItem="luf-gG-ZYm" firstAttribute="top" secondItem="1hf-fp-xZ9" secondAttribute="top" id="8wY-kz-xZz"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="20" id="9dT-uA-Pwp"/>
                                     <constraint firstItem="vVR-SJ-zbz" firstAttribute="top" secondItem="39X-WK-i00" secondAttribute="bottom" constant="8" symbolic="YES" id="A92-BN-2Ot"/>
+                                    <constraint firstItem="Hpp-xt-NdU" firstAttribute="trailing" secondItem="liK-d8-QWg" secondAttribute="trailing" id="CMn-SD-2F3"/>
                                     <constraint firstItem="liK-d8-QWg" firstAttribute="top" secondItem="P27-YG-aNI" secondAttribute="bottom" constant="7" id="CpR-7R-OGO"/>
                                     <constraint firstItem="8ge-yV-ORf" firstAttribute="trailing" secondItem="Dc0-T5-yT2" secondAttribute="trailing" id="CyJ-iS-gpO"/>
                                     <constraint firstItem="1hf-fp-xZ9" firstAttribute="leading" secondItem="JgU-BS-J94" secondAttribute="leading" id="E0S-0B-b9R"/>
                                     <constraint firstItem="FwH-la-fkM" firstAttribute="leading" secondItem="Tpy-SR-8c6" secondAttribute="leading" id="Ee1-mi-6WN"/>
+                                    <constraint firstItem="Hpp-xt-NdU" firstAttribute="top" secondItem="wc9-dU-s5a" secondAttribute="top" id="F0o-c3-Ib9"/>
                                     <constraint firstItem="42Y-ne-l9Z" firstAttribute="leading" secondItem="lMN-1N-5Kf" secondAttribute="leading" constant="8" id="FWs-lr-3SB"/>
+                                    <constraint firstItem="Hpp-xt-NdU" firstAttribute="leading" secondItem="wc9-dU-s5a" secondAttribute="leading" id="IQD-4U-7r0"/>
                                     <constraint firstItem="RHu-5s-c7I" firstAttribute="leading" secondItem="vVR-SJ-zbz" secondAttribute="leading" constant="-2" id="IUJ-2f-cry"/>
                                     <constraint firstItem="luf-gG-ZYm" firstAttribute="leading" secondItem="39X-WK-i00" secondAttribute="leading" id="Ifb-Xd-WRF"/>
                                     <constraint firstItem="gIL-8L-mDt" firstAttribute="top" secondItem="k90-Yv-fxd" secondAttribute="bottom" constant="10" id="Jkh-Pv-b25"/>
@@ -1638,16 +1645,19 @@ beat until ingredients are well combined.</string>
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2dO-00-uyw">
-                                        <rect key="frame" x="40" y="32" width="240" height="375"/>
+                                        <rect key="frame" x="40" y="32" width="240" height="163"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="375" id="HVB-H2-jxg"/>
+                                            <constraint firstAttribute="height" constant="163" id="HVB-H2-jxg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRE-Pl-pgA">
-                                        <rect key="frame" x="40" y="440" width="240" height="30"/>
+                                        <rect key="frame" x="40" y="222" width="240" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Tod-RJ-3Zm"/>
+                                        </constraints>
                                         <state key="normal" title="Lưu"/>
                                         <connections>
                                             <action selector="save:" destination="WgX-zg-JJJ" eventType="touchUpInside" id="Mpf-SO-jcA"/>
@@ -1655,13 +1665,13 @@ beat until ingredients are well combined.</string>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="2dO-00-uyw" firstAttribute="centerX" secondItem="DkJ-Uc-dYE" secondAttribute="centerX" id="1ze-v4-fPg"/>
+                                    <constraint firstItem="2dO-00-uyw" firstAttribute="centerX" secondItem="DkJ-Uc-dYE" secondAttribute="centerX" id="7o5-NU-oe6"/>
                                     <constraint firstItem="2dO-00-uyw" firstAttribute="leading" secondItem="DkJ-Uc-dYE" secondAttribute="leading" constant="40" id="BtH-3F-ejZ"/>
                                     <constraint firstAttribute="trailing" secondItem="GRE-Pl-pgA" secondAttribute="trailing" constant="40" id="ckM-P9-ugH"/>
                                     <constraint firstItem="GRE-Pl-pgA" firstAttribute="leading" secondItem="DkJ-Uc-dYE" secondAttribute="leading" constant="40" id="e27-qx-h9L"/>
+                                    <constraint firstAttribute="bottom" secondItem="GRE-Pl-pgA" secondAttribute="bottom" constant="252" id="eTA-Ij-kAG"/>
                                     <constraint firstItem="2dO-00-uyw" firstAttribute="top" secondItem="DkJ-Uc-dYE" secondAttribute="top" constant="32" id="fpv-z1-PkE"/>
-                                    <constraint firstAttribute="bottom" secondItem="GRE-Pl-pgA" secondAttribute="bottom" constant="34" id="qtm-e1-lhs"/>
-                                    <constraint firstItem="GRE-Pl-pgA" firstAttribute="top" secondItem="2dO-00-uyw" secondAttribute="bottom" constant="33" id="sbr-VJ-bcL"/>
+                                    <constraint firstItem="GRE-Pl-pgA" firstAttribute="top" secondItem="2dO-00-uyw" secondAttribute="bottom" constant="27" id="sbr-VJ-bcL"/>
                                     <constraint firstAttribute="trailing" secondItem="2dO-00-uyw" secondAttribute="trailing" constant="40" id="vwY-4z-K08"/>
                                 </constraints>
                             </scrollView>
@@ -1678,7 +1688,7 @@ beat until ingredients are well combined.</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentHeight" destination="HVB-H2-jxg" id="0Q4-mC-e0d"/>
+                        <outlet property="contentHeight" destination="HVB-H2-jxg" id="CCI-9c-iu2"/>
                         <outlet property="stepContent" destination="2dO-00-uyw" id="tNX-ds-0ZB"/>
                     </connections>
                 </viewController>
@@ -2024,19 +2034,30 @@ beat until ingredients are well combined.</string>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6q-CN-ZJh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
+                                                            <connections>
+                                                                <action selector="toMyRecipeContent:" destination="9IW-eE-YNa" eventType="touchUpInside" id="lWc-CX-p9K"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="fbl-Xq-Oae" secondAttribute="trailing" constant="4" id="4E4-1X-Dcr"/>
                                                     <constraint firstItem="fbl-Xq-Oae" firstAttribute="leading" secondItem="H8Q-h6-Rfw" secondAttribute="leading" constant="4" id="7iY-5x-Fcw"/>
                                                     <constraint firstItem="zxs-H1-mK2" firstAttribute="leading" secondItem="H8Q-h6-Rfw" secondAttribute="leadingMargin" id="A2W-px-PMT"/>
+                                                    <constraint firstItem="n6q-CN-ZJh" firstAttribute="width" secondItem="QHo-30-iSD" secondAttribute="width" id="KMa-V7-8bY"/>
+                                                    <constraint firstItem="n6q-CN-ZJh" firstAttribute="height" secondItem="QHo-30-iSD" secondAttribute="height" id="P0W-66-J39"/>
+                                                    <constraint firstItem="n6q-CN-ZJh" firstAttribute="trailing" secondItem="QHo-30-iSD" secondAttribute="trailing" id="TIU-fQ-pqV"/>
                                                     <constraint firstItem="zxs-H1-mK2" firstAttribute="top" secondItem="QHo-30-iSD" secondAttribute="bottom" constant="-10" id="dxj-9T-BKY"/>
+                                                    <constraint firstItem="n6q-CN-ZJh" firstAttribute="top" secondItem="QHo-30-iSD" secondAttribute="top" id="e4F-Hr-yZi"/>
                                                     <constraint firstItem="QHo-30-iSD" firstAttribute="leading" secondItem="H8Q-h6-Rfw" secondAttribute="leading" id="fb0-1C-FXS"/>
                                                     <constraint firstAttribute="trailingMargin" secondItem="zxs-H1-mK2" secondAttribute="trailing" constant="75" id="fr4-Fm-4SJ"/>
                                                     <constraint firstItem="QHo-30-iSD" firstAttribute="top" secondItem="H8Q-h6-Rfw" secondAttribute="top" id="hPJ-aH-jfo"/>
                                                     <constraint firstAttribute="trailing" secondItem="QHo-30-iSD" secondAttribute="trailing" id="o7S-bZ-xu9"/>
                                                     <constraint firstItem="fbl-Xq-Oae" firstAttribute="top" secondItem="zxs-H1-mK2" secondAttribute="bottom" constant="9" id="rTk-iB-uxh"/>
                                                     <constraint firstAttribute="bottom" secondItem="fbl-Xq-Oae" secondAttribute="bottom" constant="8" id="yQh-pV-Kud"/>
+                                                    <constraint firstItem="n6q-CN-ZJh" firstAttribute="leading" secondItem="QHo-30-iSD" secondAttribute="leading" id="yWG-aC-3be"/>
                                                 </constraints>
                                                 <size key="customSize" width="136" height="190"/>
                                                 <connections>
@@ -2191,14 +2212,15 @@ beat until ingredients are well combined.</string>
                         <outlet property="userRecipeCollectionViewHeight" destination="eSC-nf-Nv0" id="pCp-0g-h5L"/>
                         <outlet property="userRecipes" destination="x4A-1p-uMh" id="OmD-lH-Yy9"/>
                         <segue destination="pD6-5K-Y8L" kind="show" identifier="WhoFollowMe" id="g75-gn-eHM"/>
-                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="liked" id="eFA-2q-MFP"/>
-                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="bookmarked" id="S4v-6E-P1D"/>
+                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="myLiked" id="eFA-2q-MFP"/>
+                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="myBookmarked" id="S4v-6E-P1D"/>
                         <segue destination="fIt-ZX-Gr1" kind="show" identifier="myRecipe" id="KLg-0K-8Yf"/>
+                        <segue destination="tZU-fG-D3n" kind="presentation" identifier="toRecipeContent" id="b6J-Aq-dbC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqm-j5-4xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1031" y="2356"/>
+            <point key="canvasLocation" x="1029.375" y="2355.6338028169016"/>
         </scene>
         <!--User Who Follow View Controller-->
         <scene sceneID="eah-wv-lhO">
@@ -2584,7 +2606,7 @@ beat until ingredients are well combined.</string>
                         <outlet property="theNavibar" destination="2Ly-9C-n5h" id="ds2-2z-WGl"/>
                         <outlet property="theScrollview" destination="Z9W-Vv-BHN" id="D49-2f-iw0"/>
                         <outlet property="userImg" destination="vBH-sc-dt9" id="mqv-3P-1Vo"/>
-                        <segue destination="fIt-ZX-Gr1" kind="show" identifier="createdRecipe" id="qGs-g9-Ntq"/>
+                        <segue destination="tZU-fG-D3n" kind="presentation" identifier="createdRecipe" id="USk-jU-2U1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qg-yk-GhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2611,8 +2633,8 @@ beat until ingredients are well combined.</string>
         <image name="tabbtn5-active" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Bl-lx-IyN"/>
+        <segue reference="KLg-0K-8Yf"/>
         <segue reference="f5m-pI-QLe"/>
-        <segue reference="qGs-g9-Ntq"/>
+        <segue reference="USk-jU-2U1"/>
     </inferredMetricsTieBreakers>
 </document>

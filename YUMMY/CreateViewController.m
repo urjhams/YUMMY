@@ -10,6 +10,7 @@
 #import "CreateViewController.h"
 #import "cateCell.h"
 #import "stepCell.h"
+#import "userInfosSingleton.h"
 #import "recipeAvatarViewController.h"
 #import "recipeIngredientViewController.h"
 #import "recipeStepViewController.h"
@@ -121,20 +122,19 @@
     self.ingredientTableView.delegate = self;
     self.ingredientTableView.dataSource = self;
     
+    self.lblUsername.text = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:1];
     //get all the category & category ID from server
     [self getCateAndCateID];
     
 }
 
-#pragma mark - get JSON Data - category
+#pragma mark - get JSON Data - category (Asynchoronus)
 
 - (void) getCateAndCateID {
     @try {
-        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_all_loai_congthuc.php"];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                 NSArray *rsArray = [jsonData objectForKey:@"results"];
@@ -158,18 +158,11 @@
                         [cateIDArrayToGet addObject:cateID];
                     }
                 }
-                NSLog(@"%@",cateArrayToGet);
-                NSLog(@"%@",cateIDArrayToGet);
             }
         }];
         [dataTask resume];
     } @catch (NSException *exception) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
-                                                                       message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:alright];
-        [self presentViewController:alert animated:YES completion:nil];
+        NSLog(@"%@",exception);
     }
 }
 
@@ -256,6 +249,7 @@
 }
 
 - (IBAction)addStepImage:(id)sender {
+    
 }
 
 

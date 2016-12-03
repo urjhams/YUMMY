@@ -9,5 +9,5 @@
 #import "ViewController.h"
 
 @interface RecipeContentViewController : ViewController <UIScrollViewDelegate>
-
+@property (nonatomic) NSString *inputRecipeID;
 @end
