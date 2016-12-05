@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface UserViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface UserViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @end

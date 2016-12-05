@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.theTableView.delegate = self;
     self.theTableView.dataSource = self;
-    
+    [self.theTableView reloadData];
 }
 
 #pragma mark - getUser Follow (Asynchoronus)
@@ -39,7 +39,7 @@
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
         
-        NSURLSessionDataTask *dataTask =[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSURLSessionDataTask *dataTask =[[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:NSJSONReadingMutableContainers
@@ -87,6 +87,9 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     userTableViewCell *updateCell = (id)[tableView cellForRowAtIndexPath:indexPath];
                     updateCell.image.image = image;
+                    updateCell.image.layer.cornerRadius = updateCell.image.frame.size.width / 2;
+                    [updateCell.image setClipsToBounds:YES];
+                    updateCell.image.contentMode = UIViewContentModeScaleAspectFit;
                 });
             }
         }

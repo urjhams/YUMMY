@@ -34,18 +34,6 @@
     self.theNavigationBar.backgroundColor = [UIColor whiteColor];
     [self.theNavigationBar setAlpha:0.95];
     
-    //thay code lấy dữ liệu dưới đây
-    /*
-    self.imageArr = [NSMutableArray arrayWithObjects:@"1.png",@"2.png",@"3.png",@"1.png",@"2.png",@"3.png", nil];
-    self.categoryArr = [NSMutableArray arrayWithObjects:@"Món Ý",@"Món Pháp",@"Món Xào",@"Low Carb",@"Món chay",@"Ăn kiêng", nil];
-    self.nameArr = [NSMutableArray arrayWithObjects:@"Đùi gà nướng bơ",@"TacoBell sốt Mayone",@"Bánh mỳ quét mayone sốt cà chua",@"Đùi gà nướng bơ",@"TacoBell sốt Mayone",@"Bánh mỳ quét mayone sốt cà chua", nil];
-    self.likeArr = [NSMutableArray arrayWithObjects:@"123",@"324",@"222",@"154",@"2004",@"353", nil];
-    self.selectedArr = [NSMutableArray arrayWithObjects:@"yes",@"no",@"no",@"no",@"no",@"no", nil];
-    */
-    
-    //để cuối hàm!!!
-    //self.tabBarController.selectedIndex = 1;
-    
     switch (self.key) {
         case 1:
             
@@ -77,11 +65,14 @@
     @try {
         NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_congthuc_created.php"];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters = [NSString stringWithFormat:@"UserID=%@",(NSString *)[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+        NSString *post = [[NSString alloc] initWithFormat:@"UserID=%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+        NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+        NSString *postLenght = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
         [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
+        [urlRequest setValue:postLenght forHTTPHeaderField:@"Content-lenght"];
+        [urlRequest setHTTPBody:postData];
         //shareSession = asynchoronus task
-        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                 NSArray *rsArray = [jsonData objectForKey:@"results"];
@@ -145,7 +136,7 @@
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
         //shareSession = asynchoronus task
-        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                 NSArray *rsArray = [jsonData objectForKey:@"results"];
@@ -209,7 +200,7 @@
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
         //shareSession = asynchoronus task
-        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
                 NSArray *rsArray = [jsonData objectForKey:@"results"];

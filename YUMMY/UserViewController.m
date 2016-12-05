@@ -6,6 +6,8 @@
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
 
+#import "AFHTTPSessionManager.h"
+#import "UIImageView+AFNetworking.h"
 #import "UserViewController.h"
 #import "UserRecipeCollectionViewCell.h"
 #import "TabBarController.h"
@@ -46,6 +48,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (!recipeObject) {
+        recipeObject = [[NSMutableArray alloc] init];
+    }
+    
     self.userRecipeCollectionView.delegate = self;
     self.userRecipeCollectionView.dataSource = self;
     
@@ -77,14 +84,13 @@
     NSString *myAvatarName = [userInfomaton objectAtIndex:5];
     NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",myAvatarName]];
     NSData *avatarData = [[NSData alloc] initWithContentsOfURL:avatarUrl];*/
-    NSData *userAvatar = [[NSData alloc] initWithData:[[userInfosSingleton sharedUserAvatar] theUserAvatar]];
-    if (userAvatar) {
-        self.userAvatar.image = [UIImage imageWithData:userAvatar];
-    }
+    self.userAvatar.image = [[userInfosSingleton sharedUserAvatar] theUserAvatar];
     self.userAvatar.contentMode = UIViewContentModeScaleAspectFit;
     //self.userAvatar.image = [UIImage imageWithData:avatarData];
 
     self.userAccount.text = [NSString stringWithFormat:@"@%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:1]];
+    
+    [self getRecipeByUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
     
     [self getUserInfoWithID:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
     
@@ -94,23 +100,23 @@
 
 - (void) getUserInfoWithID:(NSString *)userID {
     @try {
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_user_info.php"];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters = [[NSString alloc] initWithFormat:@"UserID=%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
-        [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-        NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error == nil) {
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                self.userRecipes.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoCongthucTao"]];
-                self.userLike.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoLike"]];
-                self.userBookmark.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoBookmark"]];
-                self.userFolow.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoNguoiFollow"]];
-            }
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:@"UserID",userID, nil];
+        [manager POST:@"http://yummy-quan.esy.es/get_user_info.php"
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                  NSDictionary *jsonData = (NSDictionary *)responseObject;
+                  self.userRecipes.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoCongthucTao"]];
+                  self.userLike.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoLike"]];
+                  self.userBookmark.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoBookmark"]];
+                  self.userFolow.text = [NSString stringWithFormat:@"%ld",(long)jsonData[@"SoNguoiFollow"]];
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"Error:%@",error);
         }];
-        [dataTask resume];
     } @catch (NSException *exception) {
-        NSLog(@"%@",exception);
+        NSLog(@"EX:%@",exception);
     }
 }
 
@@ -118,49 +124,54 @@
 
 - (void) getRecipeByUser:(NSString *)userID {
     @try {
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_congthuc_created.php"];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters = [[NSString alloc] initWithFormat:@"UserID=%@",[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
-        [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-        NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error == nil) {
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                NSMutableArray *rsArray = [jsonData objectForKey:@"results"];
-                for (int i = 0; i < rsArray.count; i++) {
-                    id recipeID = [[rsArray objectAtIndex:i] valueForKey:@"CongthucID"];
-                    id recipeName = [[rsArray objectAtIndex:i] valueForKey:@"Tencongthuc"];
-                    NSString *name = [NSString stringWithUTF8String:[recipeName cStringUsingEncoding:NSUTF8StringEncoding]];
-                    id recipeAvatarName = [[rsArray objectAtIndex:i] valueForKey:@"Avatar"];
-                    NSString *avatar = [NSString stringWithUTF8String:[recipeAvatarName cStringUsingEncoding:NSUTF8StringEncoding]];
-                    id recipeCate = [[rsArray objectAtIndex:i] valueForKey:@"TenLoaicongthuc"];
-                    NSString *cate = [NSString stringWithUTF8String:[recipeCate cStringUsingEncoding:NSUTF8StringEncoding]];
-                    
-                    recipeOfUser *currentRecipe = [[recipeOfUser alloc] init];
-                    currentRecipe.recipeID = recipeID;
-                    currentRecipe.recipeName = name;
-                    currentRecipe.recipeCate = cate;
-                    currentRecipe.recipeAvatar = avatar;
-                    //[self setRecipeAvatarOfObject:currentRecipe];     //tạm thời không dùng vì đang gán hàm ở cellForItemAtIndexPath
-                    
-                    if (!recipeObject) {
-                        recipeObject = [[NSMutableArray alloc] initWithObjects:currentRecipe, nil];
-                    } else {
-                        [recipeObject addObject:currentRecipe];
-                    }
-                }
-            }
-        }];
-        [dataTask resume];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:@"UserID",userID, nil];
+        [manager POST:@"http://yummy-quan.esy.es/get_congthuc_created.php"
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                  NSDictionary *jsonData = (NSDictionary *)responseObject;
+                  NSMutableArray *rsArray = [jsonData objectForKey:@"results"];
+                  for (int i = 0; i < rsArray.count; i++) {
+                      id recipeID = [[rsArray objectAtIndex:i] valueForKey:@"CongthucID"];
+                      id recipeName = [[rsArray objectAtIndex:i] valueForKey:@"Tencongthuc"];
+                      NSString *name = [NSString stringWithUTF8String:[recipeName cStringUsingEncoding:NSUTF8StringEncoding]];
+                      id recipeAvatarName = [[rsArray objectAtIndex:i] valueForKey:@"Avatar"];
+                      NSString *avatar = [NSString stringWithUTF8String:[recipeAvatarName cStringUsingEncoding:NSUTF8StringEncoding]];
+                      id recipeCate = [[rsArray objectAtIndex:i] valueForKey:@"TenLoaicongthuc"];
+                      NSString *cate = [NSString stringWithUTF8String:[recipeCate cStringUsingEncoding:NSUTF8StringEncoding]];
+                      
+                      recipeOfUser *currentRecipe = [[recipeOfUser alloc] init];
+                      currentRecipe.recipeID = recipeID;
+                      currentRecipe.recipeName = name;
+                      currentRecipe.recipeCate = cate;
+                      currentRecipe.recipeAvatar = avatar;
+                      //[self setRecipeAvatarOfObject:currentRecipe];     //tạm thời không dùng vì đang gán hàm ở cellForItemAtIndexPath
+                      
+                      if (!recipeObject) {
+                          recipeObject = [[NSMutableArray alloc] initWithObjects:currentRecipe, nil];
+                      } else {
+                          [recipeObject addObject:currentRecipe];
+                      }
+                      
+                  }
+                  [self.userRecipeCollectionView reloadData];
+                  
+              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                  NSLog(@"Error:%@",error);
+              }];
     } @catch (NSException *exception) {
-        NSLog(@"%@",exception);
+        NSLog(@"EX:%@",exception);
     }
 }
 
 #pragma mark - lấy ảnh cho ô công thức (Asynchoronus)
 - (void)setRecipeAvatarOfObject:(recipeOfUser *)theRecipeObject {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/congthuc/%@",theRecipeObject.recipeAvatar]];
-    NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    UIImageView *downloadImageView = [[UIImageView alloc] init];
+    [downloadImageView setImageWithURL:url];
+    theRecipeObject.avatarImg = downloadImageView.image;
+    /*NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             UIImage *image = [UIImage imageWithData:data];
             if (image) {
@@ -170,7 +181,7 @@
             }
         }
     }];
-    [dataTask resume];
+    [dataTask resume];*/
 }
 
 #pragma mark - chỉnh màu status bar
@@ -192,7 +203,13 @@
     //cell.recipeImage.image = recipe.avatarImg;        //dùng khi chạy setRecipeAvatarOfObject: ở getRecipeByUser:
     //getImage asynchoronus
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/congthuc/%@",recipe.recipeAvatar]];
+    UIImageView *downloadImageView = [[UIImageView alloc] init];
+    [downloadImageView setImageWithURL:url];
+    UserRecipeCollectionViewCell *updateCell = (id)[collectionView cellForItemAtIndexPath:indexPath];
+    updateCell.recipeImage.image = downloadImageView.image;
+    
     self.userRecipeCollectionViewHeight.constant = self.userRecipeCollectionView.contentSize.height;
+    /*
     NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             UIImage *image = [UIImage imageWithData:data];
@@ -204,18 +221,15 @@
             }
         }
     }];
-    [dataTask resume];
+    [dataTask resume];*/
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.borderColor = [[UIColor clearColor] CGColor];
+    cell.layer.cornerRadius = 7.0f;
     return cell;
 }
 
-#pragma mark - điều chỉnh khoảng cách giữa cell với nhau và với viền
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(-15, 10, 55, 10);  //top left bottom right
-    return sectionInset;
-}
-
-#pragma mark - collectionview cell size config
+#pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat cellWidth = [UIScreen mainScreen].bounds.size.width /2.2;
     CGFloat cellHeight = cellWidth * 1.36;

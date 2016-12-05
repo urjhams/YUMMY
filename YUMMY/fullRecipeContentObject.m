@@ -1,54 +1,14 @@
 //
-//  mainScreenRecipe.m
+//  fullRecipeContentObject.m
 //  YUMMY
 //
-//  Created by Đinh Quân on 12/2/16.
+//  Created by Đinh Quân on 12/4/16.
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
 
-#import "mainScreenRecipe.h"
+#import "fullRecipeContentObject.h"
 
-@implementation mainScreenRecipe
-
-#pragma mark - getLikes (Synchoronus)
-
-- (void) getLikesOfRecipe:(NSString *)recipeID {
-    @try {
-        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        
-        NSURL *url =[NSURL URLWithString:@"http://yummy-quan.esy.es/get_congthucLikes_withID.php"];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters = [NSString stringWithFormat:@"@CongthucID=%@",recipeID];
-        [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error == nil) {
-                
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                
-                if ([[jsonData valueForKey:@"code"] integerValue] == 1) {
-                    
-                    NSArray *rsArray = [jsonData objectForKey:@"results"];
-                    
-                    id solike = [[rsArray objectAtIndex:0] valueForKey:@"Like"];
-                    
-                    self.recipeLikes = solike;
-                    
-                    NSLog(@"%@",[jsonData valueForKey:@"message"]);
-                    
-                } else {
-                    
-                    NSLog(@"%@",[jsonData valueForKey:@"message"]);
-                }
-            }
-        }];
-        [dataTask resume];
-    } @catch (NSException *exception) {
-        NSLog(@"%@",exception);
-    }
-}
+@implementation fullRecipeContentObject
 
 #pragma mark - liked (Asynchoronus) - kiểm tra đã like công thức này hay chưa
 - (void)recipeLiked:(NSString *)recipeID byUser:(NSString *)userID {
@@ -65,10 +25,10 @@
                 int code = (int)[jsonData[@"code"] integerValue];
                 if (code == 1) {
                     NSLog(@"%@",jsonData[@"message"]);
-                    self.likeRecipe = YES;
+                    self.liked = YES;
                 } else {
                     NSLog(@"%@",jsonData[@"message"]);
-                    self.likeRecipe = NO;
+                    self.liked = NO;
                 }
             }
         }];
@@ -80,7 +40,7 @@
 #pragma mark - bookmarked (Asynchoronus) - kiểm tra đã bookmark công thức này hay chưa
 - (void)recipeBookmarked:(NSString *)recipeID byUser:(NSString *)userID {
     @try {
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_bookmark.php"];
+        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/getbookmark.php"];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         NSString *parameters = [NSString stringWithFormat:@"CongthucID=%@&UserID=%@",recipeID,userID];
         [urlRequest setHTTPMethod:@"POST"];
@@ -92,10 +52,10 @@
                 int code = (int)[jsonData[@"code"] integerValue];
                 if (code == 1) {
                     NSLog(@"%@",jsonData[@"message"]);
-                    self.bookmarkRecipe = YES;
+                    self.bookmarked = YES;
                 } else {
                     NSLog(@"%@",jsonData[@"message"]);
-                    self.bookmarkRecipe = NO;
+                    self.bookmarked = NO;
                 }
             }
         }];
@@ -123,10 +83,10 @@
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             if ([jsonData[@"code"] integerValue] == 1) {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.likeRecipe = YES;
+                self.liked = YES;
             } else {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.likeRecipe = NO;
+                self.liked = NO;
             }
         }
     }];
@@ -150,10 +110,10 @@
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             if ([jsonData[@"code"] integerValue] == 1) {
                 NSLog(@"%@",jsonData[@"message"]);
-                //self.likeRecipe = NO;
+                self.liked = NO;
             } else {
                 NSLog(@"%@",jsonData[@"message"]);
-                //self.likeRecipe = YES;
+                self.liked = YES;
             }
         }
     }];
@@ -177,10 +137,10 @@
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             if ([jsonData[@"code"] integerValue] == 1) {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.bookmarkRecipe = YES;
+                self.bookmarked = YES;
             } else {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.bookmarkRecipe = NO;
+                self.bookmarked = NO;
             }
         }
     }];
@@ -204,15 +164,16 @@
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             if ([jsonData[@"code"] integerValue] == 1) {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.bookmarkRecipe = NO;
+                self.bookmarked = NO;
             } else {
                 NSLog(@"%@",jsonData[@"message"]);
-                self.bookmarkRecipe = YES;
+                self.bookmarked = YES;
             }
         }
     }];
     [dataTask resume];
 }
+
 
 
 @end

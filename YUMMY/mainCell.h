@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recipeLike;
 @property (weak, nonatomic) IBOutlet UIButton *btnLike;
 @property (weak, nonatomic) IBOutlet UIButton *btnBookmark;
+@property (weak, nonatomic) IBOutlet UIButton *btnDetail;
+
 //@property (nonatomic) NSString *recipeID;
 @end

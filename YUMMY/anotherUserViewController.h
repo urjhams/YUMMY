@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface anotherUserViewController : ViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
-
+@interface anotherUserViewController : ViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
+@property (nonatomic) NSString *thisUserID;
+@property (nonatomic) NSString *thisUsername;
+@property (nonatomic) UIImage *thisUserAvatar;
 @end

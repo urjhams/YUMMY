@@ -11,6 +11,8 @@
 #import <CoreImage/CoreImage.h>
 #import "TabBarController.h"
 #import "userInfosSingleton.h"
+#import "AFHTTPSessionManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ViewController () {
     NSInteger success;
@@ -59,6 +61,59 @@
         [self presentViewController:alertFill animated:YES completion:nil];
     }
     else {
+        success = 0;
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+        [parameters setValue:self.txtAcc.text forKey:@"username"];
+        [parameters setValue:self.txtPwd.text forKey:@"password"];
+        [manager POST:@"http://yummy-quan.esy.es/login.php"
+           parameters:parameters
+             progress:nil
+              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+                 NSDictionary *jsonData = (NSDictionary *)responseObject;
+                 success = [jsonData[@"code"] integerValue];
+                 if (success == 1) {
+                     NSString *message = (NSString *) jsonData[@"message"];
+                     //NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
+                     
+                     NSArray *rsArray = [jsonData objectForKey:@"results"];
+                     NSDictionary *userInfoDict = [rsArray objectAtIndex:0];
+                     NSString *userID = [userInfoDict objectForKey:@"UserID"];
+                     NSString *userName = [userInfoDict objectForKey:@"Username"];
+                     NSString *email = [userInfoDict objectForKey:@"Email"];
+                     NSString *ngaytao = [userInfoDict objectForKey:@"Ngaytao"];
+                     NSString *mota = [userInfoDict objectForKey:@"Mota"];
+                     NSString *avatar = [userInfoDict objectForKey:@"Avatar"];
+                     
+                     userInfoArr = [[NSMutableArray alloc] initWithObjects: userID, userName, email, ngaytao, mota, avatar, nil];
+                     [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
+                     
+                     NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",avatar]];
+                     //[[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
+                     UIImageView *userAvatarDownload = [[UIImageView alloc] init];
+                     [userAvatarDownload setImageWithURL:avatarUrl];
+                     [[userInfosSingleton sharedUserAvatar] userAvatarIs:userAvatarDownload.image];
+                     
+                     
+                     NSLog(@"%@",message);
+                     [self performSegueWithIdentifier:@"loginSuccess" sender:self];
+                 } else {
+                     NSString *message = (NSString *) jsonData[@"message"];
+                     NSLog(@"%@",message);
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Đăng nhập thất bại"
+                                                                                    message:message
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                     UIAlertAction *alright = [UIAlertAction actionWithTitle:@"Thử lại" style:UIAlertActionStyleCancel handler:nil];
+                     [alert addAction:alright];
+                     [self presentViewController:alert animated:YES completion:nil];
+                 }
+
+        } failure:^(NSURLSessionTask *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+        /*
         @try {
             success = 0;
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -118,6 +173,7 @@
             [alert addAction:alright];
             [self presentViewController:alert animated:YES completion:nil];
         }
+         */
     }
 }
 
