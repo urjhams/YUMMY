@@ -12,4 +12,5 @@
 @interface SearchResultViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout, UICollectionViewDataSourcePrefetching>
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionViewController;
 @property (nonatomic) int key;
+@property (nonatomic) NSString *inputValue;
 @end

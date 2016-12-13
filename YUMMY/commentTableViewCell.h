@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *userComment;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnCheckUserOfComment;
 @end

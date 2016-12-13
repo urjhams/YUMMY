@@ -7,18 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 @interface userInfosSingleton : NSObject {
     NSMutableArray *userInfos;
-    UIImage *userAvatar;
+    NSData *userAvatar;
 }
 @property (nonatomic, retain) NSMutableArray *userInfos;
-@property (nonatomic, retain) UIImage *userAvatar;
+@property (nonatomic, retain) NSData *userAvatar;
 +(userInfosSingleton *)sharedUserInfos;
 +(userInfosSingleton *)sharedUserAvatar;
 - (void)userInfoArrayIs:(NSMutableArray *)array;
 - (NSMutableArray *)theUserInfosArray;
-- (void)userAvatarIs:(UIImage *)avatarImg;
-- (UIImage *)theUserAvatar;
+- (void)userAvatarIs:(NSData *)avatarData;
+- (NSData *)theUserAvatar;
 @end

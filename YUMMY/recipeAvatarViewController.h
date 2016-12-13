@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface recipeAvatarViewController : UIViewController
+@interface recipeAvatarViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

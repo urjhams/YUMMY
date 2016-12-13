@@ -18,6 +18,9 @@
 		F4197CA31DB8D43800194D9B /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA01DB8D43800194D9B /* 2.png */; };
 		F4197CA41DB8D43800194D9B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4197CA11DB8D43800194D9B /* 1.png */; };
 		F4197CA81DB8FBE300194D9B /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */; };
+		F43894851DF89BA600280635 /* suggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F43894841DF89BA600280635 /* suggestTableViewCell.m */; };
+		F43894881DF89C0400280635 /* LoaicongthucObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F43894871DF89C0400280635 /* LoaicongthucObject.m */; };
+		F438948E1DF8AD6500280635 /* userFollowMe.m in Sources */ = {isa = PBXBuildFile; fileRef = F438948D1DF8AD6500280635 /* userFollowMe.m */; };
 		F441701A1DEAC0F50048110A /* recipeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44170191DEAC0F50048110A /* recipeStepViewController.m */; };
 		F4417F521DE096FE00ABB015 /* anotherUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4417F511DE096FE00ABB015 /* anotherUserViewController.m */; };
 		F44832E01DF5B880005CFB69 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F44832D41DF5B880005CFB69 /* AFHTTPSessionManager.m */; };
@@ -34,6 +37,7 @@
 		F44832FD1DF5CA4C005CFB69 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F44832F31DF5CA4C005CFB69 /* UIButton+AFNetworking.m */; };
 		F44832FE1DF5CA4C005CFB69 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F44832F61DF5CA4C005CFB69 /* UIProgressView+AFNetworking.m */; };
 		F44832FF1DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F44832F81DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.m */; };
+		F44833021DF704FB005CFB69 /* ingredientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F44833011DF704FB005CFB69 /* ingredientObject.m */; };
 		F46787471DF088B0007AD4B3 /* recipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = F46787461DF088B0007AD4B3 /* recipeIngredient.m */; };
 		F467874A1DF1CBC0007AD4B3 /* mainScreenRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = F46787491DF1CBC0007AD4B3 /* mainScreenRecipe.m */; };
 		F467874D1DF2F00E007AD4B3 /* userObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F467874C1DF2F00E007AD4B3 /* userObject.m */; };
@@ -110,6 +114,12 @@
 		F4197CA11DB8D43800194D9B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		F43894831DF89BA600280635 /* suggestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = suggestTableViewCell.h; sourceTree = "<group>"; };
+		F43894841DF89BA600280635 /* suggestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = suggestTableViewCell.m; sourceTree = "<group>"; };
+		F43894861DF89C0400280635 /* LoaicongthucObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoaicongthucObject.h; sourceTree = "<group>"; };
+		F43894871DF89C0400280635 /* LoaicongthucObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoaicongthucObject.m; sourceTree = "<group>"; };
+		F438948C1DF8AD6500280635 /* userFollowMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userFollowMe.h; sourceTree = "<group>"; };
+		F438948D1DF8AD6500280635 /* userFollowMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userFollowMe.m; sourceTree = "<group>"; };
 		F44170181DEAC0F50048110A /* recipeStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = recipeStepViewController.h; sourceTree = "<group>"; };
 		F44170191DEAC0F50048110A /* recipeStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = recipeStepViewController.m; sourceTree = "<group>"; };
 		F4417F501DE096FE00ABB015 /* anotherUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anotherUserViewController.h; sourceTree = "<group>"; };
@@ -145,6 +155,9 @@
 		F44832F61DF5CA4C005CFB69 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		F44832F71DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		F44832F81DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		F44833001DF704FB005CFB69 /* ingredientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ingredientObject.h; sourceTree = "<group>"; };
+		F44833011DF704FB005CFB69 /* ingredientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ingredientObject.m; sourceTree = "<group>"; };
+		F44833051DF72C14005CFB69 /* baseUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = baseUrl.h; sourceTree = "<group>"; };
 		F46787451DF088B0007AD4B3 /* recipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = recipeIngredient.h; sourceTree = "<group>"; };
 		F46787461DF088B0007AD4B3 /* recipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = recipeIngredient.m; sourceTree = "<group>"; };
 		F46787481DF1CBC0007AD4B3 /* mainScreenRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainScreenRecipe.h; sourceTree = "<group>"; };
@@ -278,10 +291,9 @@
 		F4197C981DB8B2F700194D9B /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				F4197C951DB8B2EB00194D9B /* SearchViewController.h */,
-				F4197C961DB8B2EB00194D9B /* SearchViewController.m */,
-				F4F0804E1DBF9525008175A2 /* SearchResultViewController.h */,
-				F4F0804F1DBF9525008175A2 /* SearchResultViewController.m */,
+				F438948B1DF89C1F00280635 /* view */,
+				F438948A1DF89C1400280635 /* outlet */,
+				F43894891DF89C0900280635 /* object */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -302,6 +314,82 @@
 			name = exampleMaterials;
 			sourceTree = "<group>";
 		};
+		F43894641DF7B7D900280635 /* CollectionviewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */,
+				F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */,
+			);
+			name = CollectionviewLayout;
+			sourceTree = "<group>";
+		};
+		F43894651DF7B7EA00280635 /* AFNetworking3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				F44832EA1DF5CA4C005CFB69 /* AFAutoPurgingImageCache.h */,
+				F44832EB1DF5CA4C005CFB69 /* AFAutoPurgingImageCache.m */,
+				F44832EC1DF5CA4C005CFB69 /* AFImageDownloader.h */,
+				F44832ED1DF5CA4C005CFB69 /* AFImageDownloader.m */,
+				F44832EE1DF5CA4C005CFB69 /* AFNetworkActivityIndicatorManager.h */,
+				F44832EF1DF5CA4C005CFB69 /* AFNetworkActivityIndicatorManager.m */,
+				F44832F01DF5CA4C005CFB69 /* UIActivityIndicatorView+AFNetworking.h */,
+				F44832F11DF5CA4C005CFB69 /* UIActivityIndicatorView+AFNetworking.m */,
+				F44832F21DF5CA4C005CFB69 /* UIButton+AFNetworking.h */,
+				F44832F31DF5CA4C005CFB69 /* UIButton+AFNetworking.m */,
+				F44832F41DF5CA4C005CFB69 /* UIKit+AFNetworking.h */,
+				F44832F51DF5CA4C005CFB69 /* UIProgressView+AFNetworking.h */,
+				F44832F61DF5CA4C005CFB69 /* UIProgressView+AFNetworking.m */,
+				F44832F71DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.h */,
+				F44832F81DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.m */,
+				F44832E61DF5C87E005CFB69 /* UIImage+AFNetworking.h */,
+				F44832E71DF5C87E005CFB69 /* UIImageView+AFNetworking.h */,
+				F44832E81DF5C920005CFB69 /* UIImageView+AFNetworking.m */,
+				F44832D31DF5B880005CFB69 /* AFHTTPSessionManager.h */,
+				F44832D41DF5B880005CFB69 /* AFHTTPSessionManager.m */,
+				F44832D51DF5B880005CFB69 /* AFNetworking.h */,
+				F44832D61DF5B880005CFB69 /* AFNetworkReachabilityManager.h */,
+				F44832D71DF5B880005CFB69 /* AFNetworkReachabilityManager.m */,
+				F44832D81DF5B880005CFB69 /* AFSecurityPolicy.h */,
+				F44832D91DF5B880005CFB69 /* AFSecurityPolicy.m */,
+				F44832DA1DF5B880005CFB69 /* AFURLRequestSerialization.h */,
+				F44832DB1DF5B880005CFB69 /* AFURLRequestSerialization.m */,
+				F44832DC1DF5B880005CFB69 /* AFURLResponseSerialization.h */,
+				F44832DD1DF5B880005CFB69 /* AFURLResponseSerialization.m */,
+				F44832DE1DF5B880005CFB69 /* AFURLSessionManager.h */,
+				F44832DF1DF5B880005CFB69 /* AFURLSessionManager.m */,
+			);
+			name = AFNetworking3.0;
+			sourceTree = "<group>";
+		};
+		F43894891DF89C0900280635 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				F43894861DF89C0400280635 /* LoaicongthucObject.h */,
+				F43894871DF89C0400280635 /* LoaicongthucObject.m */,
+			);
+			name = object;
+			sourceTree = "<group>";
+		};
+		F438948A1DF89C1400280635 /* outlet */ = {
+			isa = PBXGroup;
+			children = (
+				F43894831DF89BA600280635 /* suggestTableViewCell.h */,
+				F43894841DF89BA600280635 /* suggestTableViewCell.m */,
+			);
+			name = outlet;
+			sourceTree = "<group>";
+		};
+		F438948B1DF89C1F00280635 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F4197C951DB8B2EB00194D9B /* SearchViewController.h */,
+				F4197C961DB8B2EB00194D9B /* SearchViewController.m */,
+				F4F0804E1DBF9525008175A2 /* SearchResultViewController.h */,
+				F4F0804F1DBF9525008175A2 /* SearchResultViewController.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		F4417F531DE0976200ABB015 /* clickOnUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +399,32 @@
 				F467874C1DF2F00E007AD4B3 /* userObject.m */,
 			);
 			name = clickOnUser;
+			sourceTree = "<group>";
+		};
+		F44833031DF7051F005CFB69 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				F4AFEC661DF3EAD7006D4816 /* fullRecipeContentObject.h */,
+				F4AFEC671DF3EAD7006D4816 /* fullRecipeContentObject.m */,
+				F4AFEC691DF44604006D4816 /* stepObject.h */,
+				F4AFEC6A1DF44604006D4816 /* stepObject.m */,
+				F4AFEC6C1DF4461B006D4816 /* commentObject.h */,
+				F4AFEC6D1DF4461B006D4816 /* commentObject.m */,
+				F44833001DF704FB005CFB69 /* ingredientObject.h */,
+				F44833011DF704FB005CFB69 /* ingredientObject.m */,
+			);
+			name = object;
+			sourceTree = "<group>";
+		};
+		F44833041DF70527005CFB69 /* outlet */ = {
+			isa = PBXGroup;
+			children = (
+				F4AFEC721DF4487D006D4816 /* commentTableViewCell.h */,
+				F4AFEC731DF4487D006D4816 /* commentTableViewCell.m */,
+				F4AFEC6F1DF44868006D4816 /* stepTableViewCell.h */,
+				F4AFEC701DF44868006D4816 /* stepTableViewCell.m */,
+			);
+			name = outlet;
 			sourceTree = "<group>";
 		};
 		F4599A451DB69F6A00014CD9 /* Login */ = {
@@ -356,6 +470,8 @@
 			children = (
 				F4F02F6F1DE3323F005D52DB /* userTableViewCell.h */,
 				F4F02F701DE3323F005D52DB /* userTableViewCell.m */,
+				F48067841DDC7B21009BC684 /* UserRecipeCollectionViewCell.h */,
+				F48067851DDC7B21009BC684 /* UserRecipeCollectionViewCell.m */,
 			);
 			name = outlet;
 			sourceTree = "<group>";
@@ -420,18 +536,8 @@
 				F467874E1DF320CB007AD4B3 /* recipeOfUser.h */,
 				F467874F1DF320CB007AD4B3 /* recipeOfUser.m */,
 				F49EDE841DDF092000412FC4 /* 2nd step view controller */,
-				F48067871DDC7B27009BC684 /* outlet */,
 			);
 			name = UserScreen;
-			sourceTree = "<group>";
-		};
-		F48067871DDC7B27009BC684 /* outlet */ = {
-			isa = PBXGroup;
-			children = (
-				F48067841DDC7B21009BC684 /* UserRecipeCollectionViewCell.h */,
-				F48067851DDC7B21009BC684 /* UserRecipeCollectionViewCell.m */,
-			);
-			name = outlet;
 			sourceTree = "<group>";
 		};
 		F483B20C1DE0111900D86DBA /* MainController2nd */ = {
@@ -439,16 +545,8 @@
 			children = (
 				F483B2091DE0110F00D86DBA /* RecipeContentViewController.h */,
 				F483B20A1DE0110F00D86DBA /* RecipeContentViewController.m */,
-				F4AFEC661DF3EAD7006D4816 /* fullRecipeContentObject.h */,
-				F4AFEC671DF3EAD7006D4816 /* fullRecipeContentObject.m */,
-				F4AFEC691DF44604006D4816 /* stepObject.h */,
-				F4AFEC6A1DF44604006D4816 /* stepObject.m */,
-				F4AFEC6C1DF4461B006D4816 /* commentObject.h */,
-				F4AFEC6D1DF4461B006D4816 /* commentObject.m */,
-				F4AFEC721DF4487D006D4816 /* commentTableViewCell.h */,
-				F4AFEC731DF4487D006D4816 /* commentTableViewCell.m */,
-				F4AFEC6F1DF44868006D4816 /* stepTableViewCell.h */,
-				F4AFEC701DF44868006D4816 /* stepTableViewCell.m */,
+				F44833031DF7051F005CFB69 /* object */,
+				F44833041DF70527005CFB69 /* outlet */,
 				F4417F531DE0976200ABB015 /* clickOnUser */,
 			);
 			name = MainController2nd;
@@ -457,39 +555,8 @@
 		F48445FA1DBC9970003B09F4 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				F44832EA1DF5CA4C005CFB69 /* AFAutoPurgingImageCache.h */,
-				F44832EB1DF5CA4C005CFB69 /* AFAutoPurgingImageCache.m */,
-				F44832EC1DF5CA4C005CFB69 /* AFImageDownloader.h */,
-				F44832ED1DF5CA4C005CFB69 /* AFImageDownloader.m */,
-				F44832EE1DF5CA4C005CFB69 /* AFNetworkActivityIndicatorManager.h */,
-				F44832EF1DF5CA4C005CFB69 /* AFNetworkActivityIndicatorManager.m */,
-				F44832F01DF5CA4C005CFB69 /* UIActivityIndicatorView+AFNetworking.h */,
-				F44832F11DF5CA4C005CFB69 /* UIActivityIndicatorView+AFNetworking.m */,
-				F44832F21DF5CA4C005CFB69 /* UIButton+AFNetworking.h */,
-				F44832F31DF5CA4C005CFB69 /* UIButton+AFNetworking.m */,
-				F44832F41DF5CA4C005CFB69 /* UIKit+AFNetworking.h */,
-				F44832F51DF5CA4C005CFB69 /* UIProgressView+AFNetworking.h */,
-				F44832F61DF5CA4C005CFB69 /* UIProgressView+AFNetworking.m */,
-				F44832F71DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.h */,
-				F44832F81DF5CA4C005CFB69 /* UIRefreshControl+AFNetworking.m */,
-				F44832E61DF5C87E005CFB69 /* UIImage+AFNetworking.h */,
-				F44832E71DF5C87E005CFB69 /* UIImageView+AFNetworking.h */,
-				F44832E81DF5C920005CFB69 /* UIImageView+AFNetworking.m */,
-				F44832D31DF5B880005CFB69 /* AFHTTPSessionManager.h */,
-				F44832D41DF5B880005CFB69 /* AFHTTPSessionManager.m */,
-				F44832D51DF5B880005CFB69 /* AFNetworking.h */,
-				F44832D61DF5B880005CFB69 /* AFNetworkReachabilityManager.h */,
-				F44832D71DF5B880005CFB69 /* AFNetworkReachabilityManager.m */,
-				F44832D81DF5B880005CFB69 /* AFSecurityPolicy.h */,
-				F44832D91DF5B880005CFB69 /* AFSecurityPolicy.m */,
-				F44832DA1DF5B880005CFB69 /* AFURLRequestSerialization.h */,
-				F44832DB1DF5B880005CFB69 /* AFURLRequestSerialization.m */,
-				F44832DC1DF5B880005CFB69 /* AFURLResponseSerialization.h */,
-				F44832DD1DF5B880005CFB69 /* AFURLResponseSerialization.m */,
-				F44832DE1DF5B880005CFB69 /* AFURLSessionManager.h */,
-				F44832DF1DF5B880005CFB69 /* AFURLSessionManager.m */,
-				F4197CA61DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.h */,
-				F4197CA71DB8FBE200194D9B /* CHTCollectionViewWaterfallLayout.m */,
+				F43894651DF7B7EA00280635 /* AFNetworking3.0 */,
+				F43894641DF7B7D900280635 /* CollectionviewLayout */,
 			);
 			name = library;
 			sourceTree = "<group>";
@@ -537,6 +604,7 @@
 		F494A5C01DB6893E00D173E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F44833051DF72C14005CFB69 /* baseUrl.h */,
 				F4E637391DEDCD4600B4D815 /* userInfosSingleton.h */,
 				F4E6373A1DEDCD4600B4D815 /* userInfosSingleton.m */,
 				F494A5C11DB6893E00D173E0 /* main.m */,
@@ -568,6 +636,8 @@
 			children = (
 				F49EDE811DDF091B00412FC4 /* UserWhoFollowViewController.h */,
 				F49EDE821DDF091B00412FC4 /* UserWhoFollowViewController.m */,
+				F438948C1DF8AD6500280635 /* userFollowMe.h */,
+				F438948D1DF8AD6500280635 /* userFollowMe.m */,
 				F46787511DF33550007AD4B3 /* outlet */,
 			);
 			name = "2nd step view controller";
@@ -862,14 +932,17 @@
 				F49EDE831DDF091B00412FC4 /* UserWhoFollowViewController.m in Sources */,
 				F4F02F741DE338FF005D52DB /* recipeAvatarViewController.m in Sources */,
 				F44832E31DF5B880005CFB69 /* AFURLRequestSerialization.m in Sources */,
+				F44833021DF704FB005CFB69 /* ingredientObject.m in Sources */,
 				F4AFEC741DF4487D006D4816 /* commentTableViewCell.m in Sources */,
 				F4B916A01DD5CBA60024C110 /* cateCell.m in Sources */,
 				F44832FB1DF5CA4C005CFB69 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				F4A7EE4D1DC5DEBC0064F576 /* CreateViewController.m in Sources */,
 				F441701A1DEAC0F50048110A /* recipeStepViewController.m in Sources */,
+				F43894881DF89C0400280635 /* LoaicongthucObject.m in Sources */,
 				F4F080501DBF9525008175A2 /* SearchResultViewController.m in Sources */,
 				F494A5C51DB6893E00D173E0 /* AppDelegate.m in Sources */,
 				F4F02F711DE3323F005D52DB /* userTableViewCell.m in Sources */,
+				F438948E1DF8AD6500280635 /* userFollowMe.m in Sources */,
 				F4E6373B1DEDCD4600B4D815 /* userInfosSingleton.m in Sources */,
 				F4197C941DB8B0A100194D9B /* TabBarController.m in Sources */,
 				F40FCC5C1DCF923E00A65B22 /* recipeInfoCell.m in Sources */,
@@ -880,6 +953,7 @@
 				F4B916A31DD5CCCD0024C110 /* stepCell.m in Sources */,
 				F44832E91DF5C920005CFB69 /* UIImageView+AFNetworking.m in Sources */,
 				F47C69FD1DCBB27500AD951E /* UserViewController.m in Sources */,
+				F43894851DF89BA600280635 /* suggestTableViewCell.m in Sources */,
 				F44832E21DF5B880005CFB69 /* AFSecurityPolicy.m in Sources */,
 				F48067861DDC7B21009BC684 /* UserRecipeCollectionViewCell.m in Sources */,
 				F47630071DE9B64C0087EB3E /* recipeIngredientViewController.m in Sources */,

@@ -27,7 +27,7 @@
     static userInfosSingleton *sharedUserAvatar = nil;
     if (!sharedUserAvatar) {
         sharedUserAvatar = [[userInfosSingleton alloc] init];
-        sharedUserAvatar.userAvatar = [UIImage new];
+        sharedUserAvatar.userAvatar = [NSData new];
     }
     return sharedUserAvatar;
 }
@@ -36,7 +36,7 @@
     self = [super init];
     if (self) {
         userInfos = [[NSMutableArray alloc] init];
-        userAvatar = [[UIImage alloc] init];
+        userAvatar = [[NSData alloc] init];
     }
     return self;
 }
@@ -53,15 +53,15 @@
     return [self userInfos];
 }
 
-- (void)userAvatarIs:(UIImage *)avatarData {
+- (void)userAvatarIs:(NSData *)avatarData {
     if (self.userAvatar == nil) {
-        self.userAvatar = [[UIImage alloc] initWithCGImage:[avatarData CGImage]];
+        self.userAvatar = [[NSData alloc] initWithData:avatarData];
     } else {
         self.userAvatar = avatarData;
     }
 }
 
-- (UIImage *)theUserAvatar {
+- (NSData *)theUserAvatar {
     return [self userAvatar];
 }
 

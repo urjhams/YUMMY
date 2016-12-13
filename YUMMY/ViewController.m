@@ -6,11 +6,13 @@
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
 
+#import "baseUrl.h"
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreImage/CoreImage.h>
 #import "TabBarController.h"
 #import "userInfosSingleton.h"
+#import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
 #import "UIImageView+AFNetworking.h"
 
@@ -18,7 +20,6 @@
     NSInteger success;
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *txtAcc;
 @property (weak, nonatomic) IBOutlet UITextField *txtPwd;
 
 - (IBAction)loginClicked:(id)sender;
@@ -66,7 +67,7 @@
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:self.txtAcc.text forKey:@"username"];
         [parameters setValue:self.txtPwd.text forKey:@"password"];
-        [manager POST:@"http://yummy-quan.esy.es/login.php"
+        [manager POST:yummy_login
            parameters:parameters
              progress:nil
               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -89,12 +90,6 @@
                      userInfoArr = [[NSMutableArray alloc] initWithObjects: userID, userName, email, ngaytao, mota, avatar, nil];
                      [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
                      
-                     NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",avatar]];
-                     //[[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
-                     UIImageView *userAvatarDownload = [[UIImageView alloc] init];
-                     [userAvatarDownload setImageWithURL:avatarUrl];
-                     [[userInfosSingleton sharedUserAvatar] userAvatarIs:userAvatarDownload.image];
-                     
                      
                      NSLog(@"%@",message);
                      [self performSegueWithIdentifier:@"loginSuccess" sender:self];
@@ -112,68 +107,6 @@
         } failure:^(NSURLSessionTask *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         }];
-        
-        /*
-        @try {
-            success = 0;
-            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-            
-            NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/login.php"];
-            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-            NSString *parameters = [[NSString alloc] initWithFormat:@"username=%@&password=%@",self.txtAcc.text,self.txtPwd.text];
-            [urlRequest setHTTPMethod:@"POST"];
-            [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                if (error == nil) {
-                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                    success = [jsonData[@"code"] integerValue];
-                    if (success == 1) {
-                        NSString *message = (NSString *) jsonData[@"message"];
-                        //NSString *userID = (NSString *) [jsonData[@"results"] objectForKey:@"UserID"];
-                        
-                        NSArray *rsArray = [jsonData objectForKey:@"results"];
-                        NSDictionary *userInfoDict = [rsArray objectAtIndex:0];
-                        NSString *userID = [userInfoDict objectForKey:@"UserID"];
-                        NSString *userName = [userInfoDict objectForKey:@"Username"];
-                        NSString *email = [userInfoDict objectForKey:@"Email"];
-                        NSString *ngaytao = [userInfoDict objectForKey:@"Ngaytao"];
-                        NSString *mota = [userInfoDict objectForKey:@"Mota"];
-                        NSString *avatar = [userInfoDict objectForKey:@"Avatar"];
-                        
-                        userInfoArr = [[NSMutableArray alloc] initWithObjects: userID, userName, email, ngaytao, mota, avatar, nil];
-                        [[userInfosSingleton sharedUserInfos] userInfoArrayIs:userInfoArr];
-                        
-                        NSURL *avatarUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/avatar/%@",avatar]];
-                        //[[userInfosSingleton sharedUserAvatar] userAvatarIs:[self getUserAvatarFromUrl:avatarUrl]];
-                        [[userInfosSingleton sharedUserAvatar] userAvatarIs:[self asynchoronusGetUserAvatarFromUrl:avatarUrl]];
-                        
-                        
-                        NSLog(@"%@",message);
-                        [self performSegueWithIdentifier:@"loginSuccess" sender:self];
-                    } else {
-                        NSString *message = (NSString *) jsonData[@"message"];
-                        NSLog(@"%@",message);
-                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Đăng nhập thất bại"
-                                                                                       message:message
-                                                                                preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"Thử lại" style:UIAlertActionStyleCancel handler:nil];
-                        [alert addAction:alright];
-                        [self presentViewController:alert animated:YES completion:nil];
-                    }
-                }
-            }];
-            [dataTask resume];
-        } @catch(NSException *exception) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
-                                                                           message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-            [alert addAction:alright];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-         */
     }
 }
 

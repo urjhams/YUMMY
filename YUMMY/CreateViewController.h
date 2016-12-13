@@ -10,7 +10,7 @@
 #import "recipeStepViewController.h"
 #import "recipeIngredientViewController.h"
 
-@interface CreateViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate, recipeContentDelegate,ingredientContentDelegate>
+@interface CreateViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate, recipeContentDelegate,ingredientContentDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate>
 //array hold value
 {
     //mảng để lưu giá trị
@@ -25,6 +25,7 @@
 
 //mảng để lưu giá trị
 @property (nonatomic) NSMutableArray *ingredientArray;
+@property (nonatomic) NSMutableArray *ingredientValueArray;
 @property (nonatomic) NSMutableArray *ingredientIDArray;          //mảng các ID nguyên liệu (thuôc tính ID của ingredient cell)
 @property (nonatomic) NSMutableArray *ingredientUnitArray;
 @property (nonatomic) NSMutableArray *ingredientNameArray;

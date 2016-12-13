@@ -8,6 +8,9 @@
 
 #import "recipeIngredientViewController.h"
 #import "recipeIngredient.h"
+#import "AFNetworking.h"
+#import "baseUrl.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface recipeIngredientViewController () {
     //mảng để lấy giá trị từ json về để hiện trên phần lựa chọn
@@ -46,7 +49,7 @@
     @try {
         NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_all_nguyenlieu.php"];
+        NSURL *url = [NSURL URLWithString:get_all_nguyenlieu];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
@@ -102,6 +105,7 @@
     NSString *rowData = [NSString stringWithFormat:@"%@",currentIngredient.ingredientName];
     return rowData;
 }
+
 #pragma mark - action
 
 - (IBAction)dissmiss:(id)sender {
@@ -118,7 +122,7 @@
     NSString *part4 = selectedIngredient.ingredientID;
     NSString *finalString = [NSString stringWithFormat:@"%@ : %@ %@",part1,part2,part3];
     [self.delegate sendBackContent:finalString];
-    [self.delegate sendBackIndex:part4 content:part1 unit:part3];
+    [self.delegate sendBackIndex:part4 content:part1 unit:part3 value:part2];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

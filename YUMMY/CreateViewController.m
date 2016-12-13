@@ -15,12 +15,22 @@
 #import "recipeIngredientViewController.h"
 #import "recipeStepViewController.h"
 #import "TabBarController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "baseUrl.h"
 
-@interface CreateViewController ()
+@interface CreateViewController () {
+    BOOL recipeCreated;
+    stepCell *currentStepCell;
+    int currentStepCellIndex;
+    NSString *currentRecipeID;
+}
 
 //outlet
+@property (weak, nonatomic) IBOutlet UIScrollView *thisScrollView;
 @property (weak, nonatomic) IBOutlet UITextField *recipeName;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsername;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddStep;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *naviBar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -39,14 +49,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTime;
 
 @property (weak, nonatomic) IBOutlet UITextView *txtAbout;
-
-@property (strong, nonatomic) UIImage *RecipeAvatar;
+@property (weak, nonatomic) IBOutlet UIImageView *recipeAvatar;
 
 - (IBAction)CancelCreate:(id)sender;
 - (IBAction)Create:(id)sender;
 - (IBAction)addStep:(id)sender;
-- (IBAction)addStepImage:(id)sender;
 - (IBAction)editStepContent:(id)sender;
+- (IBAction)adRecipeAvatar:(id)sender;
 
 
 @end
@@ -56,7 +65,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    recipeCreated = NO;
+    [self.txtAbout setDelegate:self];
+    [self.recipeName setDelegate:self];
+    
     //init arrays
+    if (!self.ingredientValueArray) {
+        self.ingredientValueArray = [[NSMutableArray alloc] init];
+    }
     if (!self.ingredientArray) {
         self.ingredientArray = [[NSMutableArray alloc] init];
     }
@@ -90,9 +106,7 @@
     [self.recipeName setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Tên công thức" attributes:@{NSForegroundColorAttributeName: placeholderColor}]];
     
     [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
-    
-    self.RecipeAvatar = [[UIImage alloc] init];
-    
+        
     //Background config
     self.view.backgroundColor = [UIColor clearColor];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -132,7 +146,7 @@
 
 - (void) getCateAndCateID {
     @try {
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/get_all_loai_congthuc.php"];
+        NSURL *url = [NSURL URLWithString:get_all_loai_congthuc];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error == nil) {
@@ -173,7 +187,7 @@
 }
 
 
-#pragma mark - tableView delegate & datasource
+#pragma mark - tableView delegate & datasource (for step & ingredient)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -185,7 +199,7 @@
         
         cell.stepImage.image = [UIImage imageNamed:[self.stepImgArr objectAtIndex:indexPath.row]];
         cell.stepImage.contentMode = UIViewContentModeScaleAspectFit;
-        
+        [cell.btnAddImage addTarget:self action:@selector(editStepImage:) forControlEvents:UIControlEventTouchUpInside];
         //config
         cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         self.stepTableViewHeight.constant = self.stepTableView.contentSize.height;  //resize
@@ -212,7 +226,7 @@
     return row;
 }
 
-#pragma mark - collectionview delegate & datasource
+#pragma mark - collectionview delegate & datasource (for category)
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return cateArray.count;
@@ -234,22 +248,172 @@
     return CGSizeMake(cellWidth, cellHeight);
 }
 
+#pragma mark - Image picker controller delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    if (recipeCreated == NO) {
+        UIImage *pickedOne = info[UIImagePickerControllerEditedImage];
+        if (pickedOne) {
+            self.recipeAvatar.image = pickedOne;
+        } else {
+            NSLog(@"cannot pick image");
+        }
+        self.recipeAvatar.contentMode = UIViewContentModeScaleAspectFill;
+        [self.recipeAvatar setClipsToBounds:YES];
+        self.recipeAvatar.layer.cornerRadius = self.recipeAvatar.frame.size.width / 2;
+    } else {
+        UIImage *pickedOne = info[UIImagePickerControllerEditedImage];
+        if (pickedOne) {
+            currentStepCell.imageView.image = pickedOne;
+        } else {
+            NSLog(@"cannot pick image");
+        }
+        [self.stepImgArr replaceObjectAtIndex:currentStepCellIndex withObject:pickedOne];
+    }
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - action
 
 - (IBAction)CancelCreate:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)editStepImage:(UIButton *)sender {
+    CGPoint touchPoint = [sender convertPoint:CGPointZero toView:self.stepTableView];
+    NSIndexPath *indexPath = [self.stepTableView indexPathForRowAtPoint:touchPoint];
+    currentStepCell = [self.stepTableView cellForRowAtIndexPath:indexPath];
+    currentStepCellIndex = (int)indexPath.row;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
 - (IBAction)Create:(id)sender {
+    if (recipeCreated == YES) {
+        for (int i = 0; i < self.stepContentArr.count; i++) {
+            UIImage *imageOfStep = [self.stepImgArr objectAtIndex:i];
+            NSData *stepImg = UIImageJPEGRepresentation(imageOfStep, 90);
+            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+            [parameters setObject:currentRecipeID forKey:@"CongthucID"];
+            [parameters setObject:[self.stepContentArr objectAtIndex:i] forKey:@"Noidung"];
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager POST:create_step_recipe parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                [formData appendPartWithFileData:stepImg name:@"fileToUpload" fileName:@"stepImg.jpeg" mimeType:@"image/jpeg"];
+            } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary *jsonData = (NSDictionary *)responseObject;
+                NSLog(@"%@",[jsonData objectForKey:@"message"]);
+                if ([[jsonData objectForKey:@"code"] integerValue] == 1) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Tạo thành công" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    [alert addAction:ok];
+                    [self presentViewController:alert animated:YES completion:nil];
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops" message:[jsonData objectForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDestructive handler:nil];
+                    [alert addAction:ok];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"Create - %@",error);
+            }];
+        }
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Opps" message:@"bạn chưa lựa chọn hết các mục cần thiết trong công thức rồi!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    /*
+    UIImage *imageToUpload = self.recipeAvatar.image;
+    NSData *userAvatarData = UIImageJPEGRepresentation(imageToUpload, 90);
+    NSDictionary *parameters = @{@"UserID":[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:1]};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:upload_avatar parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:userAvatarData name:@"fileToUpload" fileName:@"myAvatar.jpeg" mimeType:@"image/jpeg"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"Uploaded avatar\n%@\n%@",task,responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"UploadFailed\n%@\n%@",task,error);
+    }];*/
     
 }
 
 - (IBAction)addStep:(id)sender {
-    [self performSegueWithIdentifier:@"addStep" sender:self];
-}
+    if ((self.ingredientValueArray == nil) || (cateIDArray == nil) || (self.ingredientIDArray == nil)) {
+        return;
+    } else {
+        if (recipeCreated == NO) {
+            UIImage *imageToUpload = self.recipeAvatar.image;
+            NSData *userAvatarData = UIImageJPEGRepresentation(imageToUpload, 90);
+            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+            [parameters setObject:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] forKey:@"UserID"];
+            [parameters setObject:self.recipeName.text forKey:@"Tencongthuc"];
+            [parameters setObject:[NSString stringWithFormat:@"Nội dung công thức (not suport yet)"] forKey:@"Noidung"];
+            [parameters setObject:self.btnDifficult.titleLabel.text forKey:@"Dokho"];
+            [parameters setObject:self.btnPerson.titleLabel.text forKey:@"Songuoi"];
+            [parameters setObject:self.btnTime.titleLabel.text forKey:@"Thoigian"];
+            [parameters setObject:self.txtAbout.text forKey:@"Mota"];
+            
+            NSString *cateString = [[NSString alloc] init];
+            for (int i = 0; i < cateIDArray.count; i++) {
+                if (i == 0) {
+                    cateString = [NSString stringWithFormat:@"%@",[cateIDArray objectAtIndex:i]];
+                } else {
+                    NSString *newString = [cateString stringByAppendingString:[NSString stringWithFormat:@"_%@",[cateIDArray objectAtIndex:i]]];
+                    cateString = newString;
+                }
+            }
+            [parameters setObject:cateString forKey:@"LoaicongthucID_arr"];
+            
+            NSMutableString *ingredientIDString;
+            for (int i = 0; i < self.ingredientIDArray.count; i++) {
+                if (i == 0) {
+                    ingredientIDString = [NSMutableString stringWithFormat:@"%@",[self.ingredientIDArray objectAtIndex:i]];
+                } else {
+                    [ingredientIDString appendString:[NSString stringWithFormat:@"_%@",[self.ingredientIDArray objectAtIndex:i]]];
+                }
+            }
+            [parameters setObject:ingredientIDString forKey:@"Nguyenlieu_arr"];
+            
+            NSMutableString *ingredientValueString;
+            for (int i = 0; i < self.ingredientValueArray.count; i++) {
+                if (i == 0) {
+                    ingredientValueString = [NSMutableString stringWithFormat:@"%@",[self.ingredientValueArray objectAtIndex:i]];
+                } else {
+                    [ingredientValueString appendString:[NSString stringWithFormat:@"_%@",[self.ingredientValueArray objectAtIndex:i]]];
+                }
+            }
+            [parameters setObject:ingredientValueString forKey:@"Dinhluong_arr"];
+            
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager POST:create_recipe
+               parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                   [formData appendPartWithFileData:userAvatarData name:@"fileToUpload" fileName:@"myAvatar.jpeg" mimeType:@"image/jpeg"];
+               } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                   NSDictionary *jsonData = (NSDictionary *)responseObject;
+                   NSLog(@"%@",[jsonData objectForKey:@"message"]);
+                   if ([[jsonData objectForKey:@"code"] integerValue] == 1) {
+                       currentRecipeID = [[[jsonData objectForKey:@"results"] objectAtIndex:0] objectForKey:@"CongthucID"];
+                       recipeCreated = YES;
+                       [self performSegueWithIdentifier:@"addStep" sender:self];
+                   }
+               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                   NSLog(@"addStep - %@",error);
+               }];
+        } else {
+            [self performSegueWithIdentifier:@"addStep" sender:self];
+        }
 
-- (IBAction)addStepImage:(id)sender {
-    
+    }
 }
 
 
@@ -259,6 +423,15 @@
     self.currentStepToEdit = currentIndexPath.row;
     self.currentStepContentToEdit = [self.stepContentArr objectAtIndex:currentIndexPath.row];
     [self performSegueWithIdentifier:@"editStep" sender:self];
+}
+
+- (IBAction)adRecipeAvatar:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)addPerson:(id)sender {
@@ -432,10 +605,11 @@
                     completion:nil];
 }
 
-- (void)sendBackIndex:(NSString *)index content:(NSString *)content unit:(NSString *)unit {
+- (void)sendBackIndex:(NSString *)index content:(NSString *)content unit:(NSString *)unit value:(NSString *)value {
     [self.ingredientIDArray addObject:index];
     [self.ingredientNameArray addObject:content];
     [self.ingredientUnitArray addObject:unit];
+    [self.ingredientValueArray addObject:value];
 }
 
 #pragma mark - managing segue
@@ -459,5 +633,69 @@
         [destinationController setDelegate:self];
     }
 }
+
+
+#pragma mark - ẩn keyboard khi chạm bên ngoài đối tượng textfield
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    [self.thisScrollView endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+}
+
+
+#pragma mark - move view up when show keyboard
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    return YES;
+}
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    [self.view endEditing:YES];
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    [self.view endEditing:YES];
+    return YES;
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    // Assign new frame to your view
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];  //thời gian slide up view
+    [self.view setFrame:CGRectMake(0, -100, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.naviBar setHidden:YES];
+    [self.recipeName setHidden:YES];
+    [self.lblUsername setHidden:YES];
+    [self.btnAddStep setHidden:YES];
+    [UIView commitAnimations];
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];  //thời gian slide up view
+    [self.view setFrame:CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height)];
+    [self.naviBar setHidden:NO];
+    [self.recipeName setHidden:NO];
+    [self.lblUsername setHidden:NO];
+    [self.btnAddStep setHidden:NO];
+    [UIView commitAnimations];
+}
+
 
 @end

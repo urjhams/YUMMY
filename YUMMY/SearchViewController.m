@@ -7,8 +7,14 @@
 //
 
 #import "SearchViewController.h"
+#import "AFNetworking.h"
+#import "baseUrl.h"
+#import "suggestTableViewCell.h"
+#import "LoaicongthucObject.h"
 
-@interface SearchViewController ()
+@interface SearchViewController () {
+    NSMutableArray *loaiCongthucObjects;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -38,6 +44,8 @@
     
     
     
+    
+    
     //để cuối hàm!!!
     //self.tabBarController.selectedIndex = 1;
 }
@@ -46,7 +54,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 #pragma mark - ẩn navigation bar
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -58,7 +66,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
-
+*/
 #pragma mark - set statusbar style ~ bởi đã đăng ký mặc định light style trong info.plist
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
@@ -95,7 +103,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //trả về số cell định load
     
     
     return 1;

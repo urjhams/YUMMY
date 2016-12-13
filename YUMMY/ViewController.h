@@ -11,5 +11,6 @@
 @interface ViewController : UIViewController {
     NSMutableArray *userInfoArr;
 }
+@property (weak, nonatomic) IBOutlet UITextField *txtAcc;
 @end
 

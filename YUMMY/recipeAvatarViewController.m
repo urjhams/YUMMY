@@ -9,6 +9,11 @@
 #import "recipeAvatarViewController.h"
 
 @interface recipeAvatarViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imagePresent;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+
+- (IBAction)backVC:(id)sender;
+- (IBAction)saveImage:(id)sender;
 
 @end
 
@@ -17,6 +22,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.imagePresent.contentMode = UIViewContentModeScaleAspectFill;
+    [self.imagePresent setClipsToBounds:YES];
+    /*
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self.pickerView addSubview:picker.view];
+    [picker viewWillAppear:YES];
+    [picker viewDidAppear:YES];*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +50,9 @@
 }
 */
 
+- (IBAction)backVC:(id)sender {
+}
+
+- (IBAction)saveImage:(id)sender {
+}
 @end

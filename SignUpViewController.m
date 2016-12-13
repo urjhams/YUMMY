@@ -6,8 +6,10 @@
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
 
+#import "baseUrl.h"
 #import "SignUpViewController.h"
 #import "ViewController.h"
+#import "AFNetworking.h"
 
 @interface SignUpViewController () {
     NSInteger success;
@@ -85,44 +87,35 @@
 #pragma mark - webservice connect
 
 - (void)signUpWithUsername:(NSString *)username password:(NSString *)password andEmail:(NSString *)email {
-    @try {
-        NSURLSessionConfiguration *defaultConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURL *url = [NSURL URLWithString:@"http://yummy-quan.esy.es/register.php"];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *parameters =[[NSString alloc] initWithFormat:@"Username=%@&Pwd=%@&Email=%@",username,password,email];
-        [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setHTTPBody:[parameters dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error == nil) {
-                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                if ([jsonData[@"code"] integerValue] == 1) {
-                    NSString *message = (NSString *) jsonData[@"message"];
-                    UIAlertController *successAlert = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                    }];
-                    [successAlert addAction:OK];
-                    [self presentViewController:successAlert animated:YES completion:nil];
-                } else {
-                    NSString *message = (NSString *) jsonData[@"message"];
-                    UIAlertController *failedAlert =[UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
-                    [failedAlert addAction:alright];
-                    [self presentViewController:failedAlert animated:YES completion:nil];
-                }
-            }
-        }];
-        [dataTask resume];
-    } @catch (NSException *exception) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Có lỗi xảy ra"
-                                                                       message:[NSString stringWithFormat:@"Lỗi: %@\nVui lòng kiểm tra lại kết nối mạng",exception]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:alright];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:username forKey:@"Username"];
+    [parameters setObject:password forKey:@"Pwd"];
+    [parameters setObject:email forKey:@"Email"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:yummy_register
+       parameters:parameters
+         progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *jsonData = (NSDictionary *)responseObject;
+              if ([jsonData[@"code"] integerValue] == 1) {
+                  NSString *message = (NSString *) jsonData[@"message"];
+                  UIAlertController *successAlert = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+                  UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                      [self dismissViewControllerAnimated:YES completion:nil];
+                  }];
+                  [successAlert addAction:OK];
+                  [self presentViewController:successAlert animated:YES completion:nil];
+              } else {
+                  NSString *message = (NSString *) jsonData[@"message"];
+                  UIAlertController *failedAlert =[UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+                  UIAlertAction *alright = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
+                  [failedAlert addAction:alright];
+                  [self presentViewController:failedAlert animated:YES completion:nil];
+              }
+
+          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"%@",error);
+          }];
 }
 
 #pragma mark - ẩn keyboard khi chạm bên ngoài đối tượng textfield

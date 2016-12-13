@@ -11,7 +11,7 @@
 @protocol ingredientContentDelegate <NSObject>
 
 - (void)sendBackContent:(NSString *)contentString;
-- (void)sendBackIndex:(NSString *)index content:(NSString *)content unit:(NSString *)unit;
+- (void)sendBackIndex:(NSString *)index content:(NSString *)content unit:(NSString *)unit value:(NSString *)value;
 
 @end
 

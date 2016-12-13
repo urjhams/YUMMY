@@ -6,6 +6,7 @@
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
 
+#import "baseUrl.h"
 #import "MainViewController.h"
 #import "userInfosSingleton.h"
 #import "mainScreenRecipe.h"
@@ -16,7 +17,7 @@
 
 @interface MainViewController () {
     NSMutableArray *recipeObjects;
-    uint offset;
+    BOOL endOfData;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *mainCollectionView;
 
@@ -34,10 +35,10 @@
     self.mainCollectionView.prefetchDataSource = self;
     self.mainCollectionView.dataSource = self;
     self.mainCollectionView.delegate = self;
-    
-    offset = 0;
+    endOfData = FALSE;
     recipeObjects = [[NSMutableArray alloc] init];
     [self getRecipes];
+    
 }
 
 #pragma mark - getRecipes
@@ -54,7 +55,7 @@
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:parameters],@"last_id", nil];
     
-    [manager POST:@"http://yummy-quan.esy.es/get_cong_thuc_main.php"
+    [manager POST:get_congthuc_main
        parameters:params
          progress:nil
           success:^(NSURLSessionTask *task, id responseObject) {
@@ -88,12 +89,48 @@
                 recipeObject.recipeAvatar = avatar;         //tên ảnh công thức
                 recipeObject.recipeLikes = recipeLikes;     //số likes của công thức
                 recipeObject.recipeCate = mainCate;         //danh mục chính để hiển thị của công thức
+                
+                /*
                 //kiểm tra xem công thức đã được like chưa - có thì nút like sẽ ở state selected và ngược lại
                 [recipeObject recipeLiked:recipeID
                                    byUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
                 //kiểm tra xem công thức đã được bookmark chưa - có thì nút bookmark sẽ ở state selected và ngược lại
                 [recipeObject recipeBookmarked:recipeID
-                                        byUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];
+                                        byUser:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0]];*/
+                
+                NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
+                NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeObject.recipeID,@"CongthucID",userID,@"UserID", nil];
+                [manager POST:get_bookmark
+                   parameters:parameters
+                     progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                         NSDictionary *jsonData = (NSDictionary *)responseObject;
+                         int code = (int)[jsonData[@"code"] integerValue];
+                         if (code == 1) {
+                             NSLog(@"%@",jsonData[@"message"]);
+                             recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"yes"];
+                         } else {
+                             NSLog(@"%@",jsonData[@"message"]);
+                             recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"no"];
+                         }
+                     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                         NSLog(@"Error:%@",error);
+                     }];
+                
+                [manager POST:get_bookmark
+                   parameters:parameters
+                     progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                         NSDictionary *jsonData = (NSDictionary *)responseObject;
+                         int code = (int)[jsonData[@"code"] integerValue];
+                         if (code == 1) {
+                             NSLog(@"%@",jsonData[@"message"]);
+                             recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"yes"];
+                         } else {
+                             NSLog(@"%@",jsonData[@"message"]);
+                             recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"no"];
+                         }
+                     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                         NSLog(@"Error:%@",error);
+                     }];
                 
                 if (!recipeObjects) {
                     recipeObjects = [[NSMutableArray alloc] initWithObjects:recipeObject, nil];
@@ -103,20 +140,158 @@
             }
             [self.mainCollectionView reloadData];
             NSLog(@"%@",[jsonData objectForKey:@"message"]);
-        } else {
+        }
+        else {
+            endOfData = TRUE;
             NSLog(@"%@",[jsonData objectForKey:@"message"]);
         }
-        
     } failure:^(NSURLSessionTask *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        NSLog(@"get_congthuc_main Error: %@", error);
     }];
+}
+
+#pragma mark - load more
+
+- (void)loadMore {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    mainScreenRecipe *last = [recipeObjects lastObject];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:last.recipeID forKey:@"last_id"];
+    [manager POST:get_congthuc_main
+       parameters:params
+         progress:nil
+          success:^(NSURLSessionTask *task, id responseObject) {
+              NSDictionary *jsonData = (NSDictionary *)responseObject;
+              NSArray *rsArray = [jsonData objectForKey:@"results"];
+              id code = [jsonData objectForKey:@"code"];
+              if ([code integerValue] == 1) {
+                  for (int i = 0; i < rsArray.count; i++) {
+                      //values
+                      id recipeID = [[rsArray objectAtIndex:i] valueForKey:@"CongthucID"];
+                      
+                      id recipeName = [[rsArray objectAtIndex:i] valueForKey:@"Tencongthuc"];
+                      NSString *name = [NSString stringWithUTF8String:[recipeName cStringUsingEncoding:NSUTF8StringEncoding]];
+                      
+                      id recipeAvatarName = [[rsArray objectAtIndex:i] valueForKey:@"Avatar"];
+                      NSString *avatar = [NSString stringWithUTF8String:[recipeAvatarName cStringUsingEncoding:NSUTF8StringEncoding]];
+                      
+                      id recipeLikes = [[rsArray objectAtIndex:i] valueForKey:@"Like"];
+                      
+                      id recipesMainCate = [[rsArray objectAtIndex:i] valueForKey:@"TenLoaicongthuc"];
+                      NSString *mainCate;
+                      if (recipesMainCate) {
+                          mainCate = [NSString stringWithUTF8String:[recipesMainCate cStringUsingEncoding:NSUTF8StringEncoding]];
+                      } else {
+                          mainCate = @"";
+                      }
+                      mainScreenRecipe *recipeObject = [[mainScreenRecipe alloc] init];
+                      recipeObject.recipeID = recipeID;           //ID công thức
+                      recipeObject.recipeName = name;             //tên công thức
+                      recipeObject.recipeAvatar = avatar;         //tên ảnh công thức
+                      recipeObject.recipeLikes = recipeLikes;     //số likes của công thức
+                      recipeObject.recipeCate = mainCate;         //danh mục chính để hiển thị của công thức
+                      
+                      NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
+                      NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeObject.recipeID,@"CongthucID",userID,@"UserID", nil];
+                      [manager POST:get_bookmark
+                         parameters:parameters
+                           progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                               NSDictionary *jsonData = (NSDictionary *)responseObject;
+                               int code = (int)[jsonData[@"code"] integerValue];
+                               if (code == 1) {
+                                   NSLog(@"%@",jsonData[@"message"]);
+                                   recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"yes"];
+                               } else {
+                                   NSLog(@"%@",jsonData[@"message"]);
+                                   recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"no"];
+                               }
+                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                               NSLog(@"Error:%@",error);
+                           }];
+                      
+                      [manager POST:get_bookmark
+                         parameters:parameters
+                           progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                               NSDictionary *jsonData = (NSDictionary *)responseObject;
+                               int code = (int)[jsonData[@"code"] integerValue];
+                               if (code == 1) {
+                                   NSLog(@"%@",jsonData[@"message"]);
+                                   recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"yes"];
+                               } else {
+                                   NSLog(@"%@",jsonData[@"message"]);
+                                   recipeObject.bookmarkRecipe = [NSString stringWithFormat:@"no"];
+                               }
+                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                               NSLog(@"Error:%@",error);
+                           }];
+                      [recipeObjects addObject:recipeObject];
+                  }
+                    [self.mainCollectionView reloadData];
+                    NSLog(@"%@",[jsonData objectForKey:@"message"]);
+              }
+              else {
+                  endOfData = TRUE;
+                  NSLog(@"%@",[jsonData objectForKey:@"message"]);
+              }
+          } failure:^(NSURLSessionTask *operation, NSError *error) {
+              NSLog(@"get_congthuc_main Error: %@", error);
+          }];
+
+}
+
+#pragma mark - checkLike
+- (void)didLikeRecipe:(mainScreenRecipe *)recipe {
+    NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:userID,@"UserID",recipe.recipeID,@"CongthucID", nil];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:get_like
+       parameters:parameters
+         progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             NSDictionary *jsonData = (NSDictionary *)responseObject;
+             int code = (int)[jsonData[@"code"] integerValue];
+             if (code == 1) {
+                 NSLog(@"%@",jsonData[@"message"]);
+                 recipe.likeRecipe = [NSString stringWithFormat:@"yes"];
+                 
+             } else {
+                 NSLog(@"%@",jsonData[@"message"]);
+                 recipe.likeRecipe = [NSString stringWithFormat:@"no"];
+             }
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"Error:%@",error);
+         }];
+
+}
+
+#pragma mark - checkBookmark
+-(void)didBookmarkRecipe:(mainScreenRecipe *)recipe {
+    NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipe.recipeID,@"CongthucID",userID,@"UserID", nil];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:get_bookmark
+       parameters:parameters
+         progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             NSDictionary *jsonData = (NSDictionary *)responseObject;
+             int code = (int)[jsonData[@"code"] integerValue];
+             if (code == 1) {
+                 NSLog(@"%@",jsonData[@"message"]);
+                 recipe.bookmarkRecipe = [NSString stringWithFormat:@"yes"];
+             } else {
+                 NSLog(@"%@",jsonData[@"message"]);
+                 recipe.bookmarkRecipe = [NSString stringWithFormat:@"no"];
+             }
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"Error:%@",error);
+         }];
+
 }
 
 #pragma mark - like (synchoronus)
 - (void) me:(NSString *)userID likeThisRecipe:(NSString *)recipeID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://yummy-quan.esy.es/like_congthuc.php"
+    [manager POST:like_congthuc
        parameters:parameters
          progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSDictionary *jsonData = (NSDictionary *)responseObject;
@@ -134,7 +309,7 @@
 - (void) me:(NSString *)userID unlikeThisRecipe:(NSString *)recipeID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://yummy-quan.esy.es/unlike_congthuc.php"
+    [manager POST:unlike_congthuc
        parameters:parameters
          progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSDictionary *jsonData = (NSDictionary *)responseObject;
@@ -152,7 +327,7 @@
 - (void) me:(NSString *)userID bookmarkThisRecipe:(NSString *)recipeID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://yummy-quan.esy.es/bookmark_congthuc.php"
+    [manager POST:bookmark_congthuc
        parameters:parameters
          progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSDictionary *jsonData = (NSDictionary *)responseObject;
@@ -170,7 +345,7 @@
 - (void) me:(NSString *)userID unbookmarkThisRecipe:(NSString *)recipeID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://yummy-quan.esy.es/unbookmark_congthuc.php"
+    [manager POST:unbookmark_congthuc
        parameters:parameters
          progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSDictionary *jsonData = (NSDictionary *)responseObject;
@@ -184,7 +359,6 @@
              NSLog(@"Error:%@",error);
          }];
 }
-
 
 #pragma mark - collectionview delegate
 
@@ -208,9 +382,6 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"nCell" forIndexPath:indexPath];
     }
     
-    cell.btnDetail.tag = indexPath.item;
-    cell.btnLike.tag = indexPath.item;
-    cell.btnBookmark.tag = indexPath.item;
     
     [cell.btnDetail addTarget:self action:@selector(presentDetail:) forControlEvents:UIControlEventTouchUpInside];
     [cell.btnLike addTarget:self action:@selector(likeClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -221,44 +392,16 @@
     cell.recipeName.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeName];
     cell.category.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeCate];
     cell.recipeLike.text = [NSString stringWithFormat:@"%@",currentRecipe.recipeLikes];
+    
+    //[self didLikeRecipe:currentRecipe];
+    //[self didBookmarkRecipe:currentRecipe];
     //getImage asynchoronus
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://yummy-quan.esy.es/congthuc/%@",currentRecipe.recipeAvatar]];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",folder_congthuc,currentRecipe.recipeAvatar]];
     [cell.image setImageWithURL:url];
-    currentRecipe.recipeAvatarImg = cell.image.image;
-    //UIImageView *imaged;
-    //[imaged setImageWithURL:url];
-    //cell.image.image = imaged.image;
-    //currentRecipe.recipeAvatarImg = imaged.image;
-    /*
-    NSURLSessionTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (data) {
-            UIImage *image = [UIImage imageWithData:data];
-            if (image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.image.image = image;
-                    currentRecipe.recipeAvatarImg = image;
-                });
-            }
-        }
-    }];
-    [dataTask resume];*/
+    //currentRecipe.recipeAvatarImg = [[UIImage alloc] init];
+    //currentRecipe.recipeAvatarImg = cell.image.image;
     cell.image.contentMode = UIViewContentModeScaleAspectFill;
-    
-    //cell.recipeID = currentRecipe.recipeID;
-
-
-    if (currentRecipe.likeRecipe == YES) {
-        [cell.btnLike setSelected:YES];
-    } else {
-        [cell.btnLike setSelected:NO];
-    }
-    
-    if (currentRecipe.bookmarkRecipe == YES) {
-        [cell.btnBookmark setSelected:YES];
-    } else {
-        [cell.btnBookmark setSelected:NO];
-    }
-    
     //set button image
     [cell.btnLike setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     [cell.btnLike setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
@@ -266,14 +409,33 @@
     [cell.btnBookmark setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
     [cell.btnBookmark setImage:[UIImage imageNamed:@"bookmarked"] forState:UIControlStateSelected];
     
+    /*
+     if (currentRecipe.likeRecipe == YES) {
+     [cell.btnLike setSelected:YES];
+     } else {
+     [cell.btnLike setSelected:NO];
+     }
+     
+     if (currentRecipe.bookmarkRecipe == YES) {
+     [cell.btnBookmark setSelected:YES];
+     } else {
+     [cell.btnBookmark setSelected:NO];
+     }*/
+    if ([currentRecipe.likeRecipe isEqualToString:@"yes"]) {
+        [cell.btnLike setSelected:YES];
+    } else {
+        [cell.btnLike setSelected:NO];
+    }
+    
+    if ([currentRecipe.bookmarkRecipe isEqualToString:@"no"]) {
+        [cell.btnBookmark setSelected:YES];
+    } else {
+        [cell.btnBookmark setSelected:NO];
+    }
     
     //set tag for buttons
-    [cell.btnLike setTag:indexPath.item];
-    [cell.btnBookmark setTag:indexPath.item];
-    
-    //điều chỉnh size của label tăng lên khi dữ liệu hiển thị dài hơn
-    //[cell.recipeName sizeToFit];
-    //[cell.category sizeToFit];
+    //[cell.btnLike setTag:indexPath.item];
+    //[cell.btnBookmark setTag:indexPath.item];
      
     //chỉnh cho border của cell
     cell.layer.borderWidth = 1.0f;
@@ -281,9 +443,51 @@
     cell.layer.cornerRadius = 7.0f;
     //cell.category.layer.cornerRadius = 2.0;
     
-    
     return cell;
 }
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger currentOffset = scrollView.contentOffset.y;
+    NSInteger maxOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+    if (maxOffset - currentOffset <= 10.0) {
+        [self loadMore];
+    }
+}
+*/
+
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float height = size.height;
+    
+    float reload_distance = 6;
+    if (y > height + reload_distance) {
+        [self loadMore];
+    }
+}*/
+
+// ---------------------------------load more cell------------------------------------------------------------
+/*
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    int lastItem = (int)([recipeObjects count] - 1);
+    if ((int)indexPath.item == lastItem) {
+        [self getRecipes];
+        [UIView transitionWithView: self.mainCollectionView
+                          duration: 0.4f
+                           options: UIViewAnimationOptionTransitionCrossDissolve
+                        animations: ^(void)
+         {
+             [self.mainCollectionView reloadData];
+         }
+                        completion: nil];
+        
+    }
+}*/
+//-------------------------------------------------------------------------------------------------------------
 
 #pragma mark - collectionview cell size config
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -313,7 +517,7 @@
     
 }
 
-#pragma mark = button like action
+#pragma mark - button like action
 - (void)likeClick:(UIButton *)sender {
     CGPoint touchPoint = [sender convertPoint:CGPointZero toView:self.mainCollectionView];
     NSIndexPath *indexPath = [self.mainCollectionView indexPathForItemAtPoint:touchPoint];
@@ -322,30 +526,45 @@
     if ([sender isSelected]) {
         //thisCell.recipeLike.text = [NSString stringWithFormat:@"%ld",(long)([thisCell.recipeLike.text integerValue] - 1)];
         [self me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] unlikeThisRecipe:thisRecipe.recipeID];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:thisRecipe.recipeID,@"CongthucID", nil];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        [manager POST:get_congthucLikes_withID
+           parameters:parameters
+             progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                 NSDictionary *jsonData = (NSDictionary *)responseObject;
+                 NSArray *rsArray = [jsonData objectForKey:@"results"];
+                 if ([jsonData[@"code"] integerValue] == 1) {
+                     NSString *like = [[rsArray objectAtIndex:0] valueForKey:@"Like"];
+                     thisCell.recipeLike.text = like;
+                 }
+                 
+             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                 NSLog(@"Error:%@",error);
+             }];
         [sender setSelected:NO];
         
         } else {
         //thisCell.recipeLike.text = [NSString stringWithFormat:@"%ld",(long)([thisCell.recipeLike.text integerValue] + 1)];
         [self me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] likeThisRecipe:thisRecipe.recipeID];
+            NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:thisRecipe.recipeID,@"CongthucID", nil];
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager POST:get_congthucLikes_withID
+               parameters:parameters
+                 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                     NSDictionary *jsonData = (NSDictionary *)responseObject;
+                     NSArray *rsArray = [jsonData objectForKey:@"results"];
+                     if ([jsonData[@"code"] integerValue] == 1) {
+                         NSString *like = [[rsArray objectAtIndex:0] valueForKey:@"Like"];
+                         thisCell.recipeLike.text = like;
+                     }
+                     
+                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                     NSLog(@"Error:%@",error);
+                 }];
+
         [sender setSelected:YES];
         }
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:thisRecipe.recipeID,@"CongthucID", nil];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://yummy-quan.esy.es/get_congthucLikes_withID.php"
-       parameters:parameters
-         progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             NSDictionary *jsonData = (NSDictionary *)responseObject;
-             NSArray *rsArray = [jsonData objectForKey:@"results"];
-             if ([jsonData[@"code"] integerValue] == 1) {
-                 NSString *like = [[rsArray objectAtIndex:0] valueForKey:@"Like"];
-                 thisCell.recipeLike.text = like;
-             }
-             
-         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             NSLog(@"Error:%@",error);
-         }];
-
-    
 }
 
 #pragma mark - button bookmark action
@@ -368,17 +587,22 @@
     NSIndexPath *indexPath = [self.mainCollectionView indexPathForItemAtPoint:touchPoint];
     if (recipeObjects) {
         mainScreenRecipe * thisRecipe = [recipeObjects objectAtIndex:indexPath.item];
-        self.currentRecipeAvatar = thisRecipe.recipeAvatarImg;
+        //self.currentRecipeAvatar = thisRecipe.recipeAvatarImg;
         self.currentRecipeID = thisRecipe.recipeID;
     }
+    UICollectionViewCell *thisCell = [self.mainCollectionView cellForItemAtIndexPath:indexPath];
+    mainCell *diesenCell = (mainCell *)thisCell;
+    self.currentRecipeAvatar = diesenCell.image.image;
     [self performSegueWithIdentifier:@"recipeContent" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"recipeContent"]) {
         RecipeContentViewController *destVC = [segue destinationViewController];
-        destVC.inputRecipeID = [NSString stringWithFormat:@"%@",self.currentRecipeID];
         destVC.inputRecipeAvatar = self.currentRecipeAvatar;
+        destVC.inputRecipeID = [NSString stringWithFormat:@"%@",self.currentRecipeID];
+    } if ([segue.identifier isEqualToString:@""]) {
+        
     }
 }
 
