@@ -151,7 +151,7 @@
 }
 
 #pragma mark - load more
-
+//load more data when scroll down on bottom of main screen
 - (void)loadMore {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     mainScreenRecipe *last = [recipeObjects lastObject];
@@ -185,12 +185,13 @@
                       } else {
                           mainCate = @"";
                       }
-                      mainScreenRecipe *recipeObject = [[mainScreenRecipe alloc] init];
-                      recipeObject.recipeID = recipeID;           //ID công thức
-                      recipeObject.recipeName = name;             //tên công thức
-                      recipeObject.recipeAvatar = avatar;         //tên ảnh công thức
-                      recipeObject.recipeLikes = recipeLikes;     //số likes của công thức
-                      recipeObject.recipeCate = mainCate;         //danh mục chính để hiển thị của công thức
+                      
+                      mainScreenRecipe *recipeObject = [[mainScreenRecipe alloc] init]; //create an object of recipe to show
+                      recipeObject.recipeID = recipeID;           //ID công thức    --  recipeID
+                      recipeObject.recipeName = name;             //tên công thức   --  recipe name
+                      recipeObject.recipeAvatar = avatar;         //tên ảnh công thức-- recipe avatar name
+                      recipeObject.recipeLikes = recipeLikes;     //số likes của công thức  -- like number of recipe
+                      recipeObject.recipeCate = mainCate;         //danh mục chính để hiển thị của công thức -- category of recipe
                       
                       NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
                       NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeObject.recipeID,@"CongthucID",userID,@"UserID", nil];
@@ -241,6 +242,7 @@
 }
 
 #pragma mark - checkLike
+//check like numbers of recipe
 - (void)didLikeRecipe:(mainScreenRecipe *)recipe {
     NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:userID,@"UserID",recipe.recipeID,@"CongthucID", nil];
@@ -265,6 +267,7 @@
 }
 
 #pragma mark - checkBookmark
+//check did the recipe had bookmark already
 -(void)didBookmarkRecipe:(mainScreenRecipe *)recipe {
     NSString *userID = [[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipe.recipeID,@"CongthucID",userID,@"UserID", nil];
@@ -288,6 +291,7 @@
 }
 
 #pragma mark - like (synchoronus)
+//like the recipe (when click the like button)
 - (void) me:(NSString *)userID likeThisRecipe:(NSString *)recipeID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -529,6 +533,7 @@
         
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:thisRecipe.recipeID,@"CongthucID", nil];
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        //refresh the like number
         [manager POST:get_congthucLikes_withID
            parameters:parameters
              progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -547,6 +552,7 @@
         } else {
         //thisCell.recipeLike.text = [NSString stringWithFormat:@"%ld",(long)([thisCell.recipeLike.text integerValue] + 1)];
         [self me:[[[userInfosSingleton sharedUserInfos] theUserInfosArray] objectAtIndex:0] likeThisRecipe:thisRecipe.recipeID];
+            //refresh the like number
             NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:thisRecipe.recipeID,@"CongthucID", nil];
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             [manager POST:get_congthucLikes_withID

@@ -101,6 +101,7 @@
     cell.clipsToBounds = YES;
     //configuration
     //uiimage hình tròn
+    //round UIIMAGE
     cell.userImage.layer.cornerRadius = cell.userImage.frame.size.width / 2;
     [cell.userImage setClipsToBounds:YES];
     

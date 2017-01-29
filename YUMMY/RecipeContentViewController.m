@@ -129,6 +129,7 @@
                  thisRecipe = [[fullRecipeContentObject alloc] init];
                  
                  //trên webservice vẫn đẩy vào 1 array tuy nhiên chỉ có 1 phần tử tại index 0
+                 //the result on webservice will return 1 array with 1 object at index 0
                  
                  thisRecipe.congthucid = [[rsArray objectAtIndex:0] valueForKey:@"CongthucID"];
                  thisRecipe.tencongthuc = [[rsArray objectAtIndex:0] valueForKey:@"Tencongthuc"];
@@ -150,6 +151,7 @@
                  NSMutableDictionary *recipeIDparam = [[NSMutableDictionary alloc] init];
                  [recipeIDparam setObject:theID forKey:@"CongthucID"];
                  //mình đã like công thức này chưa
+                 //check did like already
                  AFHTTPSessionManager *checkLikeManager = [AFHTTPSessionManager manager];
                  [checkLikeManager POST:get_like parameters:recipeIDparam progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                      NSLog(@"JSON Liked: %@",responseObject);
@@ -168,6 +170,7 @@
                  }];
                  
                  //mình đã đánh dấu công thức này chưa
+                 //check did bookmark already
                  AFHTTPSessionManager *checkBookmarkManager = [AFHTTPSessionManager manager];
                  [checkBookmarkManager POST:get_bookmark parameters:recipeIDparam progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                      NSLog(@"JSON bookmarked: %@",responseObject);

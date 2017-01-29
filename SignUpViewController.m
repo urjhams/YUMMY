@@ -35,7 +35,7 @@
     [super viewDidLoad];
     
 #pragma mark - làm UIImageview trở nên blur
-    
+//make blur effect for UIImageview
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
         self.background.backgroundColor = [UIColor clearColor];
         
@@ -48,7 +48,7 @@
         self.background.backgroundColor = [UIColor blackColor];
     }
     
-    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar -- update the status bar color
 }
 
 #pragma mark - chỉnh màu status bar
@@ -62,9 +62,10 @@
 }
 
 #pragma mark - action
+//when click sign up button
 - (IBAction)SignUpClicked:(id)sender {
     if ([self.txtAcc.text isEqualToString:@""]||[self.txtPwd.text isEqualToString:@""]||[self.txtPwdAgain.text isEqualToString:@""]||[self.txtMail.text isEqualToString:@""]) {
-        UIAlertController *alertMiss = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Vui lòng nhập đầy đủ thông tin" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertMiss = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Vui lòng nhập đầy đủ thông tin" preferredStyle:UIAlertControllerStyleAlert];   // please insert data in all textfield
         UIAlertAction *acept = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
         [alertMiss addAction:acept];
         [self presentViewController:alertMiss animated:YES completion:nil];
@@ -73,9 +74,10 @@
         NSString *pwdAgainString = self.txtPwdAgain.text;
         if ([pwdString isEqualToString:pwdAgainString]) {
             //code xử lý gửi form đi và nhận kết quả đăng ký trả về
+            //handle the data in client-side
             [self signUpWithUsername:self.txtAcc.text password:self.txtPwd.text andEmail:self.txtMail.text];
         } else {
-            UIAlertController *alertPwd = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Mật khẩu gõ lại không khớp với mật khẩu đã nhập" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertPwd = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Mật khẩu gõ lại không khớp với mật khẩu đã nhập" preferredStyle:UIAlertControllerStyleAlert];// repeat password does not match
             UIAlertAction *acept = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
             [alertPwd addAction:acept];
             [self presentViewController:alertPwd animated:YES completion:nil];
@@ -85,7 +87,7 @@
 }
 
 #pragma mark - webservice connect
-
+//sign in method
 - (void)signUpWithUsername:(NSString *)username password:(NSString *)password andEmail:(NSString *)email {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:username forKey:@"Username"];
@@ -119,7 +121,7 @@
 }
 
 #pragma mark - ẩn keyboard khi chạm bên ngoài đối tượng textfield
-
+//hide the keyboard
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
@@ -133,7 +135,7 @@
 
 #define OFFSET_4_KEYBOARD 50.0
 
-// delegates từ UITextFieldDelegate
+// delegates form UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if ([textField isEqual:self.txtMail]) {
@@ -146,7 +148,7 @@
 
 - (void)setViewMoveUp:(BOOL)moveUp {
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];  //thời gian slide up view
+    [UIView setAnimationDuration:0.3];  //thời gian slide up view -- time to slide up the current UIView
     CGRect rect = self.view.frame;
     
     if (moveUp) {
@@ -166,7 +168,7 @@
 
 // 2 hàm dưới hỗ trợ cho việc đăng ký recive notification
 // giúp nhận phản hồi về vị trí của view
-
+//Get the reciver
 - (void)hienKeyboard {
     int limit = 0 - OFFSET_4_KEYBOARD;
     CGFloat yValue = self.view.frame.origin.y;
@@ -192,6 +194,7 @@
     //[super viewWillAppear:animated];
     
     //Đăng ký để nhận phản hồi khi keyboard hiện lên
+    //show keyboard
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(hienKeyboard)
                                                  name:UIKeyboardWillShowNotification
@@ -206,6 +209,7 @@
     //[super viewWillDisappear:animated];
     
     //Đăng ký để nhận phản hồi khi keyboard Disapear
+    //hide keyboard
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];

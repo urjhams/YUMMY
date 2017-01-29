@@ -13,6 +13,7 @@
 //override
 
 #pragma mark - hàm điều chỉnh margin giữa viền và content của label
+//config the margin of content of label
 - (CGSize)intrinsicContentSize {
     CGSize contentSize = [super intrinsicContentSize];  //lưu ý chỉnh algiment về center
     return CGSizeMake(contentSize.width + 10, contentSize.height);

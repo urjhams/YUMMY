@@ -26,6 +26,7 @@
     //class này là một tabBarController, nó không hẳn là 1 property của UITabBarController
     //nên không dùng self.tabBarController.delegate = self;
     
+    //this class is a tabBarController, not really a property of UITabBarController so do not use self.tabBarController.delegate = self
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,8 +49,8 @@
     }
     return TRUE;
 }
-
-#pragma mark - lấy màn hình hiện thời lưu vào làm 1 UIImage
+/*
+#pragma mark - lấy màn hình hiện thời lưu vào làm 1 UIImage -- unused
 - (UIImage *)snapShot {
     UIGraphicsBeginImageContext(self.view.bounds.size);
     
@@ -61,5 +62,5 @@
     
     return screenShot;
 }
-
+*/
 @end

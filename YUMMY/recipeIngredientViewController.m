@@ -60,6 +60,7 @@
                     id ingredientID = [[rsArray objectAtIndex:i] valueForKey:@"NguyenlieuID"];
                     
                     //convert để decode chuỗi string UTF8
+                    //convert the UTF8 string
                     id Donvi = [[rsArray objectAtIndex:i] valueForKey:@"Donvi"];
                     NSString *donviCorrect = [NSString stringWithUTF8String:[Donvi cStringUsingEncoding:NSUTF8StringEncoding]];
                     id Ten = [[rsArray objectAtIndex:i] valueForKey:@"Ten"];

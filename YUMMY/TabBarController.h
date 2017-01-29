@@ -11,6 +11,6 @@
 
 @interface TabBarController : UITabBarController <UITabBarControllerDelegate>
 
-- (UIImage *)snapShot;
+//- (UIImage *)snapShot;
 
 @end

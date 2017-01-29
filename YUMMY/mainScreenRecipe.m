@@ -13,6 +13,7 @@
 @implementation mainScreenRecipe
 
 #pragma mark - liked (Asynchoronus) - kiểm tra đã like công thức này hay chưa
+//check did like the recipe already
 - (void)recipeLiked:(NSString *)recipeID byUser:(NSString *)userID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -34,6 +35,7 @@
          }];
 }
 #pragma mark - bookmarked (Asynchoronus) - kiểm tra đã bookmark công thức này hay chưa
+//check did bookmark the recipe already
 - (void)recipeBookmarked:(NSString *)recipeID byUser:(NSString *)userID {
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:recipeID,@"CongthucID",userID,@"UserID", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

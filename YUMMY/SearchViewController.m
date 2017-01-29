@@ -42,7 +42,10 @@
     //table view style
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    
+    //UIRefreshControl
+    self.tableView.refreshControl.backgroundColor = [UIColor orangeColor];
+    self.tableView.refreshControl.tintColor = [UIColor whiteColor];
+    //[self.tableView.refreshControl addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventValueChanged];
     
     
     
@@ -95,7 +98,6 @@
 #pragma mark - Tableview DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //chia 2 trường hợp với sugest cell và result cell
-    
     
     
     

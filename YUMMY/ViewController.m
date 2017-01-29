@@ -5,6 +5,7 @@
 //  Created by Đinh Quân on 10/18/16.
 //  Copyright © 2016 Đinh Quân. All rights reserved.
 //
+//-------------------------------------------sign in view controller-----------------------------------------
 
 #import "baseUrl.h"
 #import "ViewController.h"
@@ -31,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar
+    [self setNeedsStatusBarAppearanceUpdate];// update lại màu status bar -- update the status bar color
 }
 
 
@@ -42,21 +43,23 @@
 
 
 #pragma mark - ẩn keyboard sau khi eddit xong
-
+//hide the keyboard after finished
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
 
 #pragma mark - chỉnh màu status bar
+//reload the status bar
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - button action
+//when click login button
 - (IBAction)loginClicked:(id)sender {
     if ([self.txtAcc.text isEqualToString:@""] || [self.txtPwd.text isEqualToString:@""]) {
-        UIAlertController *alertFill = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Vui lòng nhập đầy đủ tài khoản và mật khẩu" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertFill = [UIAlertController alertControllerWithTitle:@"Cảnh báo" message:@"Vui lòng nhập đầy đủ tài khoản và mật khẩu" preferredStyle:UIAlertControllerStyleAlert];   //please insert data in all textfield
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil];
         [alertFill addAction:action];
         [self presentViewController:alertFill animated:YES completion:nil];
@@ -96,7 +99,7 @@
                  } else {
                      NSString *message = (NSString *) jsonData[@"message"];
                      NSLog(@"%@",message);
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Đăng nhập thất bại"
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Đăng nhập thất bại"   //login failed
                                                                                     message:message
                                                                              preferredStyle:UIAlertControllerStyleAlert];
                      UIAlertAction *alright = [UIAlertAction actionWithTitle:@"Thử lại" style:UIAlertActionStyleCancel handler:nil];
@@ -110,7 +113,7 @@
     }
 }
 
-
+/*
 #pragma mark - get avatar from url
 - (NSData *)getUserAvatarFromUrl:(NSURL *)avatarUrl {
     NSData *avatar = [[NSData alloc] initWithContentsOfURL:avatarUrl];
@@ -125,7 +128,7 @@
     });
     return avatar;
 }
-
+*/
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loginSuccess"]) {
         __unused TabBarController *destinationController = [segue destinationViewController];
@@ -133,7 +136,7 @@
     }
 }
 
-
+//when click forgot password button
 - (IBAction)forgotClicked:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Lấy lại mật khẩu" message:@"Vui lòng nhập email đăng ký của bạn, chúng tôi sẽ gửi mật khẩu tới địa chỉ email mà bạn đã đăng ký" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil];
